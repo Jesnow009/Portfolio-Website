@@ -1,0 +1,18 @@
+# Essential Windows/Editor Ignores
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Common Temporary Files
+*.tmp
+*.log
+
+# Git/Environment
+.git/
+.env
+.vercel/
+node_modules/
+
+# Photoshop Files (Too large for web repo)
+*.psd
+*.PSD

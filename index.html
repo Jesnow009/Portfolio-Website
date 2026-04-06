@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jesnow Biju | Creative Portfolio</title>
+    <meta name="description" content="Portfolio of Jesnow Biju - Graphic Designer & Video Editor. BSc Visual Communication student at St Aloysius University, Mangalore.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="#home" class="logo">Jesnow<span>.</span></a>
+            <ul class="nav-links">
+                <li><a href="#featured">Featured</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Work</a></li>
+                <li><a href="#contact" class="btn-nav">Let's Talk</a></li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <header id="home" class="hero section">
+        <div class="video-overlay" style="position: absolute; top:0; left:0; width:100%; height:100%; background: radial-gradient(circle at center, transparent, rgba(8, 2, 13, 0.9)); z-index: 1;"></div>
+        <div class="video-bg-wrap" style="position: absolute; top:0; left:0; width:100%; height:100%; overflow: hidden; z-index: 0; filter: blur(5px) scale(1.1); opacity: 0.45;">
+            <!-- Live Cloudinary Hero Background -->
+            <!-- Live Cloudinary Hero Background -->
+            <div id="vimeo-hero-container" style="width: 100%; height: 100%;">
+                <video src="https://res.cloudinary.com/dtnmadjdd/video/upload/f_auto,q_auto/Cinephile_Dott.Fx_4K_bcs0dq.mp4" autoplay loop muted playsinline style="width: 100vw; height: 56.25vw; min-height: 100vh; min-width: 177.77vh; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); object-fit: cover;"></video>
+            </div>
+        </div>
+        
+        <div class="glow-obj"></div>
+        
+        <div class="container hero-content" style="z-index: 5;">
+            <p class="subtitle animate-up">Creative Video Editor & Designer</p>
+            <h1 class="hero-name-popup" style="font-size: clamp(3.5rem, 8vw, 6.5rem); line-height: 1; margin-bottom: 1.5rem; white-space: nowrap;">Jesnow Biju</h1>
+            <h2 class="animate-up delay-1" style="font-size: clamp(1.4rem, 3.5vw, 3.5rem); white-space: nowrap;">Cuts that <span>Impact.</span> Stories that <span>Stuck.</span></h2>
+            <p class="description animate-up delay-2" style="max-width: 750px; font-size: 1.4rem;">Specializing in clean cuts, smooth transitions, and high-energy mashup edits for the digital era.</p>
+            <div class="hero-actions animate-up delay-3">
+                <a href="#projects" class="btn btn-primary" style="padding: 1.2rem 3rem;">View Showcase</a>
+                <a href="#contact" class="btn btn-secondary" style="padding: 1.2rem 3rem;">Collaborate</a>
+            </div>
+        </div>
+    </header>
+    
+    <!-- 01. Featured Cinematic Edit Section -->
+    <section id="featured" class="section featured-video">
+        <div class="container">
+            <h2 class="section-title reveal"><span>01.</span> Featured Cinematic Edit</h2>
+            <div class="featured-content box-glass reveal delay-1" style="padding: 1.5rem; background: rgba(18, 3, 36, 0.4); border-radius: 20px;">
+                <div class="project-img custom-player" data-behavior="hover" style="background: #111; position: relative; height: 500px; border-radius: 12px; overflow: hidden; box-shadow: 0 40px 100px rgba(0,0,0,0.8);">
+                    <video src="https://res.cloudinary.com/dtnmadjdd/video/upload/f_auto,q_auto/Video1_xwrkki.mp4" loop muted playsinline style="width: 100%; height: 100%; object-fit: contain; background: #000;"></video>
+                    <div class="player-controls">
+                        <div class="progress-container"><input type="range" class="progress-bar" min="0" max="100" value="0" step="0.1"></div>
+                        <div class="controls-main">
+                            <div class="controls-left">
+                                <button class="control-btn play-pause-btn" aria-label="Play/Pause">
+                                    <svg class="icon-pause" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="display: none;"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>
+                                    <svg class="icon-play" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="display: block;"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                                </button>
+                                <div class="volume-container">
+                                    <button class="control-btn mute-btn" aria-label="Toggle Mute">
+                                        <svg class="icon-muted" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: block;"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg>
+                                        <svg class="icon-unmuted" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: none;"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+                                    </button>
+                                    <input type="range" class="volume-slider" min="0" max="1" step="0.05" value="1">
+                                </div>
+                                <div class="time-display"><span class="current-time">0:00</span> / <span class="duration">0:00</span></div>
+                            </div>
+                            <div class="controls-right">
+                                <button class="control-btn fullscreen-btn" aria-label="Fullscreen"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path></svg></button>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="center-play-btn" aria-label="Play"><svg viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg></button>
+                </div>
+                <div style="margin-top: 2rem; padding: 0 1rem;">
+                    <h3 style="font-size: 2rem; margin-bottom: 0.5rem;">Pulse of the Cut <span style="background: linear-gradient(to right, #00e5ff, #bd1ce3); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">2026</span></h3>
+                    <p style="color: var(--text-secondary); font-size: 1.1rem; max-width: 800px;">A definitive 4k mashup cut that push the boundaries of high-energy storytelling and cinematic impact.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 02. About Section -->
+    <section id="about" class="about section">
+        <div class="container">
+            <h2 class="section-title reveal"><span>02.</span> About Me</h2>
+            <div class="about-content grid-2 box-glass reveal delay-1">
+                <div class="about-text">
+                    <p>I’m a <strong>BSc Visual Communication student</strong> at <strong>St. Aloysius University</strong> with a passion for video editing and visual storytelling.</p>
+                    <p>I specialize in film cuts, reels, and post-production, focusing on clean edits, smooth transitions, and cinematic impact.</p>
+                    <p>Alongside video, I also work in graphic design, combining creativity and aesthetics to deliver engaging and meaningful visuals.</p>
+                </div>
+                <div class="about-stats grid-2">
+                    <div class="stat-card">
+                        <h3>Video</h3>
+                        <p>Film Cuts, Reels, Post-Production</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Design</h3>
+                        <p>Posters, Flyers, Branding, Social Media</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="skills section">
+        <div class="container">
+            <h2 class="section-title reveal"><span>03.</span> Core Tech Stack</h2>
+            <div class="skills-grid reveal delay-1">
+                <div class="skill-card">
+                    <img src="./icons8-adobe-photoshop-1000.png" alt="Adobe Photoshop">
+                    <p>Photoshop</p>
+                </div>
+                <div class="skill-card">
+                    <img src="./icons8-adobe-premiere-pro-1000.png" alt="Premiere Pro">
+                    <p>Premiere Pro</p>
+                </div>
+                <div class="skill-card">
+                    <img src="./icons8-canva-1000.png" alt="Canva">
+                    <p>Canva</p>
+                </div>
+                <div class="skill-card">
+                    <img src="./logosource_capcut-logo-png.png" alt="Capcut">
+                    <p>CapCut</p>
+                </div>
+                <div class="skill-card">
+                    <img src="./icons8-davinci-resolve-1000.png" alt="DaVinci Resolve">
+                    <p>Resolve</p>
+                </div>
+                <div class="skill-card">
+                    <img src="./icons8-adobe-after-effects-1000.png" alt="After Effects">
+                    <p>After Effects</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services section">
+        <div class="container">
+            <h2 class="section-title reveal"><span>04.</span> What I Do</h2>
+            <div class="services-grid">
+                <div class="service-card box-glass reveal">
+                    <div class="service-icon" style="margin-bottom: 2rem; color: var(--primary-color);">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="filter: drop-shadow(0 0 8px #00e5ff);"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"></path><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"></path><path d="M7 21h10"></path><path d="M12 21V7"></path><path d="m15 4-3-3-3 3"></path></svg>
+                    </div>
+                    <h3>Video Editing</h3>
+                    <p>Clean cuts, smooth transitions, color grading, and dynamic post-production for film and social media.</p>
+                </div>
+                <div class="service-card box-glass reveal delay-1">
+                    <div class="service-icon" style="margin-bottom: 2rem; color: #bd1ce3;">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="filter: drop-shadow(0 0 8px #bd1ce3);"><path d="m12 19 7-7 3 3-7 7-3-3Z"></path><path d="m18 13-1.5-7.5L2 2l4 14.5L13 18l5-5Z"></path><path d="m2 2 8.8 8.8"></path><circle cx="11" cy="11" r="2"></circle></svg>
+                    </div>
+                    <h3>Graphic Design</h3>
+                    <p>High-end posters, brand identities, and digital graphics that complement visual narratives.</p>
+                </div>
+                <div class="service-card box-glass reveal delay-2">
+                    <div class="service-icon" style="margin-bottom: 2rem; color: #ffffff;">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="filter: drop-shadow(0 0 8px rgba(255,255,255,0.5));"><circle cx="12" cy="12" r="1"></circle><path d="M5.33 14c.15.54.4 1.05.74 1.5a8.58 8.58 0 0 0 11.86 0c.34-.45.59-.96.74-1.5"></path><path d="M18.67 10c-.15-.54-.4-1.05-.74-1.5a8.58 8.58 0 0 0-11.86 0c-.34.45-.59.96-.74 1.5"></path><circle cx="12" cy="12" r="10"></circle><path d="M12 2a10 10 0 0 1 10 10 10 10 0 0 1-10 10 10 10 0 0 1-10-10 10 10 0 0 1 10-10"></path></svg>
+                    </div>
+                    <h3>Visual Communication</h3>
+                    <p>Bridging the gap between a brand's message and their audience through cohesive design.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+        <!-- Projects Section -->
+        <section id="projects" class="projects section">
+            <div class="container">
+                <h2 class="section-title reveal"><span>05.</span> Selected Mashup cuts</h2>
+            <div class="projects-grid">
+                <div class="project-card reveal">
+                    <div class="project-img custom-player" data-behavior="hover" style="background: #111; position: relative; height: 350px;">
+                        <video src="https://res.cloudinary.com/dtnmadjdd/video/upload/f_auto,q_auto/Video1_xwrkki.mp4" loop muted playsinline style="width: 100%; height: 100%; object-fit: contain; background: #000;"></video>
+                        <div class="player-controls">
+                            <div class="progress-container"><input type="range" class="progress-bar" min="0" max="100" value="0" step="0.1"></div>
+                            <div class="controls-main">
+                                <div class="controls-left">
+                                    <button class="control-btn play-pause-btn" aria-label="Play/Pause">
+                                        <svg class="icon-pause" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="display: none;"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>
+                                        <svg class="icon-play" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="display: block;"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                                    </button>
+                                    <div class="volume-container">
+                                        <button class="control-btn mute-btn" aria-label="Toggle Mute">
+                                            <svg class="icon-muted" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: block;"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg>
+                                            <svg class="icon-unmuted" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: none;"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+                                        </button>
+                                        <input type="range" class="volume-slider" min="0" max="1" step="0.05" value="1">
+                                    </div>
+                                    <div class="time-display"><span class="current-time">0:00</span> / <span class="duration">0:00</span></div>
+                                </div>
+                                <div class="controls-right">
+                                    <button class="control-btn fullscreen-btn" aria-label="Fullscreen"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path></svg></button>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="center-play-btn" aria-label="Play"><svg viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg></button>
+                    </div>
+                    <div style="padding: 1.5rem;">
+                        <h3 style="font-size: 1.4rem; margin-bottom: 0.5rem;">Monkey Man</h3>
+                        <p style="color: rgba(255,255,255,0.5); font-size: 0.9rem;">A broken man. A brutal awakening.</p>
+                    </div>
+                </div>
+
+                <div class="project-card reveal delay-1">
+                    <div class="project-img custom-player" data-behavior="hover" style="background: #111; position: relative; height: 350px;">
+                        <video src="https://res.cloudinary.com/dtnmadjdd/video/upload/f_auto,q_auto/Video2_opjtbm.mp4" loop muted playsinline style="width: 100%; height: 100%; object-fit: contain; background: #000;"></video>
+                        <div class="player-controls">
+                            <div class="progress-container"><input type="range" class="progress-bar" min="0" max="100" value="0" step="0.1"></div>
+                            <div class="controls-main">
+                                <div class="controls-left">
+                                    <button class="control-btn play-pause-btn" aria-label="Play/Pause">
+                                        <svg class="icon-pause" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="display: none;"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>
+                                        <svg class="icon-play" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="display: block;"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                                    </button>
+                                    <div class="volume-container">
+                                        <button class="control-btn mute-btn" aria-label="Toggle Mute">
+                                            <svg class="icon-muted" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: block;"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg>
+                                            <svg class="icon-unmuted" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: none;"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+                                        </button>
+                                        <input type="range" class="volume-slider" min="0" max="1" step="0.05" value="1">
+                                    </div>
+                                    <div class="time-display"><span class="current-time">0:00</span> / <span class="duration">0:00</span></div>
+                                </div>
+                                <div class="controls-right">
+                                    <button class="control-btn fullscreen-btn" aria-label="Fullscreen"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path></svg></button>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="center-play-btn" aria-label="Play"><svg viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg></button>
+                    </div>
+                    <div style="padding: 1.5rem;">
+                        <h3 style="font-size: 1.4rem; margin-bottom: 0.5rem;">Extraction</h3>
+                        <p style="color: rgba(255,255,255,0.5); font-size: 0.9rem;">One mission. No escape.</p>
+                    </div>
+                </div>
+
+                <div class="project-card reveal delay-2">
+                    <div class="project-img custom-player" data-behavior="hover" style="background: #111; position: relative; height: 350px;">
+                        <video src="https://res.cloudinary.com/dtnmadjdd/video/upload/f_auto,q_auto/Bullet_Train_Dott.Fx_k7dckw.mp4" loop muted playsinline style="width: 100%; height: 100%; object-fit: contain; background: #000;"></video>
+                        <div class="player-controls">
+                            <div class="progress-container"><input type="range" class="progress-bar" min="0" max="100" value="0" step="0.1"></div>
+                            <div class="controls-main">
+                                <div class="controls-left">
+                                    <button class="control-btn play-pause-btn" aria-label="Play/Pause">
+                                        <svg class="icon-pause" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="display: none;"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>
+                                        <svg class="icon-play" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="display: block;"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                                    </button>
+                                    <div class="volume-container">
+                                        <button class="control-btn mute-btn" aria-label="Toggle Mute">
+                                            <svg class="icon-muted" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: block;"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg>
+                                            <svg class="icon-unmuted" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: none;"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+                                        </button>
+                                        <input type="range" class="volume-slider" min="0" max="1" step="0.05" value="1">
+                                    </div>
+                                    <div class="time-display"><span class="current-time">0:00</span> / <span class="duration">0:00</span></div>
+                                </div>
+                                <div class="controls-right">
+                                    <button class="control-btn fullscreen-btn" aria-label="Fullscreen"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path></svg></button>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="center-play-btn" aria-label="Play"><svg viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg></button>
+                    </div>
+                    <div style="padding: 1.5rem;">
+                        <h3 style="font-size: 1.4rem; margin-bottom: 0.5rem;">Bullet Train</h3>
+                        <p style="color: rgba(255,255,255,0.5); font-size: 0.9rem;">High-octane action.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- THE PORTAL: An impressive and creative entry point to your full videos -->
+            <div class="showcase-portal reveal" style="margin-top: 8rem; position: relative; border-radius: 20px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); background: #000; box-shadow: 0 40px 100px rgba(0,0,0,0.8);">
+                <!-- Montage Background -->
+                <video src="video3.mp4" autoplay loop muted playsinline style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover; opacity: 0.3; filter: grayscale(1) contrast(1.2); pointer-events: none;"></video>
+                <div style="position: absolute; top:0; left:0; width:100%; height:100%; background: linear-gradient(90deg, rgba(8,2,13,0.95) 0%, transparent 60%, rgba(8,2,13,0.95) 100%);"></div>
+                
+                <div class="portal-content" style="position: relative; z-index: 10; padding: 6rem 4rem; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; min-height: 400px;">
+                    <p style="color: var(--primary-color); text-transform: uppercase; letter-spacing: 5px; font-weight: 700; margin-bottom: 1rem; font-size: 0.9rem;">The Repository</p>
+                    <h2 style="font-size: 3.5rem; font-weight: 900; margin-bottom: 2rem; max-width: 600px; line-height: 1.1; text-transform: uppercase; font-family: var(--font-heading);">Enter the full <span style="background: linear-gradient(to right, #00e5ff, #bd1ce3); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">Cinematic</span> Showcase</h2>
+                    <p style="max-width: 500px; font-size: 1.1rem; color: rgba(255,255,255,0.6); margin-bottom: 3rem;">Browse through 50+ professional edits, motion graphics, and high-fidelity mashup cuts in 4K.</p>
+                    <a href="works.html" class="btn btn-primary" style="padding: 1.5rem 4rem; border-radius: 40px; background: linear-gradient(135deg, #e50914, #b20710); border: none; font-size: 1.2rem; font-weight: 800; letter-spacing: 1px; box-shadow: 0 15px 45px rgba(229,9,20,0.4); display: flex; align-items: center; gap: 1rem; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);">
+                        BEYOND THE CUT 
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </a>
+                </div>
+
+                <!-- Floating Particles Decor -->
+                <div style="position: absolute; right: 10%; top: 50%; width: 200px; height: 200px; background: var(--primary-color); filter: blur(100px); opacity: 0.2; pointer-events: none;"></div>
+                <div style="position: absolute; left: 20%; bottom: -50px; width: 150px; height: 150px; background: #bd1ce3; filter: blur(80px); opacity: 0.15; pointer-events: none;"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact section" style="position: relative; overflow: hidden;">
+        <!-- Background Ambient Glows -->
+        <div style="position: absolute; top: 20%; right: -10%; width: 400px; height: 400px; background: radial-gradient(circle, var(--primary-color) 0%, transparent 70%); filter: blur(120px); opacity: 0.15; pointer-events: none; z-index: 1;"></div>
+        <div style="position: absolute; bottom: 10%; left: -5%; width: 300px; height: 300px; background: radial-gradient(circle, var(--secondary-color) 0%, transparent 70%); filter: blur(100px); opacity: 0.1; pointer-events: none; z-index: 1;"></div>
+
+        <div class="container" style="position: relative; z-index: 10;">
+            <h2 class="section-title reveal"><span>06.</span> Let's Create</h2>
+            <div class="contact-wrapper box-glass reveal delay-1" style="background: rgba(18, 3, 36, 0.4); border: 1px solid rgba(255,255,255,0.05); overflow: hidden;">
+                <div class="contact-info" style="padding-right: 2rem; border-right: 1px solid rgba(255,255,255,0.05);">
+                    <div class="availability-badge" style="display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(0, 229, 255, 0.1); border: 1px solid rgba(0, 229, 255, 0.2); color: var(--primary-color); padding: 0.4rem 1rem; border-radius: 20px; font-size: 0.8rem; font-weight: 700; margin-bottom: 2rem; text-transform: uppercase; letter-spacing: 1px;">
+                        <span style="width: 8px; height: 8px; background: #00ff88; border-radius: 50%; box-shadow: 0 0 10px #00ff88;"></span>
+                        Available for Freelance
+                    </div>
+                    <h3 style="font-size: 3rem; margin-bottom: 1.5rem; line-height: 1.1;">Ready to make some <span>Impact?</span></h3>
+                    <p style="font-size: 1.1rem; color: rgba(255,255,255,0.6); margin-bottom: 2.5rem;">I'm always open to discussing new projects, creative ideas, or being part of your vision.</p>
+                    
+                    <div class="contact-methods" style="display: flex; flex-direction: column; gap: 1.5rem; margin-bottom: 3rem;">
+                        <a href="mailto:jes009now@gmail.com" class="contact-method-item" style="display: flex; align-items: center; gap: 1.2rem; transition: transform 0.3s ease;">
+                            <div style="width: 50px; height: 50px; background: rgba(255,255,255,0.05); border-radius: 12px; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,0.1);">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--primary-color)" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                            </div>
+                            <div>
+                                <p style="font-size: 0.8rem; margin: 0; opacity: 0.5; text-transform: uppercase; letter-spacing: 1px;">Email Me</p>
+                                <p style="font-size: 1.1rem; margin: 0; font-weight: 600;">jes009now@gmail.com</p>
+                            </div>
+                        </a>
+                        <a href="https://wa.me/+918281265705" target="_blank" class="contact-method-item" style="display: flex; align-items: center; gap: 1.2rem; transition: transform 0.3s ease;">
+                            <div style="width: 50px; height: 50px; background: rgba(255,255,255,0.05); border-radius: 12px; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,0.1);">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#25D366" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                            </div>
+                            <div>
+                                <p style="font-size: 0.8rem; margin: 0; opacity: 0.5; text-transform: uppercase; letter-spacing: 1px;">WhatsApp</p>
+                                <p style="font-size: 1.1rem; margin: 0; font-weight: 600;">+91 8281 265 705</p>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="social-links" style="display: flex; gap: 1rem;">
+                        <a href="https://instagram.com/jes.now" target="_blank" aria-label="Instagram">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                        </a>
+                        <a href="https://behance.net/jesnowbiju" target="_blank" aria-label="Behance">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12H5"></path><path d="M12 12c0 2.2-1.8 4-4 4H5V8h3c2.2 0 4 1.8 4 4z"></path><path d="M15 16h4"></path><path d="M15 12h4"></path><path d="M21 9h-6"></path></svg>
+                        </a>
+                        <!-- Add more social links as needed -->
+                    </div>
+                </div>
+
+                <form class="contact-form" action="https://api.web3forms.com/submit" method="POST" style="padding-left: 1rem;">
+                    <input type="hidden" name="access_key" value="a661877e-fb39-465c-82a2-9839d8939d41">
+                    <!-- Web3Forms Configuration -->
+                    <input type="hidden" name="from_name" value="Jesnow Portfolio">
+                    <input type="hidden" name="subject" value="New Inquiry from Cinematic Portfolio">
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem;">
+                        <div class="input-group">
+                            <input type="text" name="name" required placeholder="Full Name" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); padding: 1.2rem; border-radius: 12px; transition: all 0.3s ease;">
+                        </div>
+                        <div class="input-group">
+                            <input type="email" name="email" required placeholder="Email Address" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); padding: 1.2rem; border-radius: 12px; transition: all 0.3s ease;">
+                        </div>
+                    </div>
+                    <div class="input-group" style="margin-bottom: 1.5rem;">
+                        <input type="text" name="subject_text" placeholder="Project Type (e.g. Video Editing, Branding)" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); padding: 1.2rem; border-radius: 12px; transition: all 0.3s ease; width: 100%;">
+                    </div>
+                    <div class="input-group" style="margin-bottom: 2rem;">
+                        <textarea name="message" rows="5" required placeholder="Tell me about your vision..." style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); padding: 1.2rem; border-radius: 12px; transition: all 0.3s ease; width: 100%; resize: none;"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%; padding: 1.5rem; border-radius: 12px; font-size: 1.1rem; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 1rem; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);">
+                        Launch Message
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                    </button>
+                    <p style="text-align: center; margin-top: 1.5rem; font-size: 0.8rem; color: rgba(255,255,255,0.3);">Secure submission via Web3Forms</p>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer style="padding: 4rem 0; border-top: 1px solid rgba(255,255,255,0.05); background: rgba(8, 2, 13, 0.5);">
+        <div class="container" style="text-align: center;">
+            <div class="footer-socials" style="display: flex; justify-content: center; gap: 2rem; margin-bottom: 2.5rem;">
+                <a href="https://instagram.com/jes.now" target="_blank" aria-label="Instagram" style="color: rgba(255,255,255,0.4); transition: all 0.3s ease;">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                </a>
+                <a href="https://behance.net/jesnowbiju" target="_blank" aria-label="Behance" style="color: rgba(255,255,255,0.4); transition: all 0.3s ease;">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12H5"></path><path d="M12 12c0 2.2-1.8 4-4 4H5V8h3c2.2 0 4 1.8 4 4z"></path><path d="M15 16h4"></path><path d="M15 12h4"></path><path d="M21 9h-6"></path></svg>
+                </a>
+                <a href="mailto:jes009now@gmail.com" aria-label="Email" style="color: rgba(255,255,255,0.4); transition: all 0.3s ease;">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                </a>
+            </div>
+            <p style="opacity: 0.3; font-size: 0.9rem; letter-spacing: 1px;">&copy; 2026 JESNOW BIJU &bull; DESIGNED FOR CINEMATIC IMPACT</p>
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
+</body>
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reel Showcase | Jesnow Biju</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .reels-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 20px;
+            padding: 100px 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .reel-item {
+            position: relative;
+            aspect-ratio: 9/16;
+            background: #000;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+        }
+
+        .reel-item:hover {
+            transform: scale(1.02) translateY(-10px);
+        }
+
+        .reel-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 30px 20px;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+            color: #fff;
+            pointer-events: none;
+        }
+
+        .reel-title {
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .reel-subtitle {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .back-home {
+            position: fixed;
+            top: 30px;
+            left: 30px;
+            z-index: 1000;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            padding: 10px 20px;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #fff;
+            text-decoration: none;
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: all 0.3s ease;
+        }
+
+        .back-home:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateX(-5px);
+        }
+
+        /* Video Player Overrides for Vertical */
+        .reels-container .custom-player {
+            height: 100%;
+        }
+
+        .reels-container video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body class="showcase-body">
+
+    <a href="index.html" class="back-home">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        Back to Home
+    </a>
+
+    <div class="container">
+        <header style="padding-top: 100px; text-align: center;">
+            <h1 style="font-size: 4rem; margin-bottom: 1rem;">Vertical <span style="color: var(--primary-color);">Excellence</span></h1>
+            <p style="max-width: 600px; margin: 0 auto; opacity: 0.7;">A collection of high-energy reels, social media edits, and short-form storytelling designed for the mobile-first era.</p>
+        </header>
+
+        <div class="reels-container" id="reels-grid">
+            <!-- Reels will be injected here -->
+        </div>
+    </div>
+
+    <script src="main.js"></script>
+    <script>
+        const reels = [
+            { src: 'reel1.mp4', title: 'Monologue', subtitle: 'Dramatic story beat' },
+            { src: 'reel2.mp4', title: 'Client Video', subtitle: 'Dynamic high-velocity' },
+            { src: 'reel3.mp4', title: 'Weekend Movies', subtitle: 'Atmospheric textures' },
+            { src: 'parava cut.mp4', title: 'Parava Style', subtitle: 'Street-soul rhythm' }
+        ];
+
+        const reelsGrid = document.getElementById('reels-grid');
+        
+        reelsGrid.innerHTML = reels.map(reel => `
+            <div class="reel-item custom-player" data-behavior="hover">
+                <video src="${reel.src}" loop muted playsinline></video>
+                <div class="reel-overlay">
+                    <h3 class="reel-title">${reel.title}</h3>
+                    <p class="reel-subtitle">${reel.subtitle}</p>
+                </div>
+                <!-- Custom Player Controls Integrated via main.js -->
+                <button class="center-play-btn" aria-label="Play">
+                    <svg viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                </button>
+            </div>
+        `).join('');
+
+        // Re-init players for dynamic content
+        if (window.initCustomVideoPlayers) window.initCustomVideoPlayers();
+    </script>
+</body>
+</html>
