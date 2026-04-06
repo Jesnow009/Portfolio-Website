@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const myVideos = [
         // Hero / Featured
         { 
-          cloudinaryId: "Cinephile_Dott.Fx_4K_bcs0dq", 
+          cloudinaryId: "Cinephile_Dott.Fx_4K_supvjn", 
           title: "Marco 4K Mashup", 
           subtitle: "Cut beyond the story—into the pulse", 
           category: "Featured", 
@@ -13,11 +13,11 @@ document.addEventListener('DOMContentLoaded', () => {
         },
 
         // Blockbuster Trailers / Mashups
+        { cloudinaryId: "Video3_o0gyis", title: "New Release", subtitle: "Latest cinematic cut.", category: "Mashup Cuts", type: "mashup" },
         { cloudinaryId: "Video1_xwrkki", title: "Monkey man", subtitle: "A broken man. A brutal awakening.", category: "Mashup Cuts", type: "mashup" },
-        { cloudinaryId: "Video2_opjtbm", title: "Extraction", subtitle: "One mission. No escape.", category: "Mashup Cuts", type: "mashup" },
-        { cloudinaryId: "Cinephile_Dott.Fx_4K_bcs0dq", title: "Cinephile Edit", subtitle: "4K Cinematic cut.", category: "Mashup Cuts", type: "mashup" },
+        { cloudinaryId: "Video2_zbt4g5", title: "Extraction", subtitle: "One mission. No escape.", category: "Mashup Cuts", type: "mashup" },
+        { cloudinaryId: "Doctor_Strange_4K_Dott.Fx_x2ghxa", title: "Doctor Strange", subtitle: "Multiverse mix.", category: "Mashup Cuts", type: "mashup" },
         { cloudinaryId: "Bullet_Train_Dott.Fx_k7dckw", title: "Bullet Train", subtitle: "High-octane action.", category: "Mashup Cuts", type: "mashup" },
-        { vimeoId: "", title: "Doctor Strange", subtitle: "Multiverse mix.", category: "Mashup Cuts", type: "mashup" },
         { vimeoId: "", title: "John Wick Mashup", subtitle: "Action compilation.", category: "Mashup Cuts", type: "mashup" },
         { vimeoId: "", title: "A Day with Sneha Shetty Kohli in Collage", subtitle: "Capturing the vibrant essence of emotion through high-fidelity 4K storytelling.", category: "Special Projects", type: "mashup" },
         { vimeoId: "", title: "Avatar Edit", subtitle: "Visual Storytelling.", category: "Mashup Cuts", type: "mashup" },
