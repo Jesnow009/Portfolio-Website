@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
         { cloudinaryId: "v1775504623/Reel4_sxipxz", title: "Client Video", subtitle: "A curated showcase of professional narrative and visual excellence.", category: "Viral Reels", type: "reel" },
 
         // Special Projects / Event Work
-        { cloudinaryId: "v1775504665/Sneha_Shetty_Image_Collage_Intro_afd9t6", title: "A day with Sneha Shetty Kohli", subtitle: "Honored to host Sneha Shetty Kohli at our campus.", category: "Special Projects", type: "mashup" },
+        { cloudinaryId: "v1775504612/Sneha_Day_4K_jiglzv", title: "A day with Sneha Shetty Kohli", subtitle: "Honored to host Sneha Shetty Kohli at our campus.", category: "Special Projects", type: "mashup" },
         { cloudinaryId: "v1775504682/Sneha_Shetty_Kohli_y1cwvh", title: "Sneha Shetty Intro", subtitle: "“From screen to stage—stories that inspire.”", category: "Special Projects", type: "mashup" },
         { cloudinaryId: "v1775504609/Vijay_Raghavendra_Inaugural_Video1_g7ai0e", title: "Vijay Raghavendra", subtitle: "“From passion to legacy—his journey continues.”", category: "Special Projects", type: "mashup" },
         { cloudinaryId: "v1775504612/Kumbla_5_m6kkoi", title: "Love Birds", subtitle: "“Love, captured in its purest form.”", category: "Special Projects", type: "mashup" },
