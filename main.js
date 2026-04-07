@@ -112,7 +112,7 @@ window.initCustomVideoPlayers = function() {
         // Attach listeners
         if (container.dataset.behavior === 'hover' || container.classList.contains('showcase-hero')) {
             // Entire card becomes a one-click portal to the viewer
-            const clickTarget = container.closest('.showcase-card') || container;
+            const clickTarget = container.closest('.showcase-card') || container.closest('.project-card') || container;
             clickTarget.style.cursor = 'pointer';
             clickTarget.addEventListener('click', openViewer);
         }
