@@ -38,13 +38,10 @@ document.addEventListener('DOMContentLoaded', () => {
         { cloudinaryId: "v1775550718/shootings_stars_cut_mbz4xg", title: "shooting stars", subtitle: "“From stage to soul—every moment mattered.”", category: "Special Projects", type: "mashup" },
 
         // Identity, Intros & Motion Graphics (Manually Ordered)
-        { vimeoId: "", title: "Motion Comp", subtitle: "Complex motion graphics intro.", category: "Identity & Intros", type: "mashup" },
-        { vimeoId: "", title: "Dott.fx Identity", subtitle: "Brand opening sequence.", category: "Identity & Intros", type: "mashup" },
+        { cloudinaryId: "v1775504660/St.Aloysius_Text_Logo_Intro_wukcqg", title: "St. Aloysius College Name Intro", subtitle: "“Not just a college… a journey that defines us.”", category: "Identity & Intros", type: "mashup" },
+        { cloudinaryId: "v1775504650/Department_Of_Media_Studies_Intro_sccd6n", title: "Department of Media Studies", subtitle: "“We don’t just study media… we create it.”", category: "Identity & Intros", type: "mashup" },
+        { cloudinaryId: "v1775504664/St.Aloysius_Logo_Intro_nymic4", title: "St. Aloysius College Logo Intro", subtitle: "“Where Stories Begin”", category: "Identity & Intros", type: "mashup" },
         { vimeoId: "", title: "Signature Logo", subtitle: "Floating logo animation.", category: "Identity & Intros", type: "mashup" },
-        { vimeoId: "", title: "SAU Text Intro", subtitle: "Clean typography reveal.", category: "Identity & Intros", type: "mashup" },
-        { vimeoId: "", title: "Premium Logo Animation", subtitle: "Advanced motion design.", category: "Identity & Intros", type: "mashup" },
-        { vimeoId: "", title: "Flash Intro 3", subtitle: "Quick 3ms visual sting.", category: "Identity & Intros", type: "mashup" },
-        { vimeoId: "", title: "Media Studies", subtitle: "Departmental Introduction.", category: "Identity & Intros", type: "mashup" },
         { vimeoId: "", title: "Samudra Logo", subtitle: "Dynamic Logo Reveal.", category: "Identity & Intros", type: "mashup" },
         { vimeoId: "", title: "St. Aloysius University", subtitle: "Academic identity intro.", category: "Identity & Intros", type: "mashup" },
         { vimeoId: "", title: "Shadow Intro", subtitle: "Alternative intro variation.", category: "Identity & Intros", type: "mashup" }
