@@ -25,10 +25,10 @@ document.addEventListener('DOMContentLoaded', () => {
         { cloudinaryId: "v1775550744/Tamil_Filmmakers_tigdbk", title: "Tamil Filmmakers", subtitle: "“They don’t follow trends—they create movements.”", category: "Mashup Cuts", type: "mashup" },
 
         // Viral Reels (Vertical)
-        { vimeoId: "", title: "Monologue", subtitle: "The pulse of dialogue: mastering the beat of performance and emotion.", category: "Viral Reels", type: "reel" },
-        { vimeoId: "", title: "Client Video", subtitle: "High-velocity visual rhythm designed for maximum audience engagement.", category: "Viral Reels", type: "reel" },
-        { vimeoId: "", title: "Weekend Movies", subtitle: "Cinematic atmosphere captured in the fleeting moments of leisure.", category: "Viral Reels", type: "reel" },
-        { vimeoId: "", title: "Client Video", subtitle: "A curated showcase of professional narrative and visual excellence.", category: "Viral Reels", type: "reel" },
+        { cloudinaryId: "v1775554997/reel1_ofapqz", title: "Monologue", subtitle: "The pulse of dialogue: mastering the beat of performance and emotion.", category: "Viral Reels", type: "reel" },
+        { cloudinaryId: "v1775554993/reel2_nra1td", title: "Client Video", subtitle: "High-velocity visual rhythm designed for maximum audience engagement.", category: "Viral Reels", type: "reel" },
+        { cloudinaryId: "v1775555011/reel3_lux8bx", title: "Weekend Movies", subtitle: "Cinematic atmosphere captured in the fleeting moments of leisure.", category: "Viral Reels", type: "reel" },
+        { cloudinaryId: "v1775504623/Reel4_sxipxz", title: "Client Video", subtitle: "A curated showcase of professional narrative and visual excellence.", category: "Viral Reels", type: "reel" },
 
         // Special Projects / Event Work
         { cloudinaryId: "v1775504665/Sneha_Shetty_Image_Collage_Intro_afd9t6", title: "A day with Sneha Shetty Kohli", subtitle: "Honored to host Sneha Shetty Kohli at our campus.", category: "Special Projects", type: "mashup" },
