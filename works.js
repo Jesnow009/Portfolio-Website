@@ -127,7 +127,26 @@ document.addEventListener('DOMContentLoaded', () => {
             mediaHTML = `
                 <video src="${clUrl}" loop muted playsinline class="video-element" style="object-fit: contain; width: 100%; height: 100%; background: #000;"></video>
                 <div class="player-controls">
-                    <!-- Custom Player Controls Already Handled in main.js -->
+                    <div class="progress-container"><input type="range" class="progress-bar" min="0" max="100" value="0" step="0.1"></div>
+                    <div class="controls-main">
+                        <div class="controls-left">
+                            <button class="control-btn play-pause-btn" aria-label="Play/Pause">
+                                <svg class="icon-pause" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="display: none;"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>
+                                <svg class="icon-play" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="display: block;"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                            </button>
+                            <div class="volume-container">
+                                <button class="control-btn mute-btn" aria-label="Toggle Mute">
+                                    <svg class="icon-muted" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: block;"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg>
+                                    <svg class="icon-unmuted" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: none;"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+                                </button>
+                                <input type="range" class="volume-slider" min="0" max="1" step="0.05" value="1">
+                            </div>
+                            <div class="time-display"><span class="current-time">0:00</span> / <span class="duration">0:00</span></div>
+                        </div>
+                        <div class="controls-right">
+                            <button class="control-btn fullscreen-btn" aria-label="Fullscreen"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path></svg></button>
+                        </div>
+                    </div>
                 </div>`;
         } else {
             mediaHTML = `
