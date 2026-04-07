@@ -104,17 +104,21 @@ window.initCustomVideoPlayers = function() {
             }
         };
 
-        // Standard behavioral listeners
-        if (centerPlayBtn) centerPlayBtn.addEventListener('click', togglePlay);
-        if (playPauseBtn) playPauseBtn.addEventListener('click', togglePlay);
-        video.addEventListener('click', togglePlay); // Video itself toggles play
-
         // Attach listeners
         if (container.dataset.behavior === 'hover' || container.classList.contains('showcase-hero')) {
             // Entire card becomes a one-click portal to the viewer
             const clickTarget = container.closest('.showcase-card') || container.closest('.project-card') || container;
             clickTarget.style.cursor = 'pointer';
             clickTarget.addEventListener('click', openViewer);
+            
+            // To ensure center-play-btn and video clicks within the card also trigger fullscreen,
+            // we do NOT add togglePlay to them directly here. They will bubble up to clickTarget.
+            if (playPauseBtn) playPauseBtn.addEventListener('click', togglePlay);
+        } else {
+            // Standard behavioral listeners for non-hover videos (e.g. Reels)
+            if (centerPlayBtn) centerPlayBtn.addEventListener('click', togglePlay);
+            if (playPauseBtn) playPauseBtn.addEventListener('click', togglePlay);
+            video.addEventListener('click', togglePlay); // Video itself toggles play
         }
 
         // Hover to play mechanics - Enhanced for Showcase Cards
