@@ -54,12 +54,40 @@ window.initCustomVideoPlayers = function() {
         // --- One-Click Professional Viewing Experience ---
         let manuallyPaused = false;
         
+        const togglePlay = (e) => {
+            // Standard Behavior for non-showcase (Home/Reels)
+            if (e && e.target.closest('.control-btn') !== playPauseBtn && e.target.closest('.center-play-btn') !== centerPlayBtn) {
+                if (e.target.closest('.player-controls')) return; 
+            }
+            if (e) { e.preventDefault(); e.stopPropagation(); }
+            
+            if (video.paused) {
+                video.muted = false;
+                video.play().catch(err => console.log('Play failed:', err));
+                manuallyPaused = false;
+            } else {
+                video.pause();
+                manuallyPaused = true;
+            }
+        };
+
         const openViewer = async (e) => {
             // Prevent double-trigger if clicking specific control buttons
             if (e.target.closest('.control-btn')) return;
             
             e.preventDefault(); e.stopPropagation();
             
+            const isFullscreen = document.fullscreenElement || 
+                               document.webkitFullscreenElement || 
+                               document.mozFullScreenElement || 
+                               document.msFullscreenElement;
+
+            // If already in fullscreen, clicking toggles playback (Play/Pause)
+            if (isFullscreen) {
+                togglePlay();
+                return;
+            }
+
             try {
                 // 1. Enter Fullscreen
                 if (container.requestFullscreen) await container.requestFullscreen();
@@ -76,22 +104,10 @@ window.initCustomVideoPlayers = function() {
             }
         };
 
-        const togglePlay = (e) => {
-            // Standard Behavior for non-showcase (Home/Reels)
-            if (e && e.target.closest('.control-btn') !== playPauseBtn && e.target.closest('.center-play-btn') !== centerPlayBtn) {
-                if (e.target.closest('.player-controls')) return; 
-            }
-            if (e) { e.preventDefault(); e.stopPropagation(); }
-            
-            if (video.paused) {
-                video.muted = false;
-                video.play();
-                manuallyPaused = false;
-            } else {
-                video.pause();
-                manuallyPaused = true;
-            }
-        };
+        // Standard behavioral listeners
+        if (centerPlayBtn) centerPlayBtn.addEventListener('click', togglePlay);
+        if (playPauseBtn) playPauseBtn.addEventListener('click', togglePlay);
+        video.addEventListener('click', togglePlay); // Video itself toggles play
 
         // Attach listeners
         if (container.dataset.behavior === 'hover' || container.classList.contains('showcase-hero')) {
@@ -99,11 +115,6 @@ window.initCustomVideoPlayers = function() {
             const clickTarget = container.closest('.showcase-card') || container;
             clickTarget.style.cursor = 'pointer';
             clickTarget.addEventListener('click', openViewer);
-        } else {
-            // Standard behavioral listeners
-            if (centerPlayBtn) centerPlayBtn.addEventListener('click', togglePlay);
-            if (playPauseBtn) playPauseBtn.addEventListener('click', togglePlay);
-            video.addEventListener('click', togglePlay);
         }
 
         // Hover to play mechanics - Enhanced for Showcase Cards
