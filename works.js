@@ -68,7 +68,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 </iframe>
             </div>`;
     } else if (heroVideo.cloudinaryId) {
-        const clUrl = `https://res.cloudinary.com/dtnmadjdd/video/upload/f_auto,q_auto/${heroVideo.cloudinaryId}.mp4`;
+        const clUrl = heroVideo.cloudinaryId.includes('/') 
+            ? `https://res.cloudinary.com/dtnmadjdd/video/upload/${heroVideo.cloudinaryId}.mp4`
+            : `https://res.cloudinary.com/dtnmadjdd/video/upload/f_auto,q_auto/${heroVideo.cloudinaryId}.mp4`;
         heroMediaHTML = `
             <div class="hero-video-wrap" style="position: absolute; top:0; left:0; width:100%; height:100%; overflow: hidden; pointer-events: none; z-index: 0;">
                 <video src="${clUrl}" autoplay loop muted playsinline class="video-element hero-video-bg" style="width: 100vw; height: 56.25vw; min-height: 100vh; min-width: 177.77vh; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); opacity: 0.4; filter: blur(5px) scale(1.05);"></video>
@@ -120,7 +122,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>`;
         } else if (videoObj.cloudinaryId) {
             // High-Performance Cloudinary Video Delivery
-            const clUrl = `https://res.cloudinary.com/dtnmadjdd/video/upload/f_auto,q_auto/${videoObj.cloudinaryId}.mp4`;
+            const clUrl = videoObj.cloudinaryId.includes('/')
+                ? `https://res.cloudinary.com/dtnmadjdd/video/upload/${videoObj.cloudinaryId}.mp4`
+                : `https://res.cloudinary.com/dtnmadjdd/video/upload/f_auto,q_auto/${videoObj.cloudinaryId}.mp4`;
             mediaHTML = `
                 <video src="${clUrl}" loop muted playsinline class="video-element" style="object-fit: contain; width: 100%; height: 100%; background: #000;"></video>
                 <div class="player-controls">
