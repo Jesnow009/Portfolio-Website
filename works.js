@@ -41,10 +41,10 @@ document.addEventListener('DOMContentLoaded', () => {
         { cloudinaryId: "v1775504660/St.Aloysius_Text_Logo_Intro_wukcqg", title: "St. Aloysius College Name Intro", subtitle: "“Not just a college… a journey that defines us.”", category: "Identity & Intros", type: "mashup" },
         { cloudinaryId: "v1775504650/Department_Of_Media_Studies_Intro_sccd6n", title: "Department of Media Studies", subtitle: "“We don’t just study media… we create it.”", category: "Identity & Intros", type: "mashup" },
         { cloudinaryId: "v1775504664/St.Aloysius_Logo_Intro_nymic4", title: "St. Aloysius College Logo Intro", subtitle: "“Where Stories Begin”", category: "Identity & Intros", type: "mashup" },
-        { vimeoId: "", title: "Signature Logo", subtitle: "Floating logo animation.", category: "Identity & Intros", type: "mashup" },
-        { vimeoId: "", title: "Samudra Logo", subtitle: "Dynamic Logo Reveal.", category: "Identity & Intros", type: "mashup" },
-        { vimeoId: "", title: "St. Aloysius University", subtitle: "Academic identity intro.", category: "Identity & Intros", type: "mashup" },
-        { vimeoId: "", title: "Shadow Intro", subtitle: "Alternative intro variation.", category: "Identity & Intros", type: "mashup" }
+        { cloudinaryId: "v1775504667/logo_animation_vwqry7", title: "shooting stars", subtitle: "“Written in the Stars”", category: "Identity & Intros", type: "mashup" },
+        { cloudinaryId: "v1775504673/3_sxdkbf", title: "shooting stars", subtitle: "“Destined to Shine”", category: "Identity & Intros", type: "mashup" },
+        { cloudinaryId: "v1775504646/Signature_Logo_shgqzv", title: "dott.fx Signature", subtitle: "Signature type intro", category: "Identity & Intros", type: "mashup" },
+        { cloudinaryId: "v1775504640/Dott.fx_Intro_qmtghq", title: "dott.fx Thunder", subtitle: "Thunder effect reveal", category: "Identity & Intros", type: "mashup" }
     ];
 
 
