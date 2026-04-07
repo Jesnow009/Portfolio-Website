@@ -17,14 +17,12 @@ document.addEventListener('DOMContentLoaded', () => {
         { cloudinaryId: "Bullet_Train_Dott.Fx_xkhdca", title: "Bullet train", subtitle: "Five killers. One train. No brakes.”", category: "Mashup Cuts", type: "mashup" },
         { cloudinaryId: "Video1_xwrkki", title: "Marco", subtitle: "Where chaos meets precision", category: "Mashup Cuts", type: "mashup" },
         { cloudinaryId: "Doctor_Strange_4K_Dott.Fx_x2ghxa", title: "Doctor Strange", subtitle: "Reality is just the beginning", category: "Mashup Cuts", type: "mashup" },
-        { cloudinaryId: "Bullet_Train_Dott.Fx_k7dckw", title: "Bullet Train", subtitle: "High-octane action.", category: "Mashup Cuts", type: "mashup" },
-        { vimeoId: "", title: "John Wick Mashup", subtitle: "Action compilation.", category: "Mashup Cuts", type: "mashup" },
-        { vimeoId: "", title: "A Day with Sneha Shetty Kohli in Collage", subtitle: "Capturing the vibrant essence of emotion through high-fidelity 4K storytelling.", category: "Special Projects", type: "mashup" },
-        { vimeoId: "", title: "Avatar Edit", subtitle: "Visual Storytelling.", category: "Mashup Cuts", type: "mashup" },
-        { vimeoId: "", title: "Wheel of the Time", subtitle: "Epic fantasy storytelling through masterful cinematic pacing.", category: "Mashup Cuts", type: "mashup" },
-        { vimeoId: "", title: "Parava", subtitle: "High-energy rhythm meeting the soul of the street.", category: "Mashup Cuts", type: "mashup" },
-        { vimeoId: "", title: "Shooting Stars", subtitle: "Stylized aesthetic cut.", category: "Special Projects", type: "mashup" },
-        { vimeoId: "", title: "What is Editing", subtitle: "An exploration of narrative structure and technical precision.", category: "Mashup Cuts", type: "mashup" },
+        { cloudinaryId: "v1775504591/John_Wick_Mashup_Dott.Fx_pdxdeb", title: "John Wick Mashup", subtitle: "“You don’t hunt him. He hunts you.”", category: "Mashup Cuts", type: "mashup" },
+        { cloudinaryId: "v1775550710/wheel_of_the_time_cut_tmq9wn", title: "Wheel of the Time", subtitle: "“Fate is not chosen… it is woven.”", category: "Mashup Cuts", type: "mashup" },
+        { cloudinaryId: "v1775550708/avatar_cut_msnk59", title: "Avatar cut", subtitle: "“Not just a planet… a living soul.”", category: "Mashup Cuts", type: "mashup" },
+        { cloudinaryId: "v1775550709/parava_cut_w5ogsa", title: "Parava", subtitle: "“Not just birds… they carried our dreams.”", category: "Mashup Cuts", type: "mashup" },
+        { cloudinaryId: "v1775550705/5_1_xbtumo", title: "What is Editing", subtitle: "“Stories aren’t filmed—they’re built in the edit.”", category: "Mashup Cuts", type: "mashup" },
+        { cloudinaryId: "v1775550744/Tamil_Filmmakers_tigdbk", title: "Tamil Filmmakers", subtitle: "“They don’t follow trends—they create movements.”", category: "Mashup Cuts", type: "mashup" },
 
         // Viral Reels (Vertical)
         { vimeoId: "", title: "Monologue", subtitle: "The pulse of dialogue: mastering the beat of performance and emotion.", category: "Viral Reels", type: "reel" },
@@ -33,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
         { vimeoId: "", title: "Client Video", subtitle: "A curated showcase of professional narrative and visual excellence.", category: "Viral Reels", type: "reel" },
 
         // Special Projects / Event Work
-        { vimeoId: "", title: "Tamil Filmmakers", subtitle: "A cinematic tribute to legends.", category: "Mashup Cuts", type: "mashup" },
+        { cloudinaryId: "v1775504630/Video3_o0gyis", title: "Beyond the Lens", subtitle: "Special project showcase.", category: "Special Projects", type: "mashup" },
         { vimeoId: "", title: "Vijay Raghavendra", subtitle: "Official Guest Intro Video", category: "Special Projects", type: "mashup" },
         { vimeoId: "", title: "Sneha Shetty Kohli", subtitle: "A cinematic portrait of poise and personality.", category: "Special Projects", type: "mashup" },
         { vimeoId: "", title: "Love Birds", subtitle: "A heart-warming celebration of union, distilled into a soulful cinematic edit.", category: "Special Projects", type: "mashup" },
