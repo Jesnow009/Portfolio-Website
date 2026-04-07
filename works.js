@@ -13,10 +13,10 @@ document.addEventListener('DOMContentLoaded', () => {
         },
 
         // Blockbuster Trailers / Mashups
-        { cloudinaryId: "Video3_o0gyis", title: "New Release", subtitle: "Latest cinematic cut.", category: "Mashup Cuts", type: "mashup" },
-        { cloudinaryId: "Video1_xwrkki", title: "Monkey man", subtitle: "A broken man. A brutal awakening.", category: "Mashup Cuts", type: "mashup" },
-        { cloudinaryId: "Video2_zbt4g5", title: "Extraction", subtitle: "One mission. No escape.", category: "Mashup Cuts", type: "mashup" },
-        { cloudinaryId: "Doctor_Strange_4K_Dott.Fx_x2ghxa", title: "Doctor Strange", subtitle: "Multiverse mix.", category: "Mashup Cuts", type: "mashup" },
+        { cloudinaryId: "Video3_o0gyis", title: "Marco", subtitle: "Where chaos meets precision", category: "Mashup Cuts", type: "mashup" },
+        { cloudinaryId: "Video1_xwrkki", title: "Monkey Man", subtitle: "“A broken man. A brutal awakening.”", category: "Mashup Cuts", type: "mashup" },
+        { cloudinaryId: "Video2_zbt4g5", title: "Doctor Strange", subtitle: "Reality is just the beginning", category: "Mashup Cuts", type: "mashup" },
+        { cloudinaryId: "Doctor_Strange_4K_Dott.Fx_x2ghxa", title: "Showreel Montage", subtitle: "High-octane action.", category: "Mashup Cuts", type: "mashup" },
         { cloudinaryId: "Bullet_Train_Dott.Fx_k7dckw", title: "Bullet Train", subtitle: "High-octane action.", category: "Mashup Cuts", type: "mashup" },
         { vimeoId: "", title: "John Wick Mashup", subtitle: "Action compilation.", category: "Mashup Cuts", type: "mashup" },
         { vimeoId: "", title: "A Day with Sneha Shetty Kohli in Collage", subtitle: "Capturing the vibrant essence of emotion through high-fidelity 4K storytelling.", category: "Special Projects", type: "mashup" },
