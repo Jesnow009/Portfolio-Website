@@ -639,8 +639,8 @@ img {
 .contact-wrapper {
     display: grid;
     grid-template-columns: 1fr 1.5fr;
-    gap: 4rem;
-    padding: 4rem;
+    gap: clamp(2rem, 5vw, 4rem);
+    padding: clamp(1.5rem, 5vw, 4rem);
 }
 
 .contact-info h3 {
@@ -1687,10 +1687,10 @@ footer {
 
     /* --- 3. Hero Scaling For Professionals --- */
     .hero {
-        padding-top: 80px;
+        padding-top: clamp(60px, 10vw, 80px);
         text-align: center;
         height: auto;
-        min-height: 90vh;
+        min-height: 85vh;
     }
 
     .hero-content {
@@ -1759,6 +1759,30 @@ footer {
     .service-card {
         padding: 2.5rem 1.5rem;
     }
+
+    /* --- 6. Showcase Card Scaling --- */
+    .showcase-card.horizontal {
+        width: clamp(260px, 70vw, 320px) !important;
+    }
+
+    .showcase-card.vertical {
+        width: clamp(160px, 45vw, 220px) !important;
+    }
+
+    .slider-track {
+        gap: 15px !important;
+        padding: 20px 0 !important;
+    }
+
+    .slider-arrow {
+        width: 48px !important;
+        height: 48px !important;
+    }
+
+    .slider-arrow svg {
+        width: 24px !important;
+        height: 24px !important;
+    }
 }
 
 @media screen and (max-width: 480px) {
@@ -1779,18 +1803,18 @@ footer {
 /* Mobile Precision for The Vault */
 @media (max-width: 480px) {
     .showcase-portal .portal-content {
-        padding: 3rem 1.5rem !important;
-        min-height: 350px !important;
+        padding: clamp(2rem, 8vw, 3rem) 1.5rem !important;
+        min-height: 300px !important;
         align-items: center !important;
         text-align: center !important;
     }
     .showcase-portal h2 {
-        font-size: 2.2rem !important;
-        margin-bottom: 1.5rem !important;
+        font-size: clamp(1.8rem, 8vw, 2.2rem) !important;
+        margin-bottom: 1.2rem !important;
     }
     .showcase-portal p {
-        font-size: 1rem !important;
-        margin-bottom: 2rem !important;
+        font-size: 0.95rem !important;
+        margin-bottom: 1.5rem !important;
     }
     .showcase-portal .btn-primary {
         padding: 1.2rem 2.5rem !important;

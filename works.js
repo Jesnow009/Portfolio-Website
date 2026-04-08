@@ -80,10 +80,10 @@ document.addEventListener('DOMContentLoaded', () => {
             ${heroMediaHTML}
             <div class="hero-vignette"></div>
             
-            <div class="hero-content">
-                <span class="hero-badge">Featured Cinematic Edit</span>
-                <h1 class="hero-title">${heroVideo.title}</h1>
-                <p class="hero-subtitle">${heroVideo.subtitle}</p>
+            <div class="hero-content" style="bottom: clamp(10%, 15vw, 20%); left: 4%; width: clamp(300px, 60%, 800px);">
+                <span class="hero-badge" style="font-size: clamp(0.7rem, 1vw, 0.8rem); padding: clamp(2px, 0.5vw, 4px) clamp(8px, 1vw, 12px);">Featured Cinematic Edit</span>
+                <h1 class="hero-title" style="font-size: clamp(2.5rem, 8vw, 4.5rem); margin-bottom: clamp(10px, 2vw, 20px);">${heroVideo.title}</h1>
+                <p class="hero-subtitle" style="font-size: clamp(1rem, 2vw, 1.4rem); margin-bottom: clamp(20px, 3vw, 30px);">${heroVideo.subtitle}</p>
                 
                 <div class="hero-actions" style="display: flex; align-items: center; gap: 15px;">
                     <button class="hero-play-btn" onclick="this.closest('.showcase-hero').querySelector('iframe')?.requestFullscreen() || this.closest('.showcase-hero').querySelector('video')?.requestFullscreen()" style="border-radius: 4px; padding: 12px 35px; border: none; font-size: 1.1rem; font-weight: 700; display: flex; align-items: center; gap: 10px; cursor: pointer; background: #fff; color: #000;">
@@ -194,7 +194,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         html += `
             <div class="showcase-row reveal">
-                <h2 class="row-title" style="margin-left: 20px; font-size: 2rem;">${cat}</h2>
+                <h2 class="row-title" style="margin-left: 4%; font-size: clamp(1.5rem, 3.5vw, 2.2rem); font-weight: 800; letter-spacing: -0.5px; border-left: 4px solid #e50914; padding-left: 15px; margin-bottom: 15px;">${cat}</h2>
                 <div class="slider-wrapper">
                     <button class="slider-arrow left-arrow" aria-label="Scroll Left">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
