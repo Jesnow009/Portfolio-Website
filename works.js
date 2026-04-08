@@ -85,14 +85,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 <h1 class="hero-title" style="font-size: clamp(2.5rem, 8vw, 4.5rem); margin-bottom: clamp(10px, 2vw, 20px);">${heroVideo.title}</h1>
                 <p class="hero-subtitle" style="font-size: clamp(1rem, 2vw, 1.4rem); margin-bottom: clamp(20px, 3vw, 30px);">${heroVideo.subtitle}</p>
                 
-                <div class="hero-actions" style="display: flex; align-items: center; gap: 15px;">
-                    <button class="hero-play-btn" onclick="this.closest('.showcase-hero').querySelector('iframe')?.requestFullscreen() || this.closest('.showcase-hero').querySelector('video')?.requestFullscreen()" style="border-radius: 4px; padding: 12px 35px; border: none; font-size: 1.1rem; font-weight: 700; display: flex; align-items: center; gap: 10px; cursor: pointer; background: #fff; color: #000;">
-                        <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                <div class="hero-actions" style="display: flex; align-items: center; gap: 15px; flex-wrap: nowrap;">
+                    <button class="hero-play-btn" onclick="this.closest('.showcase-hero').querySelector('iframe')?.requestFullscreen() || this.closest('.showcase-hero').querySelector('video')?.requestFullscreen()" style="border-radius: 4px; padding: clamp(10px, 2vw, 12px) clamp(20px, 4vw, 35px); border: none; font-size: clamp(0.9rem, 1.5vw, 1.1rem); font-weight: 700; display: flex; align-items: center; gap: 10px; cursor: pointer; background: #fff; color: #000; white-space: nowrap; flex-shrink: 0;">
+                        <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
                         Play Fullscreen
                     </button>
-                    <button class="mute-btn hero-mute-btn" aria-label="Toggle Mute" style="background: rgba(255,255,255,0.15); border: 2px solid rgba(255,255,255,0.4); border-radius: 50%; width: 48px; height: 48px; cursor: pointer; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(5px);">
-                        <svg class="icon-muted" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" style="display: block;"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg>
-                        <svg class="icon-unmuted" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" style="display: none;"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+                    <button class="mute-btn hero-mute-btn" aria-label="Toggle Mute" style="background: rgba(255,255,255,0.15); border: 2px solid rgba(255,255,255,0.4); border-radius: 50%; width: 44px; height: 44px; cursor: pointer; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(5px); flex-shrink: 0;">
+                        <svg class="icon-muted" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" style="display: block;"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg>
+                        <svg class="icon-unmuted" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" style="display: none;"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
                     </button>
                 </div>
             </div>

@@ -1197,11 +1197,12 @@ footer {
 
 .showcase-logo {
     font-family: var(--font-heading);
-    font-size: 1.8rem;
+    font-size: clamp(1.4rem, 4vw, 1.8rem);
     font-weight: 800;
     color: white;
     text-decoration: none;
     letter-spacing: -0.5px;
+    white-space: nowrap;
 }
 .showcase-logo span {
     color: #e50914; /* Netflix Red signature mark */
