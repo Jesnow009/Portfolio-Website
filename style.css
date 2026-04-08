@@ -258,7 +258,6 @@ img {
 }
 
 /* Hero Section */
-/* Hero Section */
 .hero {
     height: 100vh;
     display: flex;
@@ -1772,8 +1771,35 @@ footer {
     }
 }
 
-@ k e y f r a m e s   p u l s e - g l o w   { 
-     0 % ,   1 0 0 %   {   o p a c i t y :   0 . 8 ;   t r a n s f o r m :   s c a l e ( 1 ) ;   t e x t - s h a d o w :   0   0   1 5 p x   r g b a ( 0 ,   2 2 9 ,   2 5 5 ,   0 . 6 ) ;   } 
-     5 0 %   {   o p a c i t y :   1 ;   t r a n s f o r m :   s c a l e ( 1 . 0 5 ) ;   t e x t - s h a d o w :   0   0   3 0 p x   r g b a ( 0 ,   2 2 9 ,   2 5 5 ,   0 . 9 ) ;   } 
- }  
- 
+@keyframes pulse-glow {
+    0%, 100% { opacity: 0.8; transform: scale(1); text-shadow: 0 0 15px rgba(0, 229, 255, 0.6); }
+    50% { opacity: 1; transform: scale(1.05); text-shadow: 0 0 30px rgba(0, 229, 255, 0.9); }
+}
+
+/* Mobile Precision for The Vault */
+@media (max-width: 480px) {
+    .showcase-portal .portal-content {
+        padding: 3rem 1.5rem !important;
+        min-height: 350px !important;
+        align-items: center !important;
+        text-align: center !important;
+    }
+    .showcase-portal h2 {
+        font-size: 2.2rem !important;
+        margin-bottom: 1.5rem !important;
+    }
+    .showcase-portal p {
+        font-size: 1rem !important;
+        margin-bottom: 2rem !important;
+    }
+    .showcase-portal .btn-primary {
+        padding: 1.2rem 2.5rem !important;
+        font-size: 1rem !important;
+        width: 100% !important;
+        justify-content: center !important;
+    }
+    .showcase-portal .animate-up {
+        font-size: 0.7rem !important;
+        letter-spacing: 2px !important;
+    }
+}
