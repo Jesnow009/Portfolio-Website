@@ -15,7 +15,6 @@ document.addEventListener('DOMContentLoaded', () => {
         // Blockbuster Trailers / Mashups
         { cloudinaryId: "v1775504630/Video3_o0gyis", title: "Extraction", subtitle: "“One mission. No escape. Only survival.”", category: "Mashup Cuts", type: "mashup" },
         { cloudinaryId: "Bullet_Train_Dott.Fx_xkhdca", title: "Bullet train", subtitle: "Five killers. One train. No brakes.”", category: "Mashup Cuts", type: "mashup" },
-        { youtubeId: "84IrieuQCng", title: "Marco", subtitle: "Where chaos meets precision", category: "Mashup Cuts", type: "mashup" },
         { cloudinaryId: "Doctor_Strange_4K_Dott.Fx_x2ghxa", title: "Doctor Strange", subtitle: "Reality is just the beginning", category: "Mashup Cuts", type: "mashup" },
         { cloudinaryId: "v1775504591/John_Wick_Mashup_Dott.Fx_pdxdeb", title: "John Wick Mashup", subtitle: "“You don’t hunt him. He hunts you.”", category: "Mashup Cuts", type: "mashup" },
         { cloudinaryId: "v1775550710/wheel_of_the_time_cut_tmq9wn", title: "Wheel of the Time", subtitle: "“Fate is not chosen… it is woven.”", category: "Mashup Cuts", type: "mashup" },
