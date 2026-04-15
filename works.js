@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const myVideos = [
         // Hero / Featured
         { 
-          cloudinaryId: "Video1_xwrkki", 
+          youtubeId: "84IrieuQCng", 
           title: "Marco 4K Mashup", 
           subtitle: "Cut beyond the story—into the pulse", 
           category: "Featured", 
@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Blockbuster Trailers / Mashups
         { cloudinaryId: "v1775504630/Video3_o0gyis", title: "Extraction", subtitle: "“One mission. No escape. Only survival.”", category: "Mashup Cuts", type: "mashup" },
         { cloudinaryId: "Bullet_Train_Dott.Fx_xkhdca", title: "Bullet train", subtitle: "Five killers. One train. No brakes.”", category: "Mashup Cuts", type: "mashup" },
-        { cloudinaryId: "Video1_xwrkki", title: "Marco", subtitle: "Where chaos meets precision", category: "Mashup Cuts", type: "mashup" },
+        { youtubeId: "84IrieuQCng", title: "Marco", subtitle: "Where chaos meets precision", category: "Mashup Cuts", type: "mashup" },
         { cloudinaryId: "Doctor_Strange_4K_Dott.Fx_x2ghxa", title: "Doctor Strange", subtitle: "Reality is just the beginning", category: "Mashup Cuts", type: "mashup" },
         { cloudinaryId: "v1775504591/John_Wick_Mashup_Dott.Fx_pdxdeb", title: "John Wick Mashup", subtitle: "“You don’t hunt him. He hunts you.”", category: "Mashup Cuts", type: "mashup" },
         { cloudinaryId: "v1775550710/wheel_of_the_time_cut_tmq9wn", title: "Wheel of the Time", subtitle: "“Fate is not chosen… it is woven.”", category: "Mashup Cuts", type: "mashup" },
@@ -61,6 +61,16 @@ document.addEventListener('DOMContentLoaded', () => {
                     frameborder="0" 
                     style="width: 100vw; height: 56.25vw; min-height: 100vh; min-width: 177.77vh; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); opacity: 0.4; filter: blur(5px) scale(1.05);"
                     allow="autoplay; fullscreen; picture-in-picture" allowfullscreen>
+                </iframe>
+            </div>`;
+    } else if (heroVideo.youtubeId) {
+        heroMediaHTML = `
+            <div class="hero-video-wrap" style="position: absolute; top:0; left:0; width:100%; height:100%; overflow: hidden; pointer-events: none; z-index: 0;">
+                <iframe 
+                    src="https://www.youtube.com/embed/${heroVideo.youtubeId}?autoplay=1&mute=1&loop=1&playlist=${heroVideo.youtubeId}&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1" 
+                    frameborder="0" 
+                    style="width: 100vw; height: 56.25vw; min-height: 100vh; min-width: 177.77vh; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); opacity: 0.4; filter: blur(5px) scale(1.05);"
+                    allow="autoplay; fullscreen">
                 </iframe>
             </div>`;
     } else if (heroVideo.cloudinaryId) {
@@ -113,6 +123,15 @@ document.addEventListener('DOMContentLoaded', () => {
                     <iframe src="https://player.vimeo.com/video/${videoObj.vimeoId}?autoplay=1&muted=1&loop=1&background=1" 
                         style="position: absolute; top:0; left:0; width:100%; height:100%; pointer-events: none;" 
                         frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+                    <div style="position: absolute; top:0; left:0; width:100%; height:100%; z-index: 2; cursor: pointer;" 
+                         onclick="this.closest('.project-img').requestFullscreen()"></div>
+                </div>`;
+        } else if (videoObj.youtubeId) {
+            mediaHTML = `
+                <div class="video-element-wrapper" style="width: 100%; height: 100%; overflow: hidden; position: relative;">
+                    <iframe src="https://www.youtube.com/embed/${videoObj.youtubeId}?autoplay=1&mute=1&loop=1&playlist=${videoObj.youtubeId}&controls=0&modestbranding=1" 
+                        style="position: absolute; top:0; left:0; width:100%; height:100%; pointer-events: none;" 
+                        frameborder="0" allow="autoplay; fullscreen"></iframe>
                     <div style="position: absolute; top:0; left:0; width:100%; height:100%; z-index: 2; cursor: pointer;" 
                          onclick="this.closest('.project-img').requestFullscreen()"></div>
                 </div>`;
