@@ -133,6 +133,7 @@ document.addEventListener('DOMContentLoaded', () => {
                          <iframe src="https://www.youtube.com/embed/${videoObj.youtubeId}?enablejsapi=1&autoplay=1&mute=1&loop=1&playlist=${videoObj.youtubeId}&controls=0&modestbranding=1&rel=0" 
                             style="width:100%; height:100%;" frameborder="0" allow="autoplay; fullscreen"></iframe>
                     </div>
+                    <div class="yt-click-mask" style="position: absolute; top:0; left:0; width:100%; height:100%; z-index: 2; cursor: pointer;"></div>
                     <div class="player-controls yt-controls" style="z-index: 5;">
                         <div class="progress-container"><input type="range" class="progress-bar yt-progress" min="0" max="100" value="0" step="0.1"></div>
                         <div class="controls-main">
@@ -358,19 +359,29 @@ function initYTCards() {
                         return `${m}:${rs < 10 ? '0' : ''}${rs}`;
                     }
 
+                    // --- ONE CLICK PORTAL LOGIC ---
+                    const card = container.closest('.showcase-card');
+                    const triggerFullscreen = (e) => {
+                        if (e) { e.preventDefault(); e.stopPropagation(); }
+                        const parent = container.closest('.project-img');
+                        if (parent.requestFullscreen) parent.requestFullscreen();
+                        else if (parent.webkitRequestFullscreen) parent.webkitRequestFullscreen();
+                        player.unMute();
+                        player.playVideo();
+                    };
+                    
+                    if (card) card.onclick = triggerFullscreen;
+                    container.onclick = triggerFullscreen;
+
                     // Play/Pause sync
                     playBtn.onclick = (e) => {
                         e.stopPropagation();
                         const state = player.getPlayerState();
                         if (state === 1) { // playing
                             player.pauseVideo();
-                            iconPlay.style.display = 'block';
-                            iconPause.style.display = 'none';
                         } else {
                             player.unMute();
                             player.playVideo();
-                            iconPlay.style.display = 'none';
-                            iconPause.style.display = 'block';
                         }
                     };
 
@@ -389,14 +400,7 @@ function initYTCards() {
                     };
 
                     // Fullscreen
-                    fullscreenBtn.onclick = (e) => {
-                        e.stopPropagation();
-                        const parent = container.closest('.project-img');
-                        if (parent.requestFullscreen) parent.requestFullscreen();
-                        else if (parent.webkitRequestFullscreen) parent.webkitRequestFullscreen();
-                        player.unMute();
-                        player.playVideo();
-                    };
+                    fullscreenBtn.onclick = triggerFullscreen;
 
                     // Progress Update
                     setInterval(() => {
@@ -416,6 +420,26 @@ function initYTCards() {
                         player.seekTo(progressBar.value);
                         delete container.dataset.scrubbing;
                     };
+                },
+                'onStateChange': (event) => {
+                    const card = container.closest('.showcase-card');
+                    const playBtn = container.querySelector('.yt-play-btn');
+                    if (!card || !playBtn) return;
+                    
+                    const iconPlay = playBtn.querySelector('.icon-play');
+                    const iconPause = playBtn.querySelector('.icon-pause');
+
+                    if (event.data === 1) { // Playing
+                        card.classList.add('playing');
+                        card.classList.remove('paused');
+                        if (iconPlay) iconPlay.style.display = 'none';
+                        if (iconPause) iconPause.style.display = 'block';
+                    } else { // Paused or ended
+                        card.classList.remove('playing');
+                        card.classList.add('paused');
+                        if (iconPlay) iconPlay.style.display = 'block';
+                        if (iconPause) iconPause.style.display = 'none';
+                    }
                 }
             }
         });
