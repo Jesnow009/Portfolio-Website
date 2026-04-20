@@ -297,7 +297,19 @@ window.initHeroPlayer = function() {
     window.ytHeroPlayer = new YT.Player('hero-yt-iframe', {
         events: {
             'onReady': (event) => {
-                event.target.setPlaybackQuality('highres'); // Primary 4K attempt
+                const player = event.target;
+                
+                // --- MAXIMUM QUALITY LOCKDOWN ---
+                const forceHighRes = () => {
+                   if (player.setPlaybackQuality) player.setPlaybackQuality('highres');
+                   if (player.setSuggestedVideoQuality) player.setSuggestedVideoQuality('highres');
+                };
+                
+                forceHighRes();
+                // Continuously force for the first 5 seconds to override buffer-testing
+                let qualityInterval = setInterval(forceHighRes, 500);
+                setTimeout(() => clearInterval(qualityInterval), 5000);
+
                 event.target.mute();
                 event.target.playVideo();
 
@@ -375,7 +387,16 @@ function initYTCards() {
             events: {
                 'onReady': (event) => {
                     const player = event.target;
-                    player.setPlaybackQuality('highres'); // Force 4K from start
+                    
+                    // --- MAXIMUM QUALITY LOCKDOWN ---
+                    const forceHighRes = () => {
+                        if (player.setPlaybackQuality) player.setPlaybackQuality('highres');
+                        if (player.setSuggestedVideoQuality) player.setSuggestedVideoQuality('highres');
+                    };
+                    
+                    forceHighRes();
+                    let qualityInterval = setInterval(forceHighRes, 500);
+                    setTimeout(() => clearInterval(qualityInterval), 5000);
                     
                     const playBtn = container.querySelector('.yt-play-btn');
                     const muteBtn = container.querySelector('.yt-mute-btn');
