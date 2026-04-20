@@ -234,6 +234,15 @@ document.addEventListener('DOMContentLoaded', () => {
     html += `</div>`;
     app.innerHTML = html;
 
+    // Force an ID on the iframe for the API to target before init
+    const heroIframe = document.querySelector('.hero-video-wrap iframe');
+    if (heroIframe) heroIframe.id = "hero-yt-iframe";
+
+    // Immediate Init call if API already loaded
+    if (window.ytAPIReady && window.initHeroPlayer) {
+        window.initHeroPlayer();
+    }
+
     document.querySelectorAll('.slider-wrapper').forEach(wrapper => {
         const slider = wrapper.querySelector('.row-slider');
         wrapper.querySelector('.left-arrow').onclick = () => slider.scrollBy({ left: -(window.innerWidth * 0.7), behavior: 'smooth' });
@@ -241,30 +250,24 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// --- YouTube IFrame API Support (Global Scope) ---
-const tag = document.createElement('script');
-tag.src = "https://www.youtube.com/iframe_api";
-const firstScriptTag = document.getElementsByTagName('script')[0];
-firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+});
 
-window.onYouTubeIframeAPIReady = function() {
-    const heroIframe = document.querySelector('.hero-video-wrap iframe');
-    if (!heroIframe) return;
-
-    // Force an ID on the iframe for the API to target
-    heroIframe.id = "hero-yt-iframe";
+// --- YouTube IFrame API Support (Hardened Integration) ---
+window.initHeroPlayer = function() {
+    const heroIframe = document.getElementById('hero-yt-iframe');
+    if (!heroIframe || window.ytHeroPlayer) return;
 
     window.ytHeroPlayer = new YT.Player('hero-yt-iframe', {
         events: {
             'onReady': (event) => {
+                // Wired Sound Toggle
                 const muteBtn = document.getElementById('hero-mute-btn');
                 if (muteBtn) {
                     const iconMuted = muteBtn.querySelector('.icon-muted');
                     const iconUnmuted = muteBtn.querySelector('.icon-unmuted');
-
                     muteBtn.onclick = (e) => {
                         e.preventDefault(); e.stopPropagation();
-                        if (window.ytHeroPlayer && window.ytHeroPlayer.isMuted) {
+                        if (window.ytHeroPlayer && window.ytHeroPlayer.mute) {
                             if (window.ytHeroPlayer.isMuted()) {
                                 window.ytHeroPlayer.unMute();
                                 window.ytHeroPlayer.setVolume(100);
@@ -279,7 +282,7 @@ window.onYouTubeIframeAPIReady = function() {
                     };
                 }
                 
-                // Ensure fullscreen button works correctly
+                // Wired Fullscreen Toggle
                 const playBtn = document.querySelector('.hero-play-btn');
                 if (playBtn) {
                     playBtn.onclick = (e) => {
@@ -297,3 +300,16 @@ window.onYouTubeIframeAPIReady = function() {
         }
     });
 };
+
+window.onYouTubeIframeAPIReady = function() {
+    window.ytAPIReady = true;
+    if (window.initHeroPlayer) window.initHeroPlayer();
+};
+
+// Start the API Load
+(function() {
+    const tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    const firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+})();
