@@ -423,28 +423,55 @@ function initYTCards() {
                 },
                 'onStateChange': (event) => {
                     const card = container.closest('.showcase-card');
+                    const playerContainer = container.closest('.custom-player');
                     const playBtn = container.querySelector('.yt-play-btn');
-                    if (!card || !playBtn) return;
+                    if (!playBtn) return;
                     
                     const iconPlay = playBtn.querySelector('.icon-play');
                     const iconPause = playBtn.querySelector('.icon-pause');
 
                     if (event.data === 1) { // Playing
-                        card.classList.add('playing');
-                        card.classList.remove('paused');
+                        if (card) card.classList.add('playing');
+                        if (playerContainer) playerContainer.classList.add('playing');
                         if (iconPlay) iconPlay.style.display = 'none';
                         if (iconPause) iconPause.style.display = 'block';
                     } else { // Paused or ended
-                        card.classList.remove('playing');
-                        card.classList.add('paused');
+                        if (card) card.classList.remove('playing');
+                        if (playerContainer) playerContainer.classList.remove('playing');
                         if (iconPlay) iconPlay.style.display = 'block';
                         if (iconPause) iconPause.style.display = 'none';
                     }
                 }
             }
         });
+
+        // Store player for global control (like pause on exit)
+        if (!window.activeYTPlayers) window.activeYTPlayers = [];
+        window.activeYTPlayers.push(player);
     });
 }
+
+// --- Global Fullscreen Exit Handler (Pause on Exit) ---
+const handleGlobalFullscreenExit = () => {
+    const isFullscreen = document.fullscreenElement || document.webkitFullscreenElement;
+    if (!isFullscreen) {
+        // Pause any active YouTube players
+        if (window.activeYTPlayers) {
+            window.activeYTPlayers.forEach(p => {
+                if (p && p.pauseVideo && p.getPlayerState() === 1) {
+                    p.pauseVideo();
+                }
+            });
+        }
+        // Also pause the hero player if it exists
+        if (window.ytHeroPlayer && window.ytHeroPlayer.pauseVideo) {
+            window.ytHeroPlayer.pauseVideo();
+        }
+    }
+};
+
+document.addEventListener('fullscreenchange', handleGlobalFullscreenExit);
+document.addEventListener('webkitfullscreenchange', handleGlobalFullscreenExit);
 
 window.onYouTubeIframeAPIReady = function() {
     window.ytAPIReady = true;
