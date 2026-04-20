@@ -469,10 +469,26 @@ function initYTCards() {
                                 qualityOptions.forEach(o => o.classList.remove('active'));
                                 opt.classList.add('active');
                                 const vq = opt.dataset.vq;
-                                // Try to set via API (even if deprecated, some players respect it)
-                                if (player.setPlaybackQuality) player.setPlaybackQuality(vq);
+                                
+                                // --- PRO RESOLUTION SWAP ---
+                                // To reliably force a quality change in YouTube embeds, 
+                                // we reload the video at the current timestamp with the new quality.
+                                const currentTime = player.getCurrentTime();
+                                const isPaused = player.getPlayerState() !== 1;
+                                
+                                player.loadVideoById({
+                                    videoId: ytId,
+                                    startSeconds: currentTime,
+                                    suggestedQuality: vq
+                                });
+                                
+                                // Maintain pause state if it was paused
+                                if (isPaused) {
+                                    setTimeout(() => player.pauseVideo(), 500);
+                                }
+
                                 qualityMenu.style.display = 'none';
-                                console.log('Quality requested:', vq);
+                                console.log(`Resolution swap triggered: ${vq} at ${currentTime}s`);
                             };
                         });
 
