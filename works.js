@@ -250,8 +250,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-});
-
 // --- YouTube IFrame API Support (Hardened Integration) ---
 window.initHeroPlayer = function() {
     const heroIframe = document.getElementById('hero-yt-iframe');
