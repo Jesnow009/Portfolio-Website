@@ -1849,3 +1849,30 @@ footer {
     display: none !important; /* Hide UI in fullscreen for focus */
 }
 
+
+/* Professional Aspect-Ratio Fitting for Fullscreen */
+#hero-player-container:fullscreen {
+    background: #000 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+#hero-player-container:fullscreen .hero-video-wrap {
+    width: 100vw !important;
+    height: 56.25vw !important; /* 16:9 Aspect Ratio */
+    max-height: 100vh !important;
+    position: relative !important;
+}
+
+#hero-player-container:fullscreen iframe {
+    width: 100% !important;
+    height: 100% !important;
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    opacity: 1 !important;
+    filter: none !important;
+}
+

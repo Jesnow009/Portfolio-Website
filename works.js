@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     let html = `
-        <div class="showcase-hero custom-player" data-behavior="autoplay" style="cursor: pointer;" id="hero-player-container">
+        <div class="showcase-hero custom-player" data-behavior="autoplay" style="cursor: pointer;" id="hero-player-container" onclick="if(window.ytHeroPlayer) { window.ytHeroPlayer.unMute(); window.ytHeroPlayer.playVideo(); this.requestFullscreen(); }">
             ${heroMediaHTML}
             <div class="hero-vignette"></div>
             
