@@ -5,15 +5,15 @@ document.addEventListener('DOMContentLoaded', () => {
         // Hero / Featured
         { 
           youtubeId: "RAO0_nqH4wc", 
-          title: "LEO | Cinematic Tribute", 
-          subtitle: "Unleashing the beast within the frame", 
+          title: "LEO 4K Mashup", 
+          subtitle: "Cut beyond the story—into the pulse", 
           category: "Featured", 
           type: "mashup", 
           isHero: true 
         },
 
         // Blockbuster Trailers / Mashups
-        { youtubeId: "RAO0_nqH4wc", title: "LEO Mashup", subtitle: "“Bloody Sweet.”", category: "Mashup Cuts", type: "mashup" },
+        { youtubeId: "RAO0_nqH4wc", title: "LEO", subtitle: "Where chaos meets precision", category: "Mashup Cuts", type: "mashup" },
         { cloudinaryId: "v1775504630/Video3_o0gyis", title: "Extraction", subtitle: "“One mission. No escape. Only survival.”", category: "Mashup Cuts", type: "mashup" },
         { cloudinaryId: "Bullet_Train_Dott.Fx_xkhdca", title: "Bullet train", subtitle: "Five killers. One train. No brakes.”", category: "Mashup Cuts", type: "mashup" },
         { cloudinaryId: "Doctor_Strange_4K_Dott.Fx_x2ghxa", title: "Doctor Strange", subtitle: "Reality is just the beginning", category: "Mashup Cuts", type: "mashup" },
@@ -96,7 +96,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <p class="hero-subtitle" style="font-size: clamp(1rem, 2vw, 1.4rem); margin-bottom: clamp(20px, 3vw, 30px);">${heroVideo.subtitle}</p>
                 
                 <div class="hero-actions" style="display: flex; align-items: center; gap: 15px; flex-wrap: nowrap;">
-                    <button class="hero-play-btn" onclick="window.ytHeroPlayer?.playVideo(); document.querySelector('#hero-player-container').requestFullscreen();" style="border-radius: 4px; padding: clamp(10px, 2vw, 12px) clamp(20px, 4vw, 35px); border: none; font-size: clamp(0.9rem, 1.5vw, 1.1rem); font-weight: 700; display: flex; align-items: center; gap: 10px; cursor: pointer; background: #fff; color: #000; white-space: nowrap; flex-shrink: 0;">
+                    <button class="hero-play-btn" onclick="if(window.ytHeroPlayer) { window.ytHeroPlayer.unMute(); window.ytHeroPlayer.playVideo(); document.querySelector('#hero-player-container').requestFullscreen(); }" style="border-radius: 4px; padding: clamp(10px, 2vw, 12px) clamp(20px, 4vw, 35px); border: none; font-size: clamp(0.9rem, 1.5vw, 1.1rem); font-weight: 700; display: flex; align-items: center; gap: 10px; cursor: pointer; background: #fff; color: #000; white-space: nowrap; flex-shrink: 0;">
                         <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
                         Play Fullscreen
                     </button>
