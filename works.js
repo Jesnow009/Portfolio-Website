@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Hero / Featured
         { 
           youtubeId: "RAO0_nqH4wc", 
-          title: "LEO 4K Mashup", 
+          title: "MARCO", 
           subtitle: "Cut beyond the story—into the pulse", 
           category: "Featured", 
           type: "mashup", 
@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
         },
 
         // Blockbuster Trailers / Mashups
-        { youtubeId: "RAO0_nqH4wc", title: "LEO", subtitle: "Where chaos meets precision", category: "Mashup Cuts", type: "mashup" },
+        { youtubeId: "RAO0_nqH4wc", title: "MARCO", subtitle: "Where chaos meets precision", category: "Mashup Cuts", type: "mashup" },
         { cloudinaryId: "v1775504630/Video3_o0gyis", title: "Extraction", subtitle: "“One mission. No escape. Only survival.”", category: "Mashup Cuts", type: "mashup" },
         { cloudinaryId: "Bullet_Train_Dott.Fx_xkhdca", title: "Bullet train", subtitle: "Five killers. One train. No brakes.”", category: "Mashup Cuts", type: "mashup" },
         { cloudinaryId: "Doctor_Strange_4K_Dott.Fx_x2ghxa", title: "Doctor Strange", subtitle: "Reality is just the beginning", category: "Mashup Cuts", type: "mashup" },
