@@ -467,17 +467,17 @@ function initYTCards() {
                         const currentVol = player.getVolume();
                         
                         if (isMuted || currentVol === 0) {
-                            // SHOW THE ACTION: Click to Unmute (Waves)
-                            iconMuted.style.display = 'none';
-                            iconUnmuted.style.display = 'block';
+                            // SHOW CURRENT STATE: MUTED (X)
+                            iconMuted.style.display = 'block';
+                            iconUnmuted.style.display = 'none';
                             if (volumeSlider) {
                                 volumeSlider.value = 0;
                                 volumeSlider.style.setProperty('--volume-value', `0%`);
                             }
                         } else {
-                            // SHOW THE ACTION: Click to Mute (X)
-                            iconMuted.style.display = 'block';
-                            iconUnmuted.style.display = 'none';
+                            // SHOW CURRENT STATE: UNMUTED (WAVES)
+                            iconMuted.style.display = 'none';
+                            iconUnmuted.style.display = 'block';
                             if (volumeSlider) {
                                 volumeSlider.value = currentVol;
                                 volumeSlider.style.setProperty('--volume-value', `${currentVol}%`);
