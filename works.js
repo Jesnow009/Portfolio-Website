@@ -441,17 +441,23 @@ function initYTCards() {
                     // --- VOLUME & MUTE HARDENING ---
                     const volumeSlider = container.querySelector('.yt-volume-slider');
                     const updateMuteIcons = () => {
-                        if (player.isMuted()) {
+                        const isMuted = player.isMuted();
+                        const currentVol = player.getVolume();
+                        
+                        if (isMuted) {
                             iconMuted.style.display = 'none';
-                            iconUnmuted.style.display = 'block'; // Show Speaker to invite unmuting
-                            if (volumeSlider) volumeSlider.value = 0;
+                            iconUnmuted.style.display = 'block'; // Invite unmuting
+                            if (volumeSlider) {
+                                volumeSlider.value = 0;
+                                volumeSlider.style.setProperty('--volume-value', `0%`);
+                            }
                         } else {
-                            iconMuted.style.display = 'block'; // Show X to invite muting
+                            iconMuted.style.display = 'block'; // Invite muting
                             iconUnmuted.style.display = 'none';
-                            if (volumeSlider) volumeSlider.value = player.getVolume();
-                        }
-                        if (volumeSlider) {
-                            volumeSlider.style.setProperty('--volume-value', `${volumeSlider.value}%`);
+                            if (volumeSlider) {
+                                volumeSlider.value = currentVol;
+                                volumeSlider.style.setProperty('--volume-value', `${currentVol}%`);
+                            }
                         }
                     };
 
@@ -463,17 +469,28 @@ function initYTCards() {
                         } else {
                             player.mute();
                         }
-                        updateMuteIcons();
+                        // Trigger immediate sync
+                        setTimeout(updateMuteIcons, 50);
                     };
 
                     if (volumeSlider) {
                         volumeSlider.oninput = (e) => {
-                            const val = e.target.value;
+                            e.stopPropagation();
+                            const val = parseInt(e.target.value);
                             player.setVolume(val);
-                            if (val > 0) player.unMute();
-                            else player.mute();
+                            
+                            // Visual feedback (immediate)
                             volumeSlider.style.setProperty('--volume-value', `${val}%`);
-                            updateMuteIcons();
+                            
+                            if (val > 0) {
+                                if (player.isMuted()) player.unMute();
+                                iconMuted.style.display = 'block'; // show mute option
+                                iconUnmuted.style.display = 'none';
+                            } else {
+                                if (!player.isMuted()) player.mute();
+                                iconMuted.style.display = 'none';
+                                iconUnmuted.style.display = 'block'; // show unmute option
+                            }
                         };
                     }
 
