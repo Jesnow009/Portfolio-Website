@@ -299,15 +299,16 @@ window.initHeroPlayer = function() {
             'onReady': (event) => {
                 const player = event.target;
                 
-                // --- MAXIMUM 4K LOCKDOWN ---
-                const force4K = () => {
+                // --- STABLE 4K LOCKDOWN ---
+                const lock4K = () => {
                    if (player.setPlaybackQuality) player.setPlaybackQuality('hd2160');
                    if (player.setSuggestedVideoQuality) player.setSuggestedVideoQuality('hd2160');
                 };
                 
-                force4K();
-                let qualityInterval = setInterval(force4K, 500);
-                setTimeout(() => clearInterval(qualityInterval), 5000);
+                lock4K();
+                // Second pulse after a short delay to ensure it sticks after buffer starts
+                setTimeout(lock4K, 500);
+                setTimeout(lock4K, 1500);
 
                 event.target.mute();
                 event.target.playVideo();
@@ -387,15 +388,15 @@ function initYTCards() {
                 'onReady': (event) => {
                     const player = event.target;
                     
-                    // --- MAXIMUM 4K LOCKDOWN ---
-                    const force4K = () => {
+                    // --- STABLE 4K LOCKDOWN ---
+                    const lock4K = () => {
                         if (player.setPlaybackQuality) player.setPlaybackQuality('hd2160');
                         if (player.setSuggestedVideoQuality) player.setSuggestedVideoQuality('hd2160');
                     };
                     
-                    force4K();
-                    let qualityInterval = setInterval(force4K, 500);
-                    setTimeout(() => clearInterval(qualityInterval), 5000);
+                    lock4K();
+                    setTimeout(lock4K, 500);
+                    setTimeout(lock4K, 1500);
                     
                     const playBtn = container.querySelector('.yt-play-btn');
                     const muteBtn = container.querySelector('.yt-mute-btn');
