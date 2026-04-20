@@ -239,44 +239,61 @@ document.addEventListener('DOMContentLoaded', () => {
         wrapper.querySelector('.left-arrow').onclick = () => slider.scrollBy({ left: -(window.innerWidth * 0.7), behavior: 'smooth' });
         wrapper.querySelector('.right-arrow').onclick = () => slider.scrollBy({ left: (window.innerWidth * 0.7), behavior: 'smooth' });
     });
+});
 
-    // --- YouTube IFrame API Support ---
-    const tag = document.createElement('script');
-    tag.src = "https://www.youtube.com/iframe_api";
-    const firstScriptTag = document.getElementsByTagName('script')[0];
-    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+// --- YouTube IFrame API Support (Global Scope) ---
+const tag = document.createElement('script');
+tag.src = "https://www.youtube.com/iframe_api";
+const firstScriptTag = document.getElementsByTagName('script')[0];
+firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-    window.onYouTubeIframeAPIReady = function() {
-        const heroIframe = document.querySelector('.hero-video-wrap iframe');
-        if (!heroIframe) return;
+window.onYouTubeIframeAPIReady = function() {
+    const heroIframe = document.querySelector('.hero-video-wrap iframe');
+    if (!heroIframe) return;
 
-        // Force an ID on the iframe for the API to target
-        heroIframe.id = "hero-yt-iframe";
+    // Force an ID on the iframe for the API to target
+    heroIframe.id = "hero-yt-iframe";
 
-        window.ytHeroPlayer = new YT.Player('hero-yt-iframe', {
-            events: {
-                'onReady': (event) => {
-                    const muteBtn = document.getElementById('hero-mute-btn');
-                    if (!muteBtn) return;
-
+    window.ytHeroPlayer = new YT.Player('hero-yt-iframe', {
+        events: {
+            'onReady': (event) => {
+                const muteBtn = document.getElementById('hero-mute-btn');
+                if (muteBtn) {
                     const iconMuted = muteBtn.querySelector('.icon-muted');
                     const iconUnmuted = muteBtn.querySelector('.icon-unmuted');
 
                     muteBtn.onclick = (e) => {
                         e.preventDefault(); e.stopPropagation();
-                        if (window.ytHeroPlayer.isMuted()) {
+                        if (window.ytHeroPlayer && window.ytHeroPlayer.isMuted) {
+                            if (window.ytHeroPlayer.isMuted()) {
+                                window.ytHeroPlayer.unMute();
+                                window.ytHeroPlayer.setVolume(100);
+                                iconMuted.style.display = 'none';
+                                iconUnmuted.style.display = 'block';
+                            } else {
+                                window.ytHeroPlayer.mute();
+                                iconMuted.style.display = 'block';
+                                iconUnmuted.style.display = 'none';
+                            }
+                        }
+                    };
+                }
+                
+                // Ensure fullscreen button works correctly
+                const playBtn = document.querySelector('.hero-play-btn');
+                if (playBtn) {
+                    playBtn.onclick = (e) => {
+                        e.preventDefault(); e.stopPropagation();
+                        if (window.ytHeroPlayer) {
                             window.ytHeroPlayer.unMute();
-                            window.ytHeroPlayer.setVolume(100);
-                            iconMuted.style.display = 'none';
-                            iconUnmuted.style.display = 'block';
-                        } else {
-                            window.ytHeroPlayer.mute();
-                            iconMuted.style.display = 'block';
-                            iconUnmuted.style.display = 'none';
+                            window.ytHeroPlayer.playVideo();
+                            const container = document.getElementById('hero-player-container');
+                            if (container.requestFullscreen) container.requestFullscreen();
+                            else if (container.webkitRequestFullscreen) container.webkitRequestFullscreen();
                         }
                     };
                 }
             }
-        });
-    };
-});
+        }
+    });
+};
