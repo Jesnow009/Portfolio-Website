@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
         heroMediaHTML = `
             <div class="hero-video-wrap" style="position: absolute; top:0; left:0; width:100%; height:100%; overflow: hidden; pointer-events: none; z-index: 0;">
                 <iframe 
-                    src="https://www.youtube.com/embed/${heroVideo.youtubeId}?autoplay=1&mute=1&loop=1&playlist=${heroVideo.youtubeId}&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&vq=highres&hd=1" 
+                    src="https://www.youtube.com/embed/${heroVideo.youtubeId}?autoplay=1&mute=1&loop=1&playlist=${heroVideo.youtubeId}&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&vq=hd2160&hd=1" 
                     frameborder="0" 
                     style="width: 100vw; height: 56.25vw; min-height: 100vh; min-width: 177.77vh; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); opacity: 0.4; filter: blur(5px) scale(1.05);"
                     allow="autoplay; fullscreen">
@@ -130,7 +130,7 @@ document.addEventListener('DOMContentLoaded', () => {
             mediaHTML = `
                 <div class="video-element-wrapper yt-container" style="width: 100%; height: 100%; overflow: hidden; position: relative;" data-yt-id="${videoObj.youtubeId}">
                     <div class="yt-iframe-placeholder" style="position: absolute; top:0; left:0; width:100%; height:100%; pointer-events: none; z-index: 1;">
-                         <iframe src="https://www.youtube.com/embed/${videoObj.youtubeId}?enablejsapi=1&autoplay=1&mute=1&loop=1&playlist=${videoObj.youtubeId}&controls=0&modestbranding=1&rel=0&vq=hd1080&hd=1" 
+                         <iframe src="https://www.youtube.com/embed/${videoObj.youtubeId}?enablejsapi=1&autoplay=1&mute=1&loop=1&playlist=${videoObj.youtubeId}&controls=0&modestbranding=1&rel=0&vq=hd2160&hd=1" 
                             style="width:100%; height:100%;" frameborder="0" allow="autoplay; fullscreen"></iframe>
                     </div>
                     <div class="yt-click-mask" style="position: absolute; top:0; left:0; width:100%; height:100%; z-index: 2; cursor: pointer;"></div>
@@ -299,15 +299,14 @@ window.initHeroPlayer = function() {
             'onReady': (event) => {
                 const player = event.target;
                 
-                // --- MAXIMUM QUALITY LOCKDOWN ---
-                const forceHighRes = () => {
-                   if (player.setPlaybackQuality) player.setPlaybackQuality('highres');
-                   if (player.setSuggestedVideoQuality) player.setSuggestedVideoQuality('highres');
+                // --- MAXIMUM 4K LOCKDOWN ---
+                const force4K = () => {
+                   if (player.setPlaybackQuality) player.setPlaybackQuality('hd2160');
+                   if (player.setSuggestedVideoQuality) player.setSuggestedVideoQuality('hd2160');
                 };
                 
-                forceHighRes();
-                // Continuously force for the first 5 seconds to override buffer-testing
-                let qualityInterval = setInterval(forceHighRes, 500);
+                force4K();
+                let qualityInterval = setInterval(force4K, 500);
                 setTimeout(() => clearInterval(qualityInterval), 5000);
 
                 event.target.mute();
@@ -388,14 +387,14 @@ function initYTCards() {
                 'onReady': (event) => {
                     const player = event.target;
                     
-                    // --- MAXIMUM QUALITY LOCKDOWN ---
-                    const forceHighRes = () => {
-                        if (player.setPlaybackQuality) player.setPlaybackQuality('highres');
-                        if (player.setSuggestedVideoQuality) player.setSuggestedVideoQuality('highres');
+                    // --- MAXIMUM 4K LOCKDOWN ---
+                    const force4K = () => {
+                        if (player.setPlaybackQuality) player.setPlaybackQuality('hd2160');
+                        if (player.setSuggestedVideoQuality) player.setSuggestedVideoQuality('hd2160');
                     };
                     
-                    forceHighRes();
-                    let qualityInterval = setInterval(forceHighRes, 500);
+                    force4K();
+                    let qualityInterval = setInterval(force4K, 500);
                     setTimeout(() => clearInterval(qualityInterval), 5000);
                     
                     const playBtn = container.querySelector('.yt-play-btn');
@@ -468,17 +467,17 @@ function initYTCards() {
                         const currentVol = player.getVolume();
                         
                         if (isMuted || currentVol === 0) {
-                            // CURRENT STATE: MUTED -> Show the Muted Icon (X)
-                            iconMuted.style.display = 'block';
-                            iconUnmuted.style.display = 'none';
+                            // SHOW THE ACTION: Click to Unmute (Waves)
+                            iconMuted.style.display = 'none';
+                            iconUnmuted.style.display = 'block';
                             if (volumeSlider) {
                                 volumeSlider.value = 0;
                                 volumeSlider.style.setProperty('--volume-value', `0%`);
                             }
                         } else {
-                            // CURRENT STATE: UNMUTED -> Show the Unmuted Icon (Waves)
-                            iconMuted.style.display = 'none';
-                            iconUnmuted.style.display = 'block';
+                            // SHOW THE ACTION: Click to Mute (X)
+                            iconMuted.style.display = 'block';
+                            iconUnmuted.style.display = 'none';
                             if (volumeSlider) {
                                 volumeSlider.value = currentVol;
                                 volumeSlider.style.setProperty('--volume-value', `${currentVol}%`);
