@@ -144,9 +144,10 @@ document.addEventListener('DOMContentLoaded', () => {
                                 </button>
                                 <div class="volume-container">
                                     <button class="control-btn yt-mute-btn" aria-label="Toggle Mute">
-                                        <svg class="icon-muted" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: block;"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg>
-                                        <svg class="icon-unmuted" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: none;"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+                                        <svg class="icon-muted" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: none;"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg>
+                                        <svg class="icon-unmuted" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: block;"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
                                     </button>
+                                    <input type="range" class="volume-slider yt-volume-slider" min="0" max="100" step="1" value="100">
                                 </div>
                                 <div class="time-display"><span class="current-time">0:00</span> / <span class="duration">0:00</span></div>
                             </div>
@@ -415,16 +416,20 @@ function initYTCards() {
                         }
                     };
 
-                    // Mute Sync (Corrected Reversal)
+                    // --- VOLUME & MUTE HARDENING ---
+                    const volumeSlider = container.querySelector('.yt-volume-slider');
                     const updateMuteIcons = () => {
                         if (player.isMuted()) {
-                            // If muted, show the Speaker (unmuted icon) to invite unmuting
                             iconMuted.style.display = 'none';
-                            iconUnmuted.style.display = 'block';
+                            iconUnmuted.style.display = 'block'; // Show Speaker to invite unmuting
+                            if (volumeSlider) volumeSlider.value = 0;
                         } else {
-                            // If playing with sound, show the Muted icon (X) to invite muting
-                            iconMuted.style.display = 'block';
+                            iconMuted.style.display = 'block'; // Show X to invite muting
                             iconUnmuted.style.display = 'none';
+                            if (volumeSlider) volumeSlider.value = player.getVolume();
+                        }
+                        if (volumeSlider) {
+                            volumeSlider.style.setProperty('--volume-value', `${volumeSlider.value}%`);
                         }
                     };
 
@@ -438,6 +443,17 @@ function initYTCards() {
                         }
                         updateMuteIcons();
                     };
+
+                    if (volumeSlider) {
+                        volumeSlider.oninput = (e) => {
+                            const val = e.target.value;
+                            player.setVolume(val);
+                            if (val > 0) player.unMute();
+                            else player.mute();
+                            volumeSlider.style.setProperty('--volume-value', `${val}%`);
+                            updateMuteIcons();
+                        };
+                    }
 
                     // Initial state sync
                     updateMuteIcons();
