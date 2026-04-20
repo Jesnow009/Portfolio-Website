@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
         heroMediaHTML = `
             <div class="hero-video-wrap" style="position: absolute; top:0; left:0; width:100%; height:100%; overflow: hidden; pointer-events: none; z-index: 0;">
                 <iframe 
-                    src="https://www.youtube.com/embed/${heroVideo.youtubeId}?autoplay=1&mute=1&loop=1&playlist=${heroVideo.youtubeId}&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&vq=hd1080&hd=1" 
+                    src="https://www.youtube.com/embed/${heroVideo.youtubeId}?autoplay=1&mute=1&loop=1&playlist=${heroVideo.youtubeId}&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&vq=highres&hd=1" 
                     frameborder="0" 
                     style="width: 100vw; height: 56.25vw; min-height: 100vh; min-width: 177.77vh; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); opacity: 0.4; filter: blur(5px) scale(1.05);"
                     allow="autoplay; fullscreen">
@@ -415,14 +415,16 @@ function initYTCards() {
                         }
                     };
 
-                    // Mute Sync
+                    // Mute Sync (Corrected Reversal)
                     const updateMuteIcons = () => {
                         if (player.isMuted()) {
-                            iconMuted.style.display = 'block';
-                            iconUnmuted.style.display = 'none';
-                        } else {
+                            // If muted, show the Speaker (unmuted icon) to invite unmuting
                             iconMuted.style.display = 'none';
                             iconUnmuted.style.display = 'block';
+                        } else {
+                            // If playing with sound, show the Muted icon (X) to invite muting
+                            iconMuted.style.display = 'block';
+                            iconUnmuted.style.display = 'none';
                         }
                     };
 
