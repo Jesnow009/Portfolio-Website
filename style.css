@@ -1828,3 +1828,24 @@ footer {
         letter-spacing: 2px !important;
     }
 }
+/* Professional Fullscreen Player Experience */
+#hero-player-container:fullscreen .hero-video-wrap,
+#hero-player-container:-webkit-full-screen .hero-video-wrap {
+    pointer-events: auto !important;
+}
+
+#hero-player-container:fullscreen iframe,
+#hero-player-container:fullscreen .hero-video-bg,
+#hero-player-container:-webkit-full-screen iframe,
+#hero-player-container:-webkit-full-screen .hero-video-bg {
+    opacity: 1 !important;
+    filter: none !important;
+    transform: translate(-50%, -50%) scale(1) !important;
+    z-index: 100 !important;
+}
+
+#hero-player-container:fullscreen .hero-content,
+#hero-player-container:-webkit-full-screen .hero-content {
+    display: none !important; /* Hide UI in fullscreen for focus */
+}
+
