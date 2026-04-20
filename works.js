@@ -297,26 +297,39 @@ window.initHeroPlayer = function() {
     window.ytHeroPlayer = new YT.Player('hero-yt-iframe', {
         events: {
             'onReady': (event) => {
+                event.target.setPlaybackQuality('highres'); // Primary 4K attempt
+                event.target.mute();
+                event.target.playVideo();
+
                 // Wired Sound Toggle
                 const muteBtn = document.getElementById('hero-mute-btn');
                 if (muteBtn) {
                     const iconMuted = muteBtn.querySelector('.icon-muted');
                     const iconUnmuted = muteBtn.querySelector('.icon-unmuted');
+                    
+                    const updateHeroMuteIcons = () => {
+                        if (window.ytHeroPlayer.isMuted()) {
+                            iconMuted.style.display = 'none';
+                            iconUnmuted.style.display = 'block';
+                        } else {
+                            iconMuted.style.display = 'block';
+                            iconUnmuted.style.display = 'none';
+                        }
+                    };
+
                     muteBtn.onclick = (e) => {
                         e.preventDefault(); e.stopPropagation();
                         if (window.ytHeroPlayer && window.ytHeroPlayer.mute) {
                             if (window.ytHeroPlayer.isMuted()) {
                                 window.ytHeroPlayer.unMute();
                                 window.ytHeroPlayer.setVolume(100);
-                                iconMuted.style.display = 'none';
-                                iconUnmuted.style.display = 'block';
                             } else {
                                 window.ytHeroPlayer.mute();
-                                iconMuted.style.display = 'block';
-                                iconUnmuted.style.display = 'none';
                             }
+                            updateHeroMuteIcons();
                         }
                     };
+                    updateHeroMuteIcons();
                 }
                 
                 // Wired Fullscreen Toggle
@@ -332,6 +345,12 @@ window.initHeroPlayer = function() {
                             else if (container.webkitRequestFullscreen) container.webkitRequestFullscreen();
                         }
                     };
+                }
+            },
+            'onStateChange': (event) => {
+                // Secondary 4K enforcement on playback
+                if (event.data === 1) { 
+                    event.target.setPlaybackQuality('highres');
                 }
             }
         }
@@ -355,6 +374,9 @@ function initYTCards() {
         const player = new YT.Player(frameId, {
             events: {
                 'onReady': (event) => {
+                    const player = event.target;
+                    player.setPlaybackQuality('highres'); // Force 4K from start
+                    
                     const playBtn = container.querySelector('.yt-play-btn');
                     const muteBtn = container.querySelector('.yt-mute-btn');
                     const progressBar = container.querySelector('.yt-progress');
