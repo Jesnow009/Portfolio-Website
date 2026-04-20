@@ -4,9 +4,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const myVideos = [
         // Hero / Featured
         { 
-          youtubeId: "84IrieuQCng", 
-          title: "Marco 4K Mashup", 
-          subtitle: "Cut beyond the story—into the pulse", 
+          youtubeId: "RAO0_nqH4wc", 
+          title: "LEO | Cinematic Tribute", 
+          subtitle: "Unleashing the beast within the frame", 
           category: "Featured", 
           type: "mashup", 
           isHero: true 
