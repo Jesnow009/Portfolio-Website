@@ -128,12 +128,33 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>`;
         } else if (videoObj.youtubeId) {
             mediaHTML = `
-                <div class="video-element-wrapper" style="width: 100%; height: 100%; overflow: hidden; position: relative;">
-                    <iframe src="https://www.youtube.com/embed/${videoObj.youtubeId}?autoplay=1&mute=1&loop=1&playlist=${videoObj.youtubeId}&controls=0&modestbranding=1" 
-                        style="position: absolute; top:0; left:0; width:100%; height:100%; pointer-events: none;" 
-                        frameborder="0" allow="autoplay; fullscreen"></iframe>
-                    <div style="position: absolute; top:0; left:0; width:100%; height:100%; z-index: 2; cursor: pointer;" 
-                         onclick="this.closest('.project-img').requestFullscreen()"></div>
+                <div class="video-element-wrapper yt-container" style="width: 100%; height: 100%; overflow: hidden; position: relative;" data-yt-id="${videoObj.youtubeId}">
+                    <div class="yt-iframe-placeholder" style="position: absolute; top:0; left:0; width:100%; height:100%; pointer-events: none; z-index: 1;">
+                         <iframe src="https://www.youtube.com/embed/${videoObj.youtubeId}?enablejsapi=1&autoplay=1&mute=1&loop=1&playlist=${videoObj.youtubeId}&controls=0&modestbranding=1&rel=0" 
+                            style="width:100%; height:100%;" frameborder="0" allow="autoplay; fullscreen"></iframe>
+                    </div>
+                    <div class="player-controls yt-controls" style="z-index: 5;">
+                        <div class="progress-container"><input type="range" class="progress-bar yt-progress" min="0" max="100" value="0" step="0.1"></div>
+                        <div class="controls-main">
+                            <div class="controls-left">
+                                <button class="control-btn yt-play-btn" aria-label="Play/Pause">
+                                    <svg class="icon-pause" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="display: none;"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>
+                                    <svg class="icon-play" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="display: block;"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                                </button>
+                                <div class="volume-container">
+                                    <button class="control-btn yt-mute-btn" aria-label="Toggle Mute">
+                                        <svg class="icon-muted" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: block;"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg>
+                                        <svg class="icon-unmuted" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: none;"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+                                    </button>
+                                </div>
+                                <div class="time-display"><span class="current-time">0:00</span> / <span class="duration">0:00</span></div>
+                            </div>
+                            <div class="controls-right">
+                                <span class="quality-badge" style="background: rgba(229, 9, 20, 0.8); color: #fff; font-size: 10px; font-weight: 800; padding: 2px 6px; border-radius: 2px; margin-right: 15px; letter-spacing: 1px;">4K PRO</span>
+                                <button class="control-btn fullscreen-btn" aria-label="Fullscreen"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path></svg></button>
+                            </div>
+                        </div>
+                    </div>
                 </div>`;
         } else if (videoObj.cloudinaryId) {
             // High-Performance Cloudinary Video Delivery
@@ -250,7 +271,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// --- YouTube IFrame API Support (Hardened Integration) ---
+// --- YouTube IFrame API Support (Hardened Integration with Pro Controls) ---
 window.initHeroPlayer = function() {
     const heroIframe = document.getElementById('hero-yt-iframe');
     if (!heroIframe || window.ytHeroPlayer) return;
@@ -297,7 +318,109 @@ window.initHeroPlayer = function() {
             }
         }
     });
+
+    // --- Start Card Player Sync ---
+    initYTCards();
 };
+
+function initYTCards() {
+    const ytContainers = document.querySelectorAll('.yt-container:not(.synced)');
+    ytContainers.forEach(container => {
+        container.classList.add('synced');
+        const iframe = container.querySelector('iframe');
+        const ytId = container.dataset.ytId;
+        
+        // Use a unique ID for each iframe
+        const frameId = `yt-card-${Math.random().toString(36).substr(2, 9)}`;
+        iframe.id = frameId;
+
+        const player = new YT.Player(frameId, {
+            events: {
+                'onReady': (event) => {
+                    const playBtn = container.querySelector('.yt-play-btn');
+                    const muteBtn = container.querySelector('.yt-mute-btn');
+                    const progressBar = container.querySelector('.yt-progress');
+                    const timeEl = container.querySelector('.current-time');
+                    const durEl = container.querySelector('.duration');
+                    const fullscreenBtn = container.querySelector('.fullscreen-btn');
+                    const iconPlay = playBtn.querySelector('.icon-play');
+                    const iconPause = playBtn.querySelector('.icon-pause');
+                    const iconMuted = muteBtn.querySelector('.icon-muted');
+                    const iconUnmuted = muteBtn.querySelector('.icon-unmuted');
+
+                    const duration = player.getDuration();
+                    durEl.textContent = formatTime(duration);
+                    progressBar.max = duration;
+
+                    function formatTime(s) {
+                        const m = Math.floor(s / 60);
+                        const rs = Math.floor(s % 60);
+                        return `${m}:${rs < 10 ? '0' : ''}${rs}`;
+                    }
+
+                    // Play/Pause sync
+                    playBtn.onclick = (e) => {
+                        e.stopPropagation();
+                        const state = player.getPlayerState();
+                        if (state === 1) { // playing
+                            player.pauseVideo();
+                            iconPlay.style.display = 'block';
+                            iconPause.style.display = 'none';
+                        } else {
+                            player.unMute();
+                            player.playVideo();
+                            iconPlay.style.display = 'none';
+                            iconPause.style.display = 'block';
+                        }
+                    };
+
+                    // Mute Sync
+                    muteBtn.onclick = (e) => {
+                        e.stopPropagation();
+                        if (player.isMuted()) {
+                            player.unMute();
+                            iconMuted.style.display = 'none';
+                            iconUnmuted.style.display = 'block';
+                        } else {
+                            player.mute();
+                            iconMuted.style.display = 'block';
+                            iconUnmuted.style.display = 'none';
+                        }
+                    };
+
+                    // Fullscreen
+                    fullscreenBtn.onclick = (e) => {
+                        e.stopPropagation();
+                        const parent = container.closest('.project-img');
+                        if (parent.requestFullscreen) parent.requestFullscreen();
+                        else if (parent.webkitRequestFullscreen) parent.webkitRequestFullscreen();
+                        player.unMute();
+                        player.playVideo();
+                    };
+
+                    // Progress Update
+                    setInterval(() => {
+                        const cur = player.getCurrentTime();
+                        timeEl.textContent = formatTime(cur);
+                        if (!container.dataset.scrubbing) {
+                            progressBar.value = cur;
+                            const perc = (cur / duration) * 100;
+                            progressBar.style.setProperty('--progress-value', `${perc}%`);
+                        }
+                    }, 500);
+
+                    progressBar.oninput = () => {
+                        container.dataset.scrubbing = "true";
+                    };
+                    progressBar.onchange = () => {
+                        player.seekTo(progressBar.value);
+                        delete container.dataset.scrubbing;
+                    };
+                }
+            }
+        });
+    });
+}
 
 window.onYouTubeIframeAPIReady = function() {
     window.ytAPIReady = true;
