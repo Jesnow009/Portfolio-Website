@@ -416,18 +416,29 @@ function initYTCards() {
                     };
 
                     // Mute Sync
+                    const updateMuteIcons = () => {
+                        if (player.isMuted()) {
+                            iconMuted.style.display = 'block';
+                            iconUnmuted.style.display = 'none';
+                        } else {
+                            iconMuted.style.display = 'none';
+                            iconUnmuted.style.display = 'block';
+                        }
+                    };
+
                     muteBtn.onclick = (e) => {
                         e.stopPropagation();
                         if (player.isMuted()) {
                             player.unMute();
-                            iconMuted.style.display = 'none';
-                            iconUnmuted.style.display = 'block';
+                            player.setVolume(100);
                         } else {
                             player.mute();
-                            iconMuted.style.display = 'block';
-                            iconUnmuted.style.display = 'none';
                         }
+                        updateMuteIcons();
                     };
+
+                    // Initial state sync
+                    updateMuteIcons();
 
                     // Fullscreen
                     fullscreenBtn.onclick = triggerFullscreen;
