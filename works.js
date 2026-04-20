@@ -438,21 +438,23 @@ function initYTCards() {
                         }
                     };
 
-                    // --- VOLUME & MUTE HARDENING ---
+                    // --- VOLUME & MUTE HARDENING (YOUTUBE STYLE) ---
                     const volumeSlider = container.querySelector('.yt-volume-slider');
+                    container.dataset.lastVolume = "100"; // Default start
+
                     const updateMuteIcons = () => {
                         const isMuted = player.isMuted();
                         const currentVol = player.getVolume();
                         
-                        if (isMuted) {
+                        if (isMuted || currentVol === 0) {
                             iconMuted.style.display = 'none';
-                            iconUnmuted.style.display = 'block'; // Invite unmuting
+                            iconUnmuted.style.display = 'block'; // Show Speaker to invite unmuting
                             if (volumeSlider) {
                                 volumeSlider.value = 0;
                                 volumeSlider.style.setProperty('--volume-value', `0%`);
                             }
                         } else {
-                            iconMuted.style.display = 'block'; // Invite muting
+                            iconMuted.style.display = 'block'; // Show X to invite muting
                             iconUnmuted.style.display = 'none';
                             if (volumeSlider) {
                                 volumeSlider.value = currentVol;
@@ -465,11 +467,14 @@ function initYTCards() {
                         e.stopPropagation();
                         if (player.isMuted()) {
                             player.unMute();
-                            player.setVolume(100);
+                            const restoreVol = container.dataset.lastVolume || 100;
+                            player.setVolume(restoreVol);
                         } else {
+                            // Store current volume before muting
+                            const currentVol = player.getVolume();
+                            if (currentVol > 0) container.dataset.lastVolume = currentVol;
                             player.mute();
                         }
-                        // Trigger immediate sync
                         setTimeout(updateMuteIcons, 50);
                     };
 
@@ -479,18 +484,15 @@ function initYTCards() {
                             const val = parseInt(e.target.value);
                             player.setVolume(val);
                             
-                            // Visual feedback (immediate)
-                            volumeSlider.style.setProperty('--volume-value', `${val}%`);
-                            
                             if (val > 0) {
+                                container.dataset.lastVolume = val;
                                 if (player.isMuted()) player.unMute();
-                                iconMuted.style.display = 'block'; // show mute option
-                                iconUnmuted.style.display = 'none';
                             } else {
                                 if (!player.isMuted()) player.mute();
-                                iconMuted.style.display = 'none';
-                                iconUnmuted.style.display = 'block'; // show unmute option
                             }
+                            
+                            volumeSlider.style.setProperty('--volume-value', `${val}%`);
+                            updateMuteIcons();
                         };
                     }
 
