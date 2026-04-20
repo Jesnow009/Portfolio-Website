@@ -151,7 +151,23 @@ document.addEventListener('DOMContentLoaded', () => {
                                 <div class="time-display"><span class="current-time">0:00</span> / <span class="duration">0:00</span></div>
                             </div>
                             <div class="controls-right">
-                                <span class="quality-badge" style="background: rgba(229, 9, 20, 0.8); color: #fff; font-size: 10px; font-weight: 800; padding: 2px 6px; border-radius: 2px; margin-right: 15px; letter-spacing: 1px;">4K PRO</span>
+                                <div class="yt-settings-container" style="position: relative; display: flex; align-items: center; margin-right: 15px;">
+                                    <button class="control-btn yt-settings-btn" aria-label="Settings">
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+                                    </button>
+                                    <div class="yt-quality-menu" style="display: none; position: absolute; bottom: 50px; right: 0; background: rgba(20,20,20,0.95); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 10px 0; min-width: 150px; z-index: 1000; box-shadow: 0 10px 30px rgba(0,0,0,0.8);">
+                                        <div style="padding: 10px 20px; font-size: 11px; font-weight: 800; color: rgba(255,255,255,0.5); border-bottom: 1px solid rgba(255,255,255,0.05); margin-bottom: 5px; display: flex; align-items: center; justify-content: space-between;">
+                                            <span>QUALITY</span>
+                                            <span style="color: #e50914;">AUTO</span>
+                                        </div>
+                                        <button class="quality-option" data-vq="highres">2160p <sup style="color: #e50914;">4K</sup></button>
+                                        <button class="quality-option" data-vq="hd1440">1440p <sup style="color: #e50914;">HD</sup></button>
+                                        <button class="quality-option active" data-vq="hd1080">1080p <sup style="color: #e50914;">HD</sup></button>
+                                        <button class="quality-option" data-vq="hd720">720p</button>
+                                        <button class="quality-option" data-vq="large">480p</button>
+                                        <button class="quality-option" data-vq="medium">360p</button>
+                                    </div>
+                                </div>
                                 <button class="control-btn fullscreen-btn" aria-label="Fullscreen"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path></svg></button>
                             </div>
                         </div>
@@ -434,6 +450,35 @@ function initYTCards() {
                         player.seekTo(progressBar.value);
                         delete container.dataset.scrubbing;
                     };
+
+                    // --- Settings & Quality Logic ---
+                    const settingsBtn = container.querySelector('.yt-settings-btn');
+                    const qualityMenu = container.querySelector('.yt-quality-menu');
+                    const qualityOptions = container.querySelectorAll('.quality-option');
+
+                    if (settingsBtn && qualityMenu) {
+                        settingsBtn.onclick = (e) => {
+                            e.stopPropagation();
+                            const isVisible = qualityMenu.style.display === 'block';
+                            qualityMenu.style.display = isVisible ? 'none' : 'block';
+                        };
+
+                        qualityOptions.forEach(opt => {
+                            opt.onclick = (e) => {
+                                e.stopPropagation();
+                                qualityOptions.forEach(o => o.classList.remove('active'));
+                                opt.classList.add('active');
+                                const vq = opt.dataset.vq;
+                                // Try to set via API (even if deprecated, some players respect it)
+                                if (player.setPlaybackQuality) player.setPlaybackQuality(vq);
+                                qualityMenu.style.display = 'none';
+                                console.log('Quality requested:', vq);
+                            };
+                        });
+
+                        // Close menu on outside click
+                        document.addEventListener('click', () => { qualityMenu.style.display = 'none'; });
+                    }
                 },
                 'onStateChange': (event) => {
                     const card = container.closest('.showcase-card');

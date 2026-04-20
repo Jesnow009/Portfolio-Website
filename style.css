@@ -1876,3 +1876,34 @@ footer {
     filter: none !important;
 }
 
+
+/* Professional Quality Menu Styling */
+.quality-option {
+    display: block;
+    width: 100%;
+    padding: 10px 20px;
+    background: transparent;
+    border: none;
+    color: #fff;
+    text-align: left;
+    font-size: 13px;
+    font-family: inherit;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.quality-option:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.quality-option.active {
+    color: #e50914;
+    font-weight: 700;
+}
+
+.quality-option sup {
+    font-size: 8px;
+    margin-left: 2px;
+}
+
