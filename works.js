@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Unified Configuration & Data
+    // 1. Data Source
     const myVideos = [
         { youtubeId: "RAO0_nqH4wc", title: "MARCO", subtitle: "Cut beyond the story—into the pulse", category: "Featured", type: "mashup", isHero: true },
         { youtubeId: "sJ8Bt_0QaqE", title: "John Wick Mashup", subtitle: "“You don’t hunt him. He hunts you.”", category: "Beyond the Cut", type: "mashup" },
@@ -33,20 +33,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const heroVid = myVideos.find(v => v.isHero) || myVideos[0];
     
-    // 2. Render Page Content
+    // 2. Render Page
     let html = `
         <div class="showcase-hero custom-player" id="hero-player-container" onclick="window.playHeroFS()">
-            <div class="hero-video-wrap" style="position: absolute; top:0; left:0; width:100%; height:100%; overflow: hidden; pointer-events: none; z-index: 0;">
+            <div class="hero-video-wrap" style="position: absolute; top:0; left:0; width:100%; height:100%; overflow: hidden; pointer-events: none; z-index: -1;">
                 <iframe id="hero-yt-iframe"
                     src="https://www.youtube.com/embed/${heroVid.youtubeId}?enablejsapi=1&autoplay=1&mute=1&loop=1&playlist=${heroVid.youtubeId}&controls=0&modestbranding=1&rel=0&vq=hd1080" 
                     frameborder="0" 
                     style="width: 100vw; height: 56.25vw; min-height: 100vh; min-width: 177.77vh; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); opacity: 1; border: none;" 
                     allow="autoplay; fullscreen">
                 </iframe>
-                <div class="yt-cover-image" style="background: url('https://img.youtube.com/vi/${heroVid.youtubeId}/maxresdefault.jpg') center/cover; position: absolute; top:0; left:0; width:100%; height:100%; z-index:1; pointer-events:none;"></div>
+                <div class="yt-cover-image" style="background: url('https://img.youtube.com/vi/${heroVid.youtubeId}/maxresdefault.jpg') center/cover; position: absolute; top:0; left:0; width:100%; height:100%; z-index:1; opacity: 1; transition: opacity 0.8s ease;"></div>
             </div>
             <div class="hero-vignette"></div>
-            <div class="hero-content">
+            <div class="hero-content" style="z-index: 10;">
                 <span class="hero-badge">Featured Cinematic Edit</span>
                 <h1 class="hero-title">${heroVid.title}</h1>
                 <p class="hero-subtitle">${heroVid.subtitle}</p>
@@ -59,29 +59,29 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
             <div class="hero-fade-bottom"></div>
         </div>
-        <div class="showcase-rows-container">
+        <div class="showcase-rows-container" style="position: relative; z-index: 5;">
     `;
 
-    const cats = ["Love Reels", "Beyond the Cut", "Special Projects", "Viral Reels", "Identity & Intros"];
-    cats.forEach(cat => {
+    const categories = ["Love Reels", "Beyond the Cut", "Special Projects", "Viral Reels", "Identity & Intros"];
+    categories.forEach(cat => {
         const vids = myVideos.filter(v => v.category === cat && !v.isHero);
         if (vids.length === 0) return;
 
         html += `
-            <div class="showcase-row reveal">
-                <h2 class="row-title">${cat}</h2>
-                <div class="slider-wrapper">
+            <div class="showcase-row" style="margin-bottom: 2rem; opacity: 1;">
+                <h2 class="row-title" style="margin-left: 4%; font-size: 1.8rem; border-left: 4px solid #e50914; padding-left: 15px; margin-bottom: 1rem;">${cat}</h2>
+                <div class="slider-wrapper" style="position: relative;">
                     <button class="slider-arrow left-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
-                    <div class="row-slider">
-                        <div class="slider-track">
+                    <div class="row-slider" style="overflow-x: auto; scrollbar-width: none;">
+                        <div class="slider-track" style="display: flex; gap: 15px; padding: 10px 4%;">
                             ${vids.map(v => `
-                                <div class="${v.type === 'reel' ? 'showcase-card vertical' : 'showcase-card horizontal'}" onclick="window.playGalleryItem(this)">
+                                <div class="${v.type === 'reel' ? 'showcase-card vertical' : 'showcase-card horizontal'}" onclick="window.playGalleryItem(this)" style="flex: 0 0 auto;">
                                     <div class="project-img custom-player" data-behavior="hover">
                                         <div class="yt-container" data-yt-id="${v.youtubeId}">
-                                            <div class="yt-iframe-placeholder">
-                                                <iframe src="https://www.youtube.com/embed/${v.youtubeId}?enablejsapi=1&mute=1&loop=1&playlist=${v.youtubeId}&controls=0&modestbranding=1&rel=0&vq=hd720" style="width:100%; height:115%; top:-7.5%; border:none; position:absolute;"></iframe>
+                                            <div class="yt-iframe-placeholder" style="position: absolute; top:0; left:0; width:100%; height:115%; top:-7.5%;">
+                                                <iframe src="https://www.youtube.com/embed/${v.youtubeId}?enablejsapi=1&mute=1&loop=1&playlist=${v.youtubeId}&controls=0&modestbranding=1&rel=0&vq=hd720" style="width:100%; height:100%; border:none;"></iframe>
                                             </div>
-                                            <div class="yt-cover-image" style="background: url('https://img.youtube.com/vi/${v.youtubeId}/maxresdefault.jpg') center/cover; position:absolute; top:0; left:0; width:100%; height:100%; z-index:2; pointer-events:none;"></div>
+                                            <div class="yt-cover-image" style="background: url('https://img.youtube.com/vi/${v.youtubeId}/maxresdefault.jpg') center/cover; position:absolute; top:0; left:0; width:100%; height:100%; z-index:2;"></div>
                                             <button class="center-play-btn"><svg viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg></button>
                                         </div>
                                     </div>
@@ -99,53 +99,43 @@ document.addEventListener('DOMContentLoaded', () => {
     html += `</div>`;
     app.innerHTML = html;
 
-    // 3. Scroll Reveal Fix
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('active');
-                observer.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.1 });
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-    // 4. Slider Nav
+    // 3. Setup Listeners
     document.querySelectorAll('.slider-wrapper').forEach(wrapper => {
         const slider = wrapper.querySelector('.row-slider');
         wrapper.querySelector('.left-arrow').onclick = (e) => { e.stopPropagation(); slider.scrollBy({ left: -window.innerWidth * 0.7, behavior: 'smooth' }); };
         wrapper.querySelector('.right-arrow').onclick = (e) => { e.stopPropagation(); slider.scrollBy({ left: window.innerWidth * 0.7, behavior: 'smooth' }); };
     });
 
-    // 5. Trigger YT API Load
+    // 4. API Load
     if (!window.YT) {
         const tag = document.createElement('script');
         tag.src = "https://www.youtube.com/iframe_api";
         document.body.appendChild(tag);
-    } else {
+    } else if (typeof window.onYouTubeIframeAPIReady === 'function') {
         window.onYouTubeIframeAPIReady();
     }
 });
 
-// --- GLOBAL SHOWCASE ENGINE ---
+// GLOBAL YOUTUBE ENGINE
 window.ytPlayers = {};
 window.onYouTubeIframeAPIReady = function() {
-    // Hero Player
-    if (document.getElementById('hero-yt-iframe')) {
+    // Hero
+    const heroFrame = document.getElementById('hero-yt-iframe');
+    if (heroFrame && !window.ytHeroPlayer) {
         window.ytHeroPlayer = new YT.Player('hero-yt-iframe', {
             events: {
                 'onReady': (e) => { e.target.mute(); e.target.playVideo(); },
                 'onStateChange': (e) => {
                     if (e.data === 1) {
-                         const cover = document.querySelector('#hero-player-container .yt-cover-image');
-                         if (cover) cover.style.opacity = '0';
+                        const cover = document.querySelector('#hero-player-container .yt-cover-image');
+                        if (cover) cover.style.opacity = '0';
                     }
                 }
             }
         });
     }
 
-    // Gallery Players
+    // Gallery
     document.querySelectorAll('.yt-container').forEach((el, idx) => {
         const iframe = el.querySelector('iframe');
         const frameId = `yt-gallery-${idx}`;
@@ -196,11 +186,11 @@ window.playGalleryItem = function(card) {
     }
 };
 
-const handleFSExit = () => {
+const handleFSExitGlobal = () => {
     if (!document.fullscreenElement && !document.webkitFullscreenElement) {
         if (window.ytHeroPlayer) window.ytHeroPlayer.pauseVideo();
         Object.values(window.ytPlayers).forEach(p => p.pauseVideo());
     }
 };
-document.addEventListener('fullscreenchange', handleFSExit);
-document.addEventListener('webkitfullscreenchange', handleFSExit);
+document.addEventListener('fullscreenchange', handleFSExitGlobal);
+document.addEventListener('webkitfullscreenchange', handleFSExitGlobal);
