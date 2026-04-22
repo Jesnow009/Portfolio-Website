@@ -157,6 +157,35 @@
                             </div>
                             <div class="yt-cover-image" style="position: absolute; top:0; left:0; width:100%; height:100%; z-index: 2; background: url('https://img.youtube.com/vi/RAO0_nqH4wc/maxresdefault.jpg') center/cover no-repeat; transition: opacity 0.6s ease; pointer-events: none;"></div>
                             <div class="yt-click-mask" style="position: absolute; top:0; left:0; width:100%; height:100%; z-index: 3; cursor: pointer;" onclick="playYTHome(this)"></div>
+                            
+                            <!-- Pro Controls -->
+                            <div class="player-controls yt-controls" style="z-index: 5;">
+                                <div class="progress-container"><input type="range" class="progress-bar yt-progress" min="0" max="100" value="0" step="0.1"></div>
+                                <div class="controls-main">
+                                    <div class="controls-left">
+                                        <button class="control-btn yt-play-btn" aria-label="Play/Pause">
+                                            <svg class="icon-pause" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="display: none;"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>
+                                            <svg class="icon-play" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="display: block;"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                                        </button>
+                                        <div class="volume-container">
+                                            <button class="control-btn yt-mute-btn" aria-label="Toggle Mute">
+                                                <svg class="icon-muted" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: none;"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg>
+                                                <svg class="icon-unmuted" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: block;"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+                                            </button>
+                                            <input type="range" class="volume-slider yt-volume-slider" min="0" max="100" step="1" value="100">
+                                        </div>
+                                        <div class="inline-quality-selector" style="display: flex; align-items: center; gap: 6px; margin-left: 15px; background: rgba(255,255,255,0.05); padding: 4px; border-radius: 20px;">
+                                            <button class="quality-option" data-vq="hd2160" style="background: transparent; border: none; color: white; opacity: 0.5; font-weight: 700; font-size: 11px; cursor: pointer; padding: 4px 10px; border-radius: 12px; transition: all 0.2s ease;">2160p</button>
+                                            <button class="quality-option" data-vq="hd1080" style="background: transparent; border: none; color: white; opacity: 0.5; font-weight: 700; font-size: 11px; cursor: pointer; padding: 4px 10px; border-radius: 12px; transition: all 0.2s ease;">1080p</button>
+                                            <button class="quality-option active" data-vq="hd720" style="background: white; border: none; color: black; opacity: 1; font-weight: 800; font-size: 11px; cursor: pointer; padding: 4px 10px; border-radius: 12px; transition: all 0.2s ease; box-shadow: 0 0 10px rgba(255,255,255,0.2);">720p</button>
+                                        </div>
+                                        <div class="time-display" style="margin-left: 15px;"><span class="current-time">0:00</span> / <span class="duration">0:00</span></div>
+                                    </div>
+                                    <div class="controls-right">
+                                        <button class="control-btn fullscreen-btn" aria-label="Fullscreen"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path></svg></button>
+                                    </div>
+                                </div>
+                            </div>
                          </div>
                          <button class="center-play-btn" aria-label="Play"><svg viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg></button>
                     </div>
@@ -176,6 +205,35 @@
                             </div>
                             <div class="yt-cover-image" style="position: absolute; top:0; left:0; width:100%; height:100%; z-index: 2; background: url('https://img.youtube.com/vi/9FDrKlWOojs/maxresdefault.jpg') center/cover no-repeat; transition: opacity 0.6s ease; pointer-events: none;"></div>
                             <div class="yt-click-mask" style="position: absolute; top:0; left:0; width:100%; height:100%; z-index: 3; cursor: pointer;" onclick="playYTHome(this)"></div>
+
+                            <!-- Pro Controls -->
+                            <div class="player-controls yt-controls" style="z-index: 5;">
+                                <div class="progress-container"><input type="range" class="progress-bar yt-progress" min="0" max="100" value="0" step="0.1"></div>
+                                <div class="controls-main">
+                                    <div class="controls-left">
+                                        <button class="control-btn yt-play-btn" aria-label="Play/Pause">
+                                            <svg class="icon-pause" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="display: none;"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>
+                                            <svg class="icon-play" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="display: block;"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                                        </button>
+                                        <div class="volume-container">
+                                            <button class="control-btn yt-mute-btn" aria-label="Toggle Mute">
+                                                <svg class="icon-muted" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: none;"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg>
+                                                <svg class="icon-unmuted" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: block;"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+                                            </button>
+                                            <input type="range" class="volume-slider yt-volume-slider" min="0" max="100" step="1" value="100">
+                                        </div>
+                                        <div class="inline-quality-selector" style="display: flex; align-items: center; gap: 6px; margin-left: 15px; background: rgba(255,255,255,0.05); padding: 4px; border-radius: 20px;">
+                                            <button class="quality-option" data-vq="hd2160" style="background: transparent; border: none; color: white; opacity: 0.5; font-weight: 700; font-size: 11px; cursor: pointer; padding: 4px 10px; border-radius: 12px; transition: all 0.2s ease;">2160p</button>
+                                            <button class="quality-option" data-vq="hd1080" style="background: transparent; border: none; color: white; opacity: 0.5; font-weight: 700; font-size: 11px; cursor: pointer; padding: 4px 10px; border-radius: 12px; transition: all 0.2s ease;">1080p</button>
+                                            <button class="quality-option active" data-vq="hd720" style="background: white; border: none; color: black; opacity: 1; font-weight: 800; font-size: 11px; cursor: pointer; padding: 4px 10px; border-radius: 12px; transition: all 0.2s ease; box-shadow: 0 0 10px rgba(255,255,255,0.2);">720p</button>
+                                        </div>
+                                        <div class="time-display" style="margin-left: 15px;"><span class="current-time">0:00</span> / <span class="duration">0:00</span></div>
+                                    </div>
+                                    <div class="controls-right">
+                                        <button class="control-btn fullscreen-btn" aria-label="Fullscreen"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path></svg></button>
+                                    </div>
+                                </div>
+                            </div>
                          </div>
                          <button class="center-play-btn" aria-label="Play"><svg viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg></button>
                     </div>
@@ -195,6 +253,35 @@
                             </div>
                             <div class="yt-cover-image" style="position: absolute; top:0; left:0; width:100%; height:100%; z-index: 2; background: url('https://img.youtube.com/vi/84IrieuQCng/maxresdefault.jpg') center/cover no-repeat; transition: opacity 0.6s ease; pointer-events: none;"></div>
                             <div class="yt-click-mask" style="position: absolute; top:0; left:0; width:100%; height:100%; z-index: 3; cursor: pointer;" onclick="playYTHome(this)"></div>
+
+                            <!-- Pro Controls -->
+                            <div class="player-controls yt-controls" style="z-index: 5;">
+                                <div class="progress-container"><input type="range" class="progress-bar yt-progress" min="0" max="100" value="0" step="0.1"></div>
+                                <div class="controls-main">
+                                    <div class="controls-left">
+                                        <button class="control-btn yt-play-btn" aria-label="Play/Pause">
+                                            <svg class="icon-pause" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="display: none;"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>
+                                            <svg class="icon-play" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="display: block;"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                                        </button>
+                                        <div class="volume-container">
+                                            <button class="control-btn yt-mute-btn" aria-label="Toggle Mute">
+                                                <svg class="icon-muted" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: none;"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg>
+                                                <svg class="icon-unmuted" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: block;"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+                                            </button>
+                                            <input type="range" class="volume-slider yt-volume-slider" min="0" max="100" step="1" value="100">
+                                        </div>
+                                        <div class="inline-quality-selector" style="display: flex; align-items: center; gap: 6px; margin-left: 15px; background: rgba(255,255,255,0.05); padding: 4px; border-radius: 20px;">
+                                            <button class="quality-option" data-vq="hd2160" style="background: transparent; border: none; color: white; opacity: 0.5; font-weight: 700; font-size: 11px; cursor: pointer; padding: 4px 10px; border-radius: 12px; transition: all 0.2s ease;">2160p</button>
+                                            <button class="quality-option" data-vq="hd1080" style="background: transparent; border: none; color: white; opacity: 0.5; font-weight: 700; font-size: 11px; cursor: pointer; padding: 4px 10px; border-radius: 12px; transition: all 0.2s ease;">1080p</button>
+                                            <button class="quality-option active" data-vq="hd720" style="background: white; border: none; color: black; opacity: 1; font-weight: 800; font-size: 11px; cursor: pointer; padding: 4px 10px; border-radius: 12px; transition: all 0.2s ease; box-shadow: 0 0 10px rgba(255,255,255,0.2);">720p</button>
+                                        </div>
+                                        <div class="time-display" style="margin-left: 15px;"><span class="current-time">0:00</span> / <span class="duration">0:00</span></div>
+                                    </div>
+                                    <div class="controls-right">
+                                        <button class="control-btn fullscreen-btn" aria-label="Fullscreen"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path></svg></button>
+                                    </div>
+                                </div>
+                            </div>
                          </div>
                          <button class="center-play-btn" aria-label="Play"><svg viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg></button>
                     </div>
@@ -203,6 +290,7 @@
                         <p style="color: rgba(255,255,255,0.5); font-size: 0.9rem;">“Five killers. One train. No brakes.”</p>
                     </div>
                 </div>
+
             </div>
             
             
