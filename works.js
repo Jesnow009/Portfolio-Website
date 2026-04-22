@@ -11,6 +11,37 @@ function renderShowcaseEngine() {
     if (!app || app.dataset.rendered === "true") return;
     app.dataset.rendered = "true";
 
+    // Inject Professional Animation Styles
+    if (!document.getElementById('showcase-styles')) {
+        const style = document.createElement('style');
+        style.id = 'showcase-styles';
+        style.textContent = `
+            .yt-iframe-placeholder {
+                transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), 
+                            width 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), 
+                            height 0.6s cubic-bezier(0.2, 0.8, 0.2, 1),
+                            top 0.6s cubic-bezier(0.2, 0.8, 0.2, 1),
+                            left 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+                will-change: transform, width, height;
+            }
+            .rotated-mode {
+                transform: rotate(-90deg) scale(1.777) !important;
+                z-index: 100;
+            }
+            :fullscreen .rotated-mode, :-webkit-full-screen .rotated-mode {
+                transform: translate(-50%, -50%) rotate(-90deg) !important;
+                width: 100vh !important;
+                height: 100vw !important;
+                top: 50% !important;
+                left: 50% !important;
+                position: fixed !important;
+            }
+            .showcase-card.playing .yt-cover-image { opacity: 0; pointer-events: none; }
+            .showcase-card.playing .yt-controls { opacity: 1 !important; }
+        `;
+        document.head.appendChild(style);
+    }
+
     const myVideos = [
         { youtubeId: "RAO0_nqH4wc", title: "MARCO", subtitle: "Cut beyond the story—into the pulse", category: "Featured", type: "mashup", isHero: true },
         { youtubeId: "sJ8Bt_0QaqE", title: "John Wick Mashup", subtitle: "“You don’t hunt him. He hunts you.”", category: "Beyond the Cut", type: "mashup" },
@@ -38,8 +69,6 @@ function renderShowcaseEngine() {
         { youtubeId: "1nM34AdYkIY", title: "dott.fx Thunder", subtitle: "Thunder effect reveal", category: "Identity & Intros", type: "mashup" }
     ];
 
-    const heroVid = myVideos.find(v => v.isHero) || myVideos[0];
-    
     let html = `
         <div class="showcase-hero" id="hero-player-container" style="background: #000; height: 75vh; min-height: 500px; position: relative; overflow: hidden; display: flex; align-items: center;">
             <div class="hero-image-wrap" style="position: absolute; top:0; left:0; width:100%; height:100%; z-index: 1;">
@@ -72,7 +101,7 @@ function renderShowcaseEngine() {
                                 <div class="${v.type === 'reel' ? 'showcase-card vertical' : 'showcase-card horizontal'}" onclick="window.playGalleryItem(this)" style="flex:0 0 auto;">
                                     <div class="project-img custom-player" data-behavior="hover" style="background:#000;">
                                         <div class="yt-container" data-yt-id="${v.youtubeId}">
-                                            <div class="yt-iframe-placeholder" style="position: absolute; top:0; left:0; width:100%; height:110%; top:-5%; transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);">
+                                            <div class="yt-iframe-placeholder" style="position: absolute; top:0; left:0; width:100%; height:110%; top:-5%;">
                                                 <iframe src="https://www.youtube.com/embed/${v.youtubeId}?enablejsapi=1&mute=1&loop=1&playlist=${v.youtubeId}&controls=0&modestbranding=1&rel=0&vq=hd720" style="width:100%; height:100%; border:none; position:absolute;" allow="autoplay; fullscreen"></iframe>
                                             </div>
                                             <div class="yt-cover-image" style="background: url('https://img.youtube.com/vi/${v.youtubeId}/maxresdefault.jpg') center/cover; position:absolute; top:0; left:0; width:100%; height:100%; z-index:2; transition: opacity 0.5s ease;"></div>
@@ -150,12 +179,10 @@ window.onYouTubeIframeAPIReady = function() {
                     const card = el.closest('.showcase-card');
                     const cover = el.querySelector('.yt-cover-image');
                     const centerBtn = el.querySelector('.center-play-btn');
-                    const controls = el.querySelector('.player-controls');
                     if (e.data === 1) { 
                         card.classList.add('playing');
                         if (cover) cover.style.opacity = '0';
                         if (centerBtn) centerBtn.style.opacity = '0';
-                        if (controls) controls.style.opacity = '1';
                     } else { card.classList.remove('playing'); if (centerBtn) centerBtn.style.opacity = '1'; }
                 }
             }
@@ -206,35 +233,8 @@ window.toggleRotate = function(btn, e) {
     e.stopPropagation();
     const container = btn.closest('.yt-container');
     const iframeWrap = container.querySelector('.yt-iframe-placeholder');
-    if (!iframeWrap) return;
-    
-    const isFS = document.fullscreenElement || document.webkitFullscreenElement;
-    
-    if (iframeWrap.style.transform.includes('rotate(-90deg)')) {
-        // RESET
-        iframeWrap.style.transform = 'none';
-        iframeWrap.style.width = '100%';
-        iframeWrap.style.height = '110%';
-        iframeWrap.style.top = '-5%';
-        iframeWrap.style.left = '0';
-    } else {
-        // ROTATE TO FILL
-        if (isFS) {
-            // Fullscreen Fill
-            iframeWrap.style.transform = 'translate(-50%, -50%) rotate(-90deg)';
-            iframeWrap.style.width = '100vh';
-            iframeWrap.style.height = '100vw';
-            iframeWrap.style.top = '50%';
-            iframeWrap.style.left = '50%';
-            iframeWrap.style.position = 'fixed';
-        } else {
-            // Card Fill
-            iframeWrap.style.transform = 'rotate(-90deg) scale(1.77)'; 
-            iframeWrap.style.width = '100%'; 
-            iframeWrap.style.height = '100%';
-            iframeWrap.style.top = '0';
-            iframeWrap.style.left = '0';
-        }
+    if (iframeWrap) {
+        iframeWrap.classList.toggle('rotated-mode');
     }
 };
 
@@ -252,11 +252,7 @@ window.playGalleryItem = function(card) {
 
 document.addEventListener('fullscreenchange', () => {
     if (!document.fullscreenElement && !document.webkitFullscreenElement) {
-        Object.values(window.activePlayers).forEach(p => {
-            p.pauseVideo();
-            // Reset any rotations on exit
-            const iframes = document.querySelectorAll('.yt-iframe-placeholder');
-            iframes.forEach(f => { f.style.transform = 'none'; f.style.width='100%'; f.style.height='110%'; f.style.top='-5%'; f.style.left='0'; f.style.position='absolute'; });
-        });
+        Object.values(window.activePlayers).forEach(p => p.pauseVideo());
+        document.querySelectorAll('.rotated-mode').forEach(el => el.classList.remove('rotated-mode'));
     }
 });
