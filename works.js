@@ -41,8 +41,8 @@ document.addEventListener('DOMContentLoaded', () => {
         { youtubeId: "-DjlWTcy9WQ", title: "Palm Springs", subtitle: "If I’m stuck forever, I’m glad it’s with you.", category: "Love Reels", type: "mashup" },
 
         // Identity, Intros & Motion Graphics (Manually Ordered)
-        { cloudinaryId: "v1775504660/St.Aloysius_Text_Logo_Intro_wukcqg", title: "St. Aloysius College Name Intro", subtitle: "“Not just a college… a journey that defines us.”", category: "Identity & Intros", type: "mashup" },
-        { cloudinaryId: "v1775504650/Department_Of_Media_Studies_Intro_sccd6n", title: "Department of Media Studies", subtitle: "“We don’t just study media… we create it.”", category: "Identity & Intros", type: "mashup" },
+        { youtubeId: "0eC-R5cjrV4", title: "St. Aloysius College Name Intro", subtitle: "“Not just a college… a journey that defines us.”", category: "Identity & Intros", type: "mashup" },
+        { youtubeId: "fF-eysi64SE", title: "Department of Media Studies", subtitle: "“We don’t just study media… we create it.”", category: "Identity & Intros", type: "mashup" },
         { cloudinaryId: "v1775504664/St.Aloysius_Logo_Intro_nymic4", title: "St. Aloysius College Logo Intro", subtitle: "“Where Stories Begin”", category: "Identity & Intros", type: "mashup" },
         { cloudinaryId: "v1775504667/logo_animation_vwqry7", title: "shooting stars", subtitle: "“Written in the Stars”", category: "Identity & Intros", type: "mashup" },
         { cloudinaryId: "v1775504673/3_sxdkbf", title: "shooting stars", subtitle: "“Destined to Shine”", category: "Identity & Intros", type: "mashup" },
