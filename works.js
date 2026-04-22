@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
         heroMediaHTML = `
             <div class="hero-video-wrap" style="position: absolute; top:0; left:0; width:100%; height:100%; overflow: hidden; pointer-events: none; z-index: 0;">
                 <iframe 
-                    src="https://www.youtube.com/embed/${heroVideo.youtubeId}?enablejsapi=1&mute=1&loop=1&playlist=${heroVideo.youtubeId}&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&vq=highres&hd=1" 
+                    src="https://www.youtube.com/embed/${heroVideo.youtubeId}?enablejsapi=1&mute=1&loop=1&playlist=${heroVideo.youtubeId}&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&vq=hd720&hd=1" 
                     frameborder="0" 
                     style="width: 100vw; height: 56.25vw; min-height: 100vh; min-width: 177.77vh; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); opacity: 0.4; filter: blur(5px) scale(1.05);"
                     allow="autoplay; fullscreen">
@@ -133,7 +133,7 @@ document.addEventListener('DOMContentLoaded', () => {
             mediaHTML = `
                 <div class="video-element-wrapper yt-container" style="width: 100%; height: 100%; overflow: hidden; position: relative;" data-yt-id="${videoObj.youtubeId}">
                     <div class="yt-iframe-placeholder" style="position: absolute; top:0; left:0; width:100%; height:100%; pointer-events: none; z-index: 1;">
-                         <iframe src="https://www.youtube.com/embed/${videoObj.youtubeId}?enablejsapi=1&mute=1&loop=1&playlist=${videoObj.youtubeId}&controls=0&modestbranding=1&rel=0&vq=highres&hd=1" 
+                         <iframe src="https://www.youtube.com/embed/${videoObj.youtubeId}?enablejsapi=1&mute=1&loop=1&playlist=${videoObj.youtubeId}&controls=0&modestbranding=1&rel=0&vq=hd720&hd=1" 
                             style="width:100%; height:100%;" frameborder="0" allow="autoplay; fullscreen"></iframe>
                     </div>
                     <div class="yt-click-mask" style="position: absolute; top:0; left:0; width:100%; height:100%; z-index: 2; cursor: pointer;"></div>
@@ -152,10 +152,10 @@ document.addEventListener('DOMContentLoaded', () => {
                                     </button>
                                     <input type="range" class="volume-slider yt-volume-slider" min="0" max="100" step="1" value="100">
                                 </div>
-                                <div class="inline-quality-selector" style="display: flex; align-items: center; gap: 8px; margin-left: 15px;">
-                                    <button class="quality-option active" data-vq="hd2160" style="background: none; border: none; color: white; opacity: 1; font-weight: 800; font-size: 11px; cursor: pointer; padding: 0; transition: opacity 0.3s; letter-spacing: 0.5px;">2160p</button>
-                                    <button class="quality-option" data-vq="hd1080" style="background: none; border: none; color: white; opacity: 0.4; font-weight: 800; font-size: 11px; cursor: pointer; padding: 0; transition: opacity 0.3s; letter-spacing: 0.5px;">1080p</button>
-                                    <button class="quality-option" data-vq="hd720" style="background: none; border: none; color: white; opacity: 0.4; font-weight: 800; font-size: 11px; cursor: pointer; padding: 0; transition: opacity 0.3s; letter-spacing: 0.5px;">720p</button>
+                                <div class="inline-quality-selector" style="display: flex; align-items: center; gap: 6px; margin-left: 15px; background: rgba(255,255,255,0.05); padding: 4px; border-radius: 20px;">
+                                    <button class="quality-option" data-vq="hd2160" style="background: transparent; border: none; color: white; opacity: 0.5; font-weight: 700; font-size: 11px; cursor: pointer; padding: 4px 10px; border-radius: 12px; transition: all 0.2s ease;">2160p</button>
+                                    <button class="quality-option" data-vq="hd1080" style="background: transparent; border: none; color: white; opacity: 0.5; font-weight: 700; font-size: 11px; cursor: pointer; padding: 4px 10px; border-radius: 12px; transition: all 0.2s ease;">1080p</button>
+                                    <button class="quality-option active" data-vq="hd720" style="background: white; border: none; color: black; opacity: 1; font-weight: 800; font-size: 11px; cursor: pointer; padding: 4px 10px; border-radius: 12px; transition: all 0.2s ease; box-shadow: 0 0 10px rgba(255,255,255,0.2);">720p</button>
                                 </div>
                                 <div class="time-display" style="margin-left: 15px;"><span class="current-time">0:00</span> / <span class="duration">0:00</span></div>
                             </div>
@@ -296,7 +296,7 @@ window.initHeroPlayer = function() {
                 
                 player.loadVideoById({
                     videoId: vId,
-                    suggestedQuality: 'highres'
+                    suggestedQuality: 'hd720'
                 });
                 
                 event.target.mute();
@@ -380,7 +380,7 @@ function initYTCards() {
                     // --- HARD CHUNK LOAD: ORIGINAL QUALITY ---
                     player.loadVideoById({
                         videoId: ytId,
-                        suggestedQuality: 'highres'
+                        suggestedQuality: 'hd720'
                     });
                     player.mute();
                     player.playVideo();
@@ -550,10 +550,18 @@ function initYTCards() {
                                 e.stopPropagation();
                                 qualityOptions.forEach(o => {
                                     o.classList.remove('active');
-                                    o.style.opacity = '0.4';
+                                    o.style.opacity = '0.5';
+                                    o.style.background = 'transparent';
+                                    o.style.color = 'white';
+                                    o.style.fontWeight = '700';
+                                    o.style.boxShadow = 'none';
                                 });
                                 opt.classList.add('active');
                                 opt.style.opacity = '1';
+                                opt.style.background = 'white';
+                                opt.style.color = 'black';
+                                opt.style.fontWeight = '800';
+                                opt.style.boxShadow = '0 0 10px rgba(255,255,255,0.2)';
                                 const vq = opt.dataset.vq;
                                 
                                 // --- PRO RESOLUTION SWAP ---
