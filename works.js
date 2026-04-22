@@ -12,19 +12,19 @@ function renderShowcaseEngine() {
     app.dataset.rendered = "true";
 
     const myVideos = [
-        { youtubeId: "RAO0_nqH4wc", title: "MARCO", subtitle: "Cut beyond the story—into the pulse", category: "Featured", type: "mashup", isHero: true },
-        { youtubeId: "sJ8Bt_0QaqE", title: "John Wick Mashup", subtitle: "“You don’t hunt him. He hunts you.”", category: "Beyond the Cut", type: "mashup" },
-        { youtubeId: "El7yOj4H7lw", title: "Wheel of the Time", subtitle: "“Fate is not chosen… it is woven.”", category: "Beyond the Cut", type: "mashup" },
-        { youtubeId: "e9fVDeoYKqI", title: "Avatar cut", subtitle: "“Not just a planet… a living soul.”", category: "Beyond the Cut", type: "mashup" },
-        { youtubeId: "3RkFnMO1AkA", title: "Parava", subtitle: "“Not just birds… they carried our dreams.”", category: "Beyond the Cut", type: "mashup" },
-        { youtubeId: "1fhLCzN3W9g", title: "What is Editing", subtitle: "“Stories aren’t filmed—they’re built in the edit.”", category: "Beyond the Cut", type: "mashup" },
-        { youtubeId: "4sEgxSRhnGg", title: "Tamil Filmmakers", subtitle: "“They don’t follow trends—they create movements.”", category: "Beyond the Cut", type: "mashup" },
+        { youtubeId: "RAO0_nqH4wc", title: "MARCO", subtitle: "Cut beyond the story—into the pulse", category: "Selected Mashup Cuts", type: "mashup", isHero: true },
+        { youtubeId: "sJ8Bt_0QaqE", title: "John Wick Mashup", subtitle: "“You don’t hunt him. He hunts you.”", category: "Selected Mashup Cuts", type: "mashup" },
+        { youtubeId: "El7yOj4H7lw", title: "Wheel of the Time", subtitle: "“Fate is not chosen… it is woven.”", category: "Selected Mashup Cuts", type: "mashup" },
+        { youtubeId: "e9fVDeoYKqI", title: "Avatar cut", subtitle: "“Not just a planet… a living soul.”", category: "Selected Mashup Cuts", type: "mashup" },
+        { youtubeId: "3RkFnMO1AkA", title: "Parava", subtitle: "“Not just birds… they carried our dreams.”", category: "Selected Mashup Cuts", type: "mashup" },
+        { youtubeId: "1fhLCzN3W9g", title: "What is Editing", subtitle: "“Stories aren’t filmed—they’re built in the edit.”", category: "Selected Mashup Cuts", type: "mashup" },
+        { youtubeId: "4sEgxSRhnGg", title: "Tamil Filmmakers", subtitle: "“They don’t follow trends—they create movements.”", category: "Selected Mashup Cuts", type: "mashup" },
         { youtubeId: "8j_sVKgPXNw", title: "youth", subtitle: "“Capturing the pulse of the next generation.”", category: "Instagram Reels", type: "reel" },
-        { youtubeId: "y0QlnHrg3jE", title: "A day with Sneha Shetty Kohli", subtitle: "Honored to host Sneha Shetty Kohli at our campus.", category: "Special Projects", type: "mashup" },
-        { youtubeId: "FmwkYXGVKVU", title: "Sneha Shetty Intro", subtitle: "“From screen to stage—stories that inspire.”", category: "Special Projects", type: "mashup" },
-        { youtubeId: "B7kyZeNBV4g", title: "Vijay Raghavendra", subtitle: "“From passion to legacy—his journey continues.”", category: "Special Projects", type: "mashup" },
-        { youtubeId: "nX49Q0PDnZg", title: "Love Birds", subtitle: "“Love, captured in its purest form.”", category: "Special Projects", type: "mashup" },
-        { youtubeId: "iSYg39mT96I", title: "shooting stars", subtitle: "“From stage to soul—every moment mattered.”", category: "Special Projects", type: "mashup" },
+        { youtubeId: "y0QlnHrg3jE", title: "A day with Sneha Shetty Kohli", subtitle: "Honored to host Sneha Shetty Kohli at our campus.", category: "Beyond the Cut", type: "mashup" },
+        { youtubeId: "FmwkYXGVKVU", title: "Sneha Shetty Intro", subtitle: "“From screen to stage—stories that inspire.”", category: "Beyond the Cut", type: "mashup" },
+        { youtubeId: "B7kyZeNBV4g", title: "Vijay Raghavendra", subtitle: "“From passion to legacy—his journey continues.”", category: "Beyond the Cut", type: "mashup" },
+        { youtubeId: "nX49Q0PDnZg", title: "Love Birds", subtitle: "“Love, captured in its purest form.”", category: "Beyond the Cut", type: "mashup" },
+        { youtubeId: "iSYg39mT96I", title: "shooting stars", subtitle: "“From stage to soul—every moment mattered.”", category: "Beyond the Cut", type: "mashup" },
         { youtubeId: "IeAYIBU9zXE", title: "Monologue", subtitle: "The pulse of dialogue: mastering the beat of performance and emotion.", category: "Viral Reels", type: "reel" },
         { youtubeId: "GZ9zKBOjbiE", title: "Client Video", subtitle: "High-velocity visual rhythm designed for maximum audience engagement.", category: "Viral Reels", type: "reel" },
         { youtubeId: "ZJl4KgRSLAk", title: "Weekend Movies", subtitle: "Cinematic atmosphere captured in the fleeting moments of leisure.", category: "Viral Reels", type: "reel" },
@@ -38,8 +38,6 @@ function renderShowcaseEngine() {
         { youtubeId: "1nM34AdYkIY", title: "dott.fx Thunder", subtitle: "Thunder effect reveal", category: "Identity & Intros", type: "mashup" }
     ];
 
-    const heroVid = myVideos.find(v => v.isHero) || myVideos[0];
-    
     let html = `
         <div class="showcase-hero" id="hero-player-container" style="background: #000; height: 75vh; min-height: 500px; position: relative; overflow: hidden; display: flex; align-items: center;">
             <div class="hero-image-wrap" style="position: absolute; top:0; left:0; width:100%; height:100%; z-index: 1;">
@@ -56,7 +54,8 @@ function renderShowcaseEngine() {
         <div class="showcase-rows-container" style="background: #000; position: relative; z-index: 5;">
     `;
 
-    const categories = ["Beyond the Cut", "Instagram Reels", "Special Projects", "Viral Reels", "Identity & Intros"];
+    // UPDATED CATEGORIES ORDER
+    const categories = ["Selected Mashup Cuts", "Beyond the Cut", "Instagram Reels", "Viral Reels", "Identity & Intros"];
     categories.forEach(cat => {
         const vids = myVideos.filter(v => v.category && v.category.toLowerCase().trim() === cat.toLowerCase().trim() && !v.isHero);
         if (vids.length === 0) return;
@@ -95,7 +94,6 @@ function renderShowcaseEngine() {
                                                         <div class="time-display" style="font-size:11px; font-weight:600; color:#eee;"><span class="current-time">0:00</span> / <span class="duration">0:00</span></div>
                                                     </div>
 
-                                                    <!-- Dynamic Info Message -->
                                                     <div class="quality-info-msg" style="font-size: 10px; color: #ffffff; opacity: 1; transition: opacity 1.5s ease; flex-grow: 1; text-align: center; letter-spacing: 0.5px; font-weight: 700;">
                                                         “Video quality will automatically adjust to maximum within a few seconds based on your connection.”
                                                     </div>
@@ -125,7 +123,6 @@ function renderShowcaseEngine() {
     html += `</div>`;
     app.innerHTML = html;
 
-    // Listeners
     document.querySelectorAll('.slider-wrapper').forEach(wrapper => {
         const slider = wrapper.querySelector('.row-slider');
         wrapper.querySelector('.left-arrow').onclick = (e) => { e.stopPropagation(); slider.scrollBy({ left: -window.innerWidth * 0.7, behavior: 'smooth' }); };
@@ -142,13 +139,12 @@ function renderShowcaseEngine() {
     } else { if(window.onYouTubeIframeAPIReady) window.onYouTubeIframeAPIReady(); }
 }
 
-// INTELLIGENT PLAYER ENGINE
 window.activePlayers = window.activePlayers || {};
 window.onYouTubeIframeAPIReady = function() {
     document.querySelectorAll('.yt-container').forEach((el, idx) => {
         const iframe = el.querySelector('iframe');
         if (!iframe || iframe.id) return;
-        const frameId = `yt-intel-${idx}-${Math.random().toString(36).substr(2, 4)}`;
+        const frameId = `yt-restore-${idx}-${Math.random().toString(36).substr(2, 4)}`;
         iframe.id = frameId;
         const player = new YT.Player(frameId, {
             events: {
@@ -208,12 +204,7 @@ function initProfessionalControls(container, player) {
                 if (progressBar) progressBar.value = (cur / dur) * 100;
                 container.querySelector('.current-time').textContent = formatTime(cur);
                 container.querySelector('.duration').textContent = formatTime(dur);
-                
-                // 10 Second Auto-Hide Logic
-                if (infoMsg) {
-                    if (cur > 10) infoMsg.style.opacity = '0';
-                    else infoMsg.style.opacity = '1';
-                }
+                if (infoMsg) { if (cur > 10) infoMsg.style.opacity = '0'; else infoMsg.style.opacity = '1'; }
             }
         }
     }, 1000);
