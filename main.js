@@ -458,15 +458,20 @@ document.addEventListener('DOMContentLoaded', () => {
                             const cover = container.querySelector('.yt-cover-image');
                             const iconPlay = container.querySelector('.icon-play');
                             const iconPause = container.querySelector('.icon-pause');
+                            const centerBtn = container.closest('.project-img').querySelector('.center-play-btn');
 
                             if (event.data === YT.PlayerState.PLAYING) {
                                 if (cover) cover.style.opacity = '0';
                                 if (iconPlay) iconPlay.style.display = 'none';
                                 if (iconPause) iconPause.style.display = 'block';
+                                if (centerBtn) centerBtn.style.opacity = '0';
+                                if (centerBtn) centerBtn.style.pointerEvents = 'none';
                                 startYTProgressLoop(container, event.target);
                             } else {
                                 if (iconPlay) iconPlay.style.display = 'block';
                                 if (iconPause) iconPause.style.display = 'none';
+                                if (centerBtn) centerBtn.style.opacity = '1';
+                                if (centerBtn) centerBtn.style.pointerEvents = 'auto';
                             }
                         }
                     }
