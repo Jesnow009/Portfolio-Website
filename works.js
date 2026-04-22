@@ -247,7 +247,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 3. Build Category Rows
     const rowVideos = myVideos.filter(v => !v.isHero);
-    const categories = ["Mashup Cuts", "Special Projects", "Viral Reels", "Identity & Intros", "Love Reels"];
+    const categories = ["Mashup Cuts", "Love Reels", "Special Projects", "Viral Reels", "Identity & Intros"];
 
     categories.forEach(cat => {
         const matchingVideos = rowVideos.filter(v => v.category === cat);
