@@ -11,7 +11,6 @@ function renderShowcaseEngine() {
     if (!app || app.dataset.rendered === "true") return;
     app.dataset.rendered = "true";
 
-    // 1. Unified Cinematic Data
     const myVideos = [
         { youtubeId: "RAO0_nqH4wc", title: "MARCO", subtitle: "Cut beyond the story—into the pulse", category: "Featured", type: "mashup", isHero: true },
         { youtubeId: "sJ8Bt_0QaqE", title: "John Wick Mashup", subtitle: "“You don’t hunt him. He hunts you.”", category: "Beyond the Cut", type: "mashup" },
@@ -41,7 +40,6 @@ function renderShowcaseEngine() {
 
     const heroVid = myVideos.find(v => v.isHero) || myVideos[0];
     
-    // 2. Render Interface (Premium Backdrop + High-Fidelity Rows)
     let html = `
         <div class="showcase-hero" id="hero-player-container" style="background: #000; height: 75vh; min-height: 500px; position: relative; overflow: hidden; display: flex; align-items: center;">
             <div class="hero-image-wrap" style="position: absolute; top:0; left:0; width:100%; height:100%; z-index: 1;">
@@ -66,20 +64,19 @@ function renderShowcaseEngine() {
         html += `
             <div class="showcase-row reveal" style="padding: 2.5rem 0;">
                 <h2 class="row-title" style="margin-left: 4%; font-size: 1.9rem; border-left: 4px solid #e50914; padding-left: 15px; margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 1px;">${cat}</h2>
-                <div class="slider-wrapper" style="position: relative;">
+                <div class="slider-wrapper">
                     <button class="slider-arrow left-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
                     <div class="row-slider" style="display:flex; overflow-x:auto; scrollbar-width:none; padding: 10px 4%;">
                         <div class="slider-track" style="display:flex; gap:20px;">
                             ${vids.map(v => `
                                 <div class="${v.type === 'reel' ? 'showcase-card vertical' : 'showcase-card horizontal'}" onclick="window.playGalleryItem(this)" style="flex:0 0 auto;">
-                                    <div class="project-img custom-player" data-behavior="hover">
+                                    <div class="project-img custom-player" data-behavior="hover" style="background:#000;">
                                         <div class="yt-container" data-yt-id="${v.youtubeId}">
-                                            <div class="yt-iframe-placeholder" style="position: absolute; top:0; left:0; width:100%; height:110%; top:-5%;">
+                                            <div class="yt-iframe-placeholder" style="position: absolute; top:0; left:0; width:100%; height:110%; top:-5%; transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);">
                                                 <iframe src="https://www.youtube.com/embed/${v.youtubeId}?enablejsapi=1&mute=1&loop=1&playlist=${v.youtubeId}&controls=0&modestbranding=1&rel=0&vq=hd720" style="width:100%; height:100%; border:none; position:absolute;" allow="autoplay; fullscreen"></iframe>
                                             </div>
                                             <div class="yt-cover-image" style="background: url('https://img.youtube.com/vi/${v.youtubeId}/maxresdefault.jpg') center/cover; position:absolute; top:0; left:0; width:100%; height:100%; z-index:2; transition: opacity 0.5s ease;"></div>
                                             
-                                            <!-- Professional Control Suite -->
                                             <div class="player-controls yt-controls" style="z-index: 10; opacity: 0; transition: opacity 0.3s ease;">
                                                 <div class="progress-container" style="padding: 0 10px;"><input type="range" class="progress-bar yt-progress" min="0" max="100" value="0" step="0.1" style="width:100%;"></div>
                                                 <div class="controls-main" style="display:flex; align-items:center; justify-content:space-between; padding: 5px 10px;">
@@ -97,11 +94,11 @@ function renderShowcaseEngine() {
                                                         </div>
                                                         <div class="time-display" style="font-size:11px; font-weight:600; color:#eee;"><span class="current-time">0:00</span> / <span class="duration">0:00</span></div>
                                                     </div>
-                                                        <div class="inline-quality-selector" style="display:flex; gap:4px; align-items:center;">
-                                                            ${cat === 'Instagram Reels' ? `<button class="rotate-btn" style="background:rgba(255,255,255,0.1); border:none; color:white; font-size:9px; padding:2px 5px; border-radius:2px; cursor:pointer; margin-right:5px;" onclick="window.toggleRotate(this, event)">Rotate</button>` : ''}
-                                                            <button class="quality-btn" data-vq="hd1080" style="background:rgba(255,255,255,0.1); border:none; color:white; font-size:9px; padding:2px 5px; border-radius:2px; cursor:pointer;">1080p</button>
-                                                            <button class="quality-btn active" data-vq="hd720" style="background:#e50914; border:none; color:white; font-size:9px; padding:2px 5px; border-radius:2px; cursor:pointer;">720p</button>
-                                                        </div>
+                                                    <div class="controls-right" style="display:flex; align-items:center; gap:4px;">
+                                                        ${cat === 'Instagram Reels' ? `<button class="rotate-btn" style="background:rgba(255,255,255,0.1); border:none; color:white; font-size:9px; padding:2px 5px; border-radius:2px; cursor:pointer;" onclick="window.toggleRotate(this, event)">Rotate</button>` : ''}
+                                                        <button class="quality-btn" data-vq="hd1080" style="background:rgba(255,255,255,0.1); border:none; color:white; font-size:9px; padding:2px 5px; border-radius:2px; cursor:pointer;">1080p</button>
+                                                        <button class="quality-btn active" data-vq="hd720" style="background:#e50914; border:none; color:white; font-size:9px; padding:2px 5px; border-radius:2px; cursor:pointer;">720p</button>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <button class="center-play-btn" style="z-index: 5;"><svg viewBox="0 0 24 24" fill="white" width="40" height="40"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg></button>
@@ -138,7 +135,7 @@ function renderShowcaseEngine() {
     } else { if(window.onYouTubeIframeAPIReady) window.onYouTubeIframeAPIReady(); }
 }
 
-// FULL FEATURED VIDEO ENGINE
+// VIDEO ENGINE
 window.activePlayers = window.activePlayers || {};
 window.onYouTubeIframeAPIReady = function() {
     document.querySelectorAll('.yt-container').forEach((el, idx) => {
@@ -148,36 +145,23 @@ window.onYouTubeIframeAPIReady = function() {
         iframe.id = frameId;
         const player = new YT.Player(frameId, {
             events: {
-                'onReady': (e) => {
-                    initProfessionalControls(el, e.target);
-                },
+                'onReady': (e) => { initProfessionalControls(el, e.target); },
                 'onStateChange': (e) => {
                     const card = el.closest('.showcase-card');
                     const cover = el.querySelector('.yt-cover-image');
                     const centerBtn = el.querySelector('.center-play-btn');
                     const controls = el.querySelector('.player-controls');
-                    const playIcon = el.querySelector('.icon-play');
-                    const pauseIcon = el.querySelector('.icon-pause');
-
-                    if (e.data === 1) { // Playing
+                    if (e.data === 1) { 
                         card.classList.add('playing');
                         if (cover) cover.style.opacity = '0';
                         if (centerBtn) centerBtn.style.opacity = '0';
                         if (controls) controls.style.opacity = '1';
-                        if (playIcon) playIcon.style.display = 'none';
-                        if (pauseIcon) pauseIcon.style.display = 'block';
-                    } else {
-                        card.classList.remove('playing');
-                        if (centerBtn) centerBtn.style.opacity = '1';
-                        if (playIcon) playIcon.style.display = 'block';
-                        if (pauseIcon) pauseIcon.style.display = 'none';
-                    }
+                    } else { card.classList.remove('playing'); if (centerBtn) centerBtn.style.opacity = '1'; }
                 }
             }
         });
         window.activePlayers[frameId] = player;
         el.dataset.frameId = frameId;
-        
         const card = el.closest('.showcase-card');
         card.onmouseenter = () => player.playVideo();
         card.onmouseleave = () => { if (!document.fullscreenElement) player.pauseVideo(); };
@@ -190,44 +174,20 @@ function initProfessionalControls(container, player) {
     const volSlider = container.querySelector('.yt-volume-slider');
     const progressBar = container.querySelector('.yt-progress');
     const qualityBtns = container.querySelectorAll('.quality-btn');
-
-    if (playBtn) {
-        playBtn.onclick = (e) => { e.stopPropagation(); player.getPlayerState() === 1 ? player.pauseVideo() : player.playVideo(); };
-    }
-    if (muteBtn) {
-        muteBtn.onclick = (e) => {
-            e.stopPropagation();
-            if (player.isMuted()) { 
-                player.unMute(); 
-                container.querySelector('.icon-muted').style.display='none'; 
-                container.querySelector('.icon-unmuted').style.display='block'; 
-            } else { 
-                player.mute(); 
-                container.querySelector('.icon-muted').style.display='block'; 
-                container.querySelector('.icon-unmuted').style.display='none'; 
-            }
-        };
-    }
-    if (volSlider) {
-        volSlider.oninput = (e) => { e.stopPropagation(); player.setVolume(e.target.value); if(e.target.value > 0) player.unMute(); };
-    }
-    if (progressBar) {
-        progressBar.oninput = (e) => { e.stopPropagation(); player.seekTo((e.target.value / 100) * player.getDuration()); };
-    }
+    if (playBtn) playBtn.onclick = (e) => { e.stopPropagation(); player.getPlayerState() === 1 ? player.pauseVideo() : player.playVideo(); };
+    if (muteBtn) muteBtn.onclick = (e) => { e.stopPropagation(); player.isMuted() ? player.unMute() : player.mute(); };
+    if (volSlider) volSlider.oninput = (e) => { e.stopPropagation(); player.setVolume(e.target.value); };
+    if (progressBar) progressBar.oninput = (e) => { e.stopPropagation(); player.seekTo((e.target.value / 100) * player.getDuration()); };
     qualityBtns.forEach(btn => {
         btn.onclick = (e) => {
-            e.stopPropagation();
-            player.setPlaybackQuality(btn.dataset.vq);
+            e.stopPropagation(); player.setPlaybackQuality(btn.dataset.vq);
             qualityBtns.forEach(b => { b.classList.remove('active'); b.style.background='rgba(255,255,255,0.1)'; });
-            btn.classList.add('active');
-            btn.style.background='#e50914';
+            btn.classList.add('active'); btn.style.background='#e50914';
         };
     });
-
     setInterval(() => {
         if (player.getPlayerState() === 1) {
-            const cur = player.getCurrentTime();
-            const dur = player.getDuration();
+            const cur = player.getCurrentTime(); const dur = player.getDuration();
             if (dur > 0) {
                 if (progressBar) progressBar.value = (cur / dur) * 100;
                 container.querySelector('.current-time').textContent = formatTime(cur);
@@ -238,8 +198,7 @@ function initProfessionalControls(container, player) {
 }
 
 function formatTime(s) {
-    const m = Math.floor(s / 60);
-    const rs = Math.floor(s % 60);
+    const m = Math.floor(s / 60); const rs = Math.floor(s % 60);
     return `${m}:${rs < 10 ? '0' : ''}${rs}`;
 }
 
@@ -249,19 +208,33 @@ window.toggleRotate = function(btn, e) {
     const iframeWrap = container.querySelector('.yt-iframe-placeholder');
     if (!iframeWrap) return;
     
-    if (iframeWrap.style.transform === 'rotate(-90deg)') {
+    const isFS = document.fullscreenElement || document.webkitFullscreenElement;
+    
+    if (iframeWrap.style.transform.includes('rotate(-90deg)')) {
+        // RESET
         iframeWrap.style.transform = 'none';
         iframeWrap.style.width = '100%';
         iframeWrap.style.height = '110%';
         iframeWrap.style.top = '-5%';
         iframeWrap.style.left = '0';
     } else {
-        iframeWrap.style.transform = 'rotate(-90deg)';
-        // Scale to fit horizontal width while being vertical source
-        iframeWrap.style.width = '160%'; 
-        iframeWrap.style.height = '100%';
-        iframeWrap.style.top = '0';
-        iframeWrap.style.left = '-30%';
+        // ROTATE TO FILL
+        if (isFS) {
+            // Fullscreen Fill
+            iframeWrap.style.transform = 'translate(-50%, -50%) rotate(-90deg)';
+            iframeWrap.style.width = '100vh';
+            iframeWrap.style.height = '100vw';
+            iframeWrap.style.top = '50%';
+            iframeWrap.style.left = '50%';
+            iframeWrap.style.position = 'fixed';
+        } else {
+            // Card Fill
+            iframeWrap.style.transform = 'rotate(-90deg) scale(1.77)'; 
+            iframeWrap.style.width = '100%'; 
+            iframeWrap.style.height = '100%';
+            iframeWrap.style.top = '0';
+            iframeWrap.style.left = '0';
+        }
     }
 };
 
@@ -279,6 +252,11 @@ window.playGalleryItem = function(card) {
 
 document.addEventListener('fullscreenchange', () => {
     if (!document.fullscreenElement && !document.webkitFullscreenElement) {
-        Object.values(window.activePlayers).forEach(p => p.pauseVideo());
+        Object.values(window.activePlayers).forEach(p => {
+            p.pauseVideo();
+            // Reset any rotations on exit
+            const iframes = document.querySelectorAll('.yt-iframe-placeholder');
+            iframes.forEach(f => { f.style.transform = 'none'; f.style.width='100%'; f.style.height='110%'; f.style.top='-5%'; f.style.left='0'; f.style.position='absolute'; });
+        });
     }
 });
