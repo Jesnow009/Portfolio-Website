@@ -155,6 +155,19 @@ document.addEventListener('DOMContentLoaded', () => {
                                 <div class="time-display"><span class="current-time">0:00</span> / <span class="duration">0:00</span></div>
                             </div>
                             <div class="controls-right">
+                                <div class="yt-settings-container" style="position: relative; display: flex; align-items: center; margin-right: 15px;">
+                                    <button class="control-btn yt-settings-btn" aria-label="Settings">
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+                                    </button>
+                                    <div class="yt-quality-menu" style="display: none; position: absolute; bottom: 50px; right: 0; background: rgba(20,20,20,0.95); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 10px 0; min-width: 150px; z-index: 1000; box-shadow: 0 10px 30px rgba(0,0,0,0.8);">
+                                        <div style="padding: 10px 20px; font-size: 11px; font-weight: 800; color: rgba(255,255,255,0.5); border-bottom: 1px solid rgba(255,255,255,0.05); margin-bottom: 5px; display: flex; align-items: center; justify-content: space-between;">
+                                            <span>QUALITY CONVERTER</span>
+                                        </div>
+                                        <button class="quality-option active" data-vq="hd2160">2160p <sup style="color: #e50914;">4K</sup></button>
+                                        <button class="quality-option" data-vq="hd1080">1080p <sup style="color: #e50914;">HD</sup></button>
+                                        <button class="quality-option" data-vq="hd720">720p</button>
+                                    </div>
+                                </div>
                                 <button class="control-btn fullscreen-btn" aria-label="Fullscreen"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path></svg></button>
                             </div>
                         </div>
@@ -391,11 +404,12 @@ function initYTCards() {
                     const iconMuted = muteBtn.querySelector('.icon-muted');
                     const iconUnmuted = muteBtn.querySelector('.icon-unmuted');
 
-                    const duration = player.getDuration();
-                    durEl.textContent = formatTime(duration);
-                    progressBar.max = duration;
+                    const initialDuration = player.getDuration() || 0;
+                    durEl.textContent = formatTime(initialDuration);
+                    progressBar.max = initialDuration || 100;
 
                     function formatTime(s) {
+                        if (!s || isNaN(s)) return "0:00";
                         const m = Math.floor(s / 60);
                         const rs = Math.floor(s % 60);
                         return `${m}:${rs < 10 ? '0' : ''}${rs}`;
@@ -509,11 +523,20 @@ function initYTCards() {
 
                     // Progress Update
                     setInterval(() => {
-                        const cur = player.getCurrentTime();
+                        const cur = player.getCurrentTime() || 0;
+                        const dur = player.getDuration() || 0;
+                        
                         timeEl.textContent = formatTime(cur);
-                        if (!container.dataset.scrubbing) {
+                        
+                        // Dynamically update duration once player metadata loads
+                        if (dur > 0 && progressBar.max !== String(dur)) {
+                            durEl.textContent = formatTime(dur);
+                            progressBar.max = dur;
+                        }
+                        
+                        if (!container.dataset.scrubbing && dur > 0) {
                             progressBar.value = cur;
-                            const perc = (cur / duration) * 100;
+                            const perc = (cur / dur) * 100;
                             progressBar.style.setProperty('--progress-value', `${perc}%`);
                         }
                     }, 500);
