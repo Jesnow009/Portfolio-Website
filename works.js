@@ -14,9 +14,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Blockbuster Trailers / Mashups
         // Blockbuster Trailers / Mashups (Selected)
-        { youtubeId: "9FDrKlWOojs", title: "Extraction", subtitle: "“One mission. No escape. Only survival.”", category: "Mashup Cuts", type: "mashup" },
-        { youtubeId: "84IrieuQCng", title: "Bullet train", subtitle: "Five killers. One train. No brakes.”", category: "Mashup Cuts", type: "mashup" },
-        { youtubeId: "vNWqyKHpF-I", title: "Doctor Strange", subtitle: "Reality is just the beginning", category: "Mashup Cuts", type: "mashup" },
+        { youtubeId: "9FDrKlWOojs", title: "Extraction", subtitle: "“One mission. No escape. Only survival.”", category: "Selected Mashup Cuts", type: "mashup" },
+        { youtubeId: "84IrieuQCng", title: "Bullet train", subtitle: "Five killers. One train. No brakes.”", category: "Selected Mashup Cuts", type: "mashup" },
+        { youtubeId: "vNWqyKHpF-I", title: "Doctor Strange", subtitle: "Reality is just the beginning", category: "Selected Mashup Cuts", type: "mashup" },
+
+        // Beyond the Cut - Additional Cinematic Works
+        { youtubeId: "sJ8Bt_0QaqE", title: "John Wick Mashup", subtitle: "“You don’t hunt him. He hunts you.”", category: "Beyond the Cut", type: "mashup" },
+        { youtubeId: "El7yOj4H7lw", title: "Wheel of the Time", subtitle: "“Fate is not chosen… it is woven.”", category: "Beyond the Cut", type: "mashup" },
+        { youtubeId: "e9fVDeoYKqI", title: "Avatar cut", subtitle: "“Not just a planet… a living soul.”", category: "Beyond the Cut", type: "mashup" },
+        { youtubeId: "3RkFnMO1AkA", title: "Parava", subtitle: "“Not just birds… they carried our dreams.”", category: "Beyond the Cut", type: "mashup" },
+        { youtubeId: "1fhLCzN3W9g", title: "What is Editing", subtitle: "“Stories aren’t filmed—they’re built in the edit.”", category: "Beyond the Cut", type: "mashup" },
+        { youtubeId: "4sEgxSRhnGg", title: "Tamil Filmmakers", subtitle: "“They don’t follow trends—they create movements.”", category: "Beyond the Cut", type: "mashup" },
 
         // Viral Reels (Vertical)
         { youtubeId: "IeAYIBU9zXE", title: "Monologue", subtitle: "The pulse of dialogue: mastering the beat of performance and emotion.", category: "Viral Reels", type: "reel" },
@@ -231,7 +239,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 3. Build Category Rows
     const rowVideos = myVideos.filter(v => !v.isHero);
-    const categories = ["Mashup Cuts", "Love Reels", "Special Projects", "Viral Reels", "Identity & Intros"];
+    const categories = ["Selected Mashup Cuts", "Love Reels", "Beyond the Cut", "Special Projects", "Viral Reels", "Identity & Intros"];
 
     categories.forEach(cat => {
         const matchingVideos = rowVideos.filter(v => v.category === cat);
