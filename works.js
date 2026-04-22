@@ -97,12 +97,11 @@ function renderShowcaseEngine() {
                                                         </div>
                                                         <div class="time-display" style="font-size:11px; font-weight:600; color:#eee;"><span class="current-time">0:00</span> / <span class="duration">0:00</span></div>
                                                     </div>
-                                                    <div class="controls-right">
-                                                        <div class="inline-quality-selector" style="display:flex; gap:4px;">
+                                                        <div class="inline-quality-selector" style="display:flex; gap:4px; align-items:center;">
+                                                            ${cat === 'Instagram Reels' ? `<button class="rotate-btn" style="background:rgba(255,255,255,0.1); border:none; color:white; font-size:9px; padding:2px 5px; border-radius:2px; cursor:pointer; margin-right:5px;" onclick="window.toggleRotate(this, event)">Rotate</button>` : ''}
                                                             <button class="quality-btn" data-vq="hd1080" style="background:rgba(255,255,255,0.1); border:none; color:white; font-size:9px; padding:2px 5px; border-radius:2px; cursor:pointer;">1080p</button>
                                                             <button class="quality-btn active" data-vq="hd720" style="background:#e50914; border:none; color:white; font-size:9px; padding:2px 5px; border-radius:2px; cursor:pointer;">720p</button>
                                                         </div>
-                                                    </div>
                                                 </div>
                                             </div>
                                             <button class="center-play-btn" style="z-index: 5;"><svg viewBox="0 0 24 24" fill="white" width="40" height="40"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg></button>
@@ -243,6 +242,28 @@ function formatTime(s) {
     const rs = Math.floor(s % 60);
     return `${m}:${rs < 10 ? '0' : ''}${rs}`;
 }
+
+window.toggleRotate = function(btn, e) {
+    e.stopPropagation();
+    const container = btn.closest('.yt-container');
+    const iframeWrap = container.querySelector('.yt-iframe-placeholder');
+    if (!iframeWrap) return;
+    
+    if (iframeWrap.style.transform === 'rotate(90deg)') {
+        iframeWrap.style.transform = 'none';
+        iframeWrap.style.width = '100%';
+        iframeWrap.style.height = '110%';
+        iframeWrap.style.top = '-5%';
+        iframeWrap.style.left = '0';
+    } else {
+        iframeWrap.style.transform = 'rotate(90deg)';
+        // Scale to fit horizontal width while being vertical source
+        iframeWrap.style.width = '160%'; 
+        iframeWrap.style.height = '100%';
+        iframeWrap.style.top = '0';
+        iframeWrap.style.left = '-30%';
+    }
+};
 
 window.playGalleryItem = function(card) {
     const container = card.querySelector('.yt-container');
