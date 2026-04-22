@@ -11,37 +11,7 @@ function renderShowcaseEngine() {
     if (!app || app.dataset.rendered === "true") return;
     app.dataset.rendered = "true";
 
-    // Inject Professional Animation Styles
-    if (!document.getElementById('showcase-styles')) {
-        const style = document.createElement('style');
-        style.id = 'showcase-styles';
-        style.textContent = `
-            .yt-iframe-placeholder {
-                transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), 
-                            width 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), 
-                            height 0.6s cubic-bezier(0.2, 0.8, 0.2, 1),
-                            top 0.6s cubic-bezier(0.2, 0.8, 0.2, 1),
-                            left 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
-                will-change: transform, width, height;
-            }
-            .rotated-mode {
-                transform: rotate(-90deg) scale(1.777) !important;
-                z-index: 100;
-            }
-            :fullscreen .rotated-mode, :-webkit-full-screen .rotated-mode {
-                transform: translate(-50%, -50%) rotate(-90deg) !important;
-                width: 100vh !important;
-                height: 100vw !important;
-                top: 50% !important;
-                left: 50% !important;
-                position: fixed !important;
-            }
-            .showcase-card.playing .yt-cover-image { opacity: 0; pointer-events: none; }
-            .showcase-card.playing .yt-controls { opacity: 1 !important; }
-        `;
-        document.head.appendChild(style);
-    }
-
+    // 1. Data Library
     const myVideos = [
         { youtubeId: "RAO0_nqH4wc", title: "MARCO", subtitle: "Cut beyond the story—into the pulse", category: "Featured", type: "mashup", isHero: true },
         { youtubeId: "sJ8Bt_0QaqE", title: "John Wick Mashup", subtitle: "“You don’t hunt him. He hunts you.”", category: "Beyond the Cut", type: "mashup" },
@@ -69,6 +39,8 @@ function renderShowcaseEngine() {
         { youtubeId: "1nM34AdYkIY", title: "dott.fx Thunder", subtitle: "Thunder effect reveal", category: "Identity & Intros", type: "mashup" }
     ];
 
+    const heroVid = myVideos.find(v => v.isHero) || myVideos[0];
+    
     let html = `
         <div class="showcase-hero" id="hero-player-container" style="background: #000; height: 75vh; min-height: 500px; position: relative; overflow: hidden; display: flex; align-items: center;">
             <div class="hero-image-wrap" style="position: absolute; top:0; left:0; width:100%; height:100%; z-index: 1;">
@@ -101,8 +73,8 @@ function renderShowcaseEngine() {
                                 <div class="${v.type === 'reel' ? 'showcase-card vertical' : 'showcase-card horizontal'}" onclick="window.playGalleryItem(this)" style="flex:0 0 auto;">
                                     <div class="project-img custom-player" data-behavior="hover" style="background:#000;">
                                         <div class="yt-container" data-yt-id="${v.youtubeId}">
-                                            <div class="yt-iframe-placeholder" style="position: absolute; top:0; left:0; width:100%; height:110%; top:-5%;">
-                                                <iframe src="https://www.youtube.com/embed/${v.youtubeId}?enablejsapi=1&mute=1&loop=1&playlist=${v.youtubeId}&controls=0&modestbranding=1&rel=0&vq=hd720" style="width:100%; height:100%; border:none; position:absolute;" allow="autoplay; fullscreen"></iframe>
+                                            <div class="yt-iframe-placeholder" style="position: absolute; top:0; left:0; width:100%; height:110%; top:-5%; transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);">
+                                                <iframe src="https://www.youtube.com/embed/${v.youtubeId}?enablejsapi=1&mute=1&loop=1&playlist=${v.youtubeId}&controls=0&modestbranding=1&rel=0&vq=hd1080" style="width:100%; height:100%; border:none; position:absolute;" allow="autoplay; fullscreen"></iframe>
                                             </div>
                                             <div class="yt-cover-image" style="background: url('https://img.youtube.com/vi/${v.youtubeId}/maxresdefault.jpg') center/cover; position:absolute; top:0; left:0; width:100%; height:100%; z-index:2; transition: opacity 0.5s ease;"></div>
                                             
@@ -125,8 +97,8 @@ function renderShowcaseEngine() {
                                                     </div>
                                                     <div class="controls-right" style="display:flex; align-items:center; gap:4px;">
                                                         ${cat === 'Instagram Reels' ? `<button class="rotate-btn" style="background:rgba(255,255,255,0.1); border:none; color:white; font-size:9px; padding:2px 5px; border-radius:2px; cursor:pointer;" onclick="window.toggleRotate(this, event)">Rotate</button>` : ''}
-                                                        <button class="quality-btn" data-vq="hd1080" style="background:rgba(255,255,255,0.1); border:none; color:white; font-size:9px; padding:2px 5px; border-radius:2px; cursor:pointer;">1080p</button>
-                                                        <button class="quality-btn active" data-vq="hd720" style="background:#e50914; border:none; color:white; font-size:9px; padding:2px 5px; border-radius:2px; cursor:pointer;">720p</button>
+                                                        <button class="quality-btn active" data-vq="hd1080" style="background:#e50914; border:none; color:white; font-size:9px; padding:2px 5px; border-radius:2px; cursor:pointer;">1080p</button>
+                                                        <button class="quality-btn" data-vq="hd720" style="background:rgba(255,255,255,0.1); border:none; color:white; font-size:9px; padding:2px 5px; border-radius:2px; cursor:pointer;">720p</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -164,25 +136,32 @@ function renderShowcaseEngine() {
     } else { if(window.onYouTubeIframeAPIReady) window.onYouTubeIframeAPIReady(); }
 }
 
-// VIDEO ENGINE
+// ULTRA-HD VIDEO ENGINE
 window.activePlayers = window.activePlayers || {};
 window.onYouTubeIframeAPIReady = function() {
     document.querySelectorAll('.yt-container').forEach((el, idx) => {
         const iframe = el.querySelector('iframe');
         if (!iframe || iframe.id) return;
-        const frameId = `yt-showcase-${idx}-${Math.random().toString(36).substr(2, 4)}`;
+        const frameId = `yt-ultra-${idx}-${Math.random().toString(36).substr(2, 4)}`;
         iframe.id = frameId;
         const player = new YT.Player(frameId, {
             events: {
-                'onReady': (e) => { initProfessionalControls(el, e.target); },
+                'onReady': (e) => { 
+                    // Force 1080p immediately on ready
+                    e.target.setPlaybackQuality('hd1080');
+                    initProfessionalControls(el, e.target); 
+                },
                 'onStateChange': (e) => {
                     const card = el.closest('.showcase-card');
                     const cover = el.querySelector('.yt-cover-image');
                     const centerBtn = el.querySelector('.center-play-btn');
-                    if (e.data === 1) { 
+                    const controls = el.querySelector('.player-controls');
+                    if (e.data === 1) { // Playing
+                        e.target.setPlaybackQuality('hd1080'); // Re-force on play
                         card.classList.add('playing');
                         if (cover) cover.style.opacity = '0';
                         if (centerBtn) centerBtn.style.opacity = '0';
+                        if (controls) controls.style.opacity = '1';
                     } else { card.classList.remove('playing'); if (centerBtn) centerBtn.style.opacity = '1'; }
                 }
             }
@@ -190,7 +169,7 @@ window.onYouTubeIframeAPIReady = function() {
         window.activePlayers[frameId] = player;
         el.dataset.frameId = frameId;
         const card = el.closest('.showcase-card');
-        card.onmouseenter = () => player.playVideo();
+        card.onmouseenter = () => { player.setPlaybackQuality('hd1080'); player.playVideo(); };
         card.onmouseleave = () => { if (!document.fullscreenElement) player.pauseVideo(); };
     });
 };
@@ -233,8 +212,19 @@ window.toggleRotate = function(btn, e) {
     e.stopPropagation();
     const container = btn.closest('.yt-container');
     const iframeWrap = container.querySelector('.yt-iframe-placeholder');
-    if (iframeWrap) {
-        iframeWrap.classList.toggle('rotated-mode');
+    if (!iframeWrap) return;
+    const isFS = document.fullscreenElement || document.webkitFullscreenElement;
+    if (iframeWrap.style.transform.includes('rotate(-90deg)')) {
+        iframeWrap.style.transform = 'none'; iframeWrap.style.width = '100%'; iframeWrap.style.height = '110%'; iframeWrap.style.top = '-5%'; iframeWrap.style.left = '0';
+    } else {
+        if (isFS) {
+            iframeWrap.style.transform = 'translate(-50%, -50%) rotate(-90deg)';
+            iframeWrap.style.width = '100vh'; iframeWrap.style.height = '100vw';
+            iframeWrap.style.top = '50%'; iframeWrap.style.left = '50%'; iframeWrap.style.position = 'fixed';
+        } else {
+            iframeWrap.style.transform = 'rotate(-90deg) scale(1.77)'; 
+            iframeWrap.style.width = '100%'; iframeWrap.style.height = '100%'; iframeWrap.style.top = '0'; iframeWrap.style.left = '0';
+        }
     }
 };
 
@@ -243,7 +233,9 @@ window.playGalleryItem = function(card) {
     const frameId = container.dataset.frameId;
     const player = window.activePlayers[frameId];
     if (player) {
-        player.unMute(); player.playVideo();
+        player.unMute(); 
+        player.setPlaybackQuality('hd1080'); // Force HD on click
+        player.playVideo();
         const fullTarget = card.querySelector('.project-img');
         if (fullTarget.requestFullscreen) fullTarget.requestFullscreen();
         else if (fullTarget.webkitRequestFullscreen) fullTarget.webkitRequestFullscreen();
@@ -252,7 +244,10 @@ window.playGalleryItem = function(card) {
 
 document.addEventListener('fullscreenchange', () => {
     if (!document.fullscreenElement && !document.webkitFullscreenElement) {
-        Object.values(window.activePlayers).forEach(p => p.pauseVideo());
-        document.querySelectorAll('.rotated-mode').forEach(el => el.classList.remove('rotated-mode'));
+        Object.values(window.activePlayers).forEach(p => {
+            p.pauseVideo();
+            const iframes = document.querySelectorAll('.yt-iframe-placeholder');
+            iframes.forEach(f => { f.style.transform = 'none'; f.style.width='100%'; f.style.height='110%'; f.style.top='-5%'; f.style.left='0'; f.style.position='absolute'; });
+        });
     }
 });
