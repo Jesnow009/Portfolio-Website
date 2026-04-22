@@ -249,14 +249,14 @@ window.toggleRotate = function(btn, e) {
     const iframeWrap = container.querySelector('.yt-iframe-placeholder');
     if (!iframeWrap) return;
     
-    if (iframeWrap.style.transform === 'rotate(90deg)') {
+    if (iframeWrap.style.transform === 'rotate(-90deg)') {
         iframeWrap.style.transform = 'none';
         iframeWrap.style.width = '100%';
         iframeWrap.style.height = '110%';
         iframeWrap.style.top = '-5%';
         iframeWrap.style.left = '0';
     } else {
-        iframeWrap.style.transform = 'rotate(90deg)';
+        iframeWrap.style.transform = 'rotate(-90deg)';
         // Scale to fit horizontal width while being vertical source
         iframeWrap.style.width = '160%'; 
         iframeWrap.style.height = '100%';
