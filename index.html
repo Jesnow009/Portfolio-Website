@@ -35,10 +35,9 @@
     <header id="home" class="hero section">
         <div class="video-overlay" style="position: absolute; top:0; left:0; width:100%; height:100%; background: radial-gradient(circle at center, transparent, rgba(8, 2, 13, 0.9)); z-index: 1;"></div>
         <div class="video-bg-wrap" style="position: absolute; top:0; left:0; width:100%; height:100%; overflow: hidden; z-index: 0; filter: blur(5px) scale(1.1); opacity: 0.45;">
-            <!-- Live Cloudinary Hero Background -->
-            <!-- Live Cloudinary Hero Background -->
-            <div id="vimeo-hero-container" style="width: 100%; height: 100%;">
-                <video src="https://res.cloudinary.com/dtnmadjdd/video/upload/f_auto,q_auto/Cinephile_Dott.Fx_4K_supvjn.mp4" autoplay loop muted playsinline style="width: 100vw; height: 56.25vw; min-height: 100vh; min-width: 177.77vh; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); object-fit: cover;"></video>
+            <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; pointer-events: none;">
+                <iframe src="https://www.youtube.com/embed/6FPeq7QTf-A?enablejsapi=1&autoplay=1&mute=1&loop=1&playlist=6FPeq7QTf-A&controls=0&modestbranding=1&rel=0&vq=hd1080" 
+                    style="width: 100%; height: 115%; position: absolute; top: -7.5%; left: 0; border: none; opacity: 0.8;" frameborder="0" allow="autoplay; fullscreen"></iframe>
             </div>
         </div>
         
@@ -301,10 +300,12 @@
                 <h3 style="margin-top: 1.5rem; font-size: 1.2rem; font-weight: 400; color: rgba(255,255,255,0.7); font-style: italic;">"Curious to see what happens <strong>Beyond the Cut?</strong>"</h3>
             </div>
 
-            <!-- THE PORTAL: An impressive and creative entry point to your full videos -->
             <a href="works.html" class="showcase-portal reveal" style="display: block; margin-top: 8rem; position: relative; border-radius: 30px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); background: rgba(8, 2, 13, 0.4); backdrop-filter: blur(10px); box-shadow: 0 40px 100px rgba(0,0,0,0.9), inset 0 0 80px rgba(0, 229, 255, 0.05); text-decoration: none; color: inherit;">
-                <!-- Montage Background -->
-                <video src="https://res.cloudinary.com/dtnmadjdd/video/upload/v1775550708/avatar_cut_msnk59.mp4" autoplay loop muted playsinline style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover; opacity: 0.4; filter: contrast(1.1) brightness(0.8); pointer-events: none;"></video>
+                <!-- YouTube Montage Background -->
+                <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; pointer-events: none; opacity: 0.4;">
+                    <iframe src="https://www.youtube.com/embed/e9fVDeoYKqI?enablejsapi=1&autoplay=1&mute=1&loop=1&playlist=e9fVDeoYKqI&controls=0&modestbranding=1&rel=0&vq=hd720" 
+                        style="width: 100%; height: 115%; position: absolute; top: -7.5%; left: 0; border: none;" frameborder="0" allow="autoplay; fullscreen"></iframe>
+                </div>
                 <div style="position: absolute; top:0; left:0; width:100%; height:100%; background: linear-gradient(90deg, rgba(8,2,13,0.95) 0%, transparent 60%, rgba(8,2,13,0.95) 100%);"></div>
                 
                 <div class="portal-content" style="position: relative; z-index: 10; padding: 6rem 4rem; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; min-height: 400px;">
