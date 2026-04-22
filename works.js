@@ -37,8 +37,8 @@ document.addEventListener('DOMContentLoaded', () => {
         { youtubeId: "nX49Q0PDnZg", title: "Love Birds", subtitle: "“Love, captured in its purest form.”", category: "Special Projects", type: "mashup" },
         { youtubeId: "iSYg39mT96I", title: "shooting stars", subtitle: "“From stage to soul—every moment mattered.”", category: "Special Projects", type: "mashup" },
         // Love Reels
-        { youtubeId: "5VPmkhIYLDU", title: "Love Reel 1", subtitle: "“Every moment, a memory.”", category: "Love Reels", type: "mashup" },
-        { youtubeId: "1-yNAOqRl-k", title: "Love Reel 2", subtitle: "“Captured in time.”", category: "Love Reels", type: "mashup" },
+        { youtubeId: "KBEsvHxO5Xs", title: "Love Reel 1", subtitle: "“Every moment, a memory.”", category: "Love Reels", type: "mashup" },
+        { youtubeId: "-DjlWTcy9WQ", title: "Love Reel 2", subtitle: "“Captured in time.”", category: "Love Reels", type: "mashup" },
 
         // Identity, Intros & Motion Graphics (Manually Ordered)
         { cloudinaryId: "v1775504660/St.Aloysius_Text_Logo_Intro_wukcqg", title: "St. Aloysius College Name Intro", subtitle: "“Not just a college… a journey that defines us.”", category: "Identity & Intros", type: "mashup" },
