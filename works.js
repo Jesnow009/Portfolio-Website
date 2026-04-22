@@ -164,9 +164,9 @@ document.addEventListener('DOMContentLoaded', () => {
                                             <span>QUALITY</span>
                                             <span style="color: #e50914;">AUTO</span>
                                         </div>
-                                        <button class="quality-option" data-vq="highres">2160p <sup style="color: #e50914;">4K</sup></button>
+                                        <button class="quality-option active" data-vq="hd2160">Auto (2160p) <sup style="color: #e50914;">4K</sup></button>
                                         <button class="quality-option" data-vq="hd1440">1440p <sup style="color: #e50914;">HD</sup></button>
-                                        <button class="quality-option active" data-vq="hd1080">1080p <sup style="color: #e50914;">HD</sup></button>
+                                        <button class="quality-option" data-vq="hd1080">1080p <sup style="color: #e50914;">HD</sup></button>
                                         <button class="quality-option" data-vq="hd720">720p</button>
                                         <button class="quality-option" data-vq="large">480p</button>
                                         <button class="quality-option" data-vq="medium">360p</button>
