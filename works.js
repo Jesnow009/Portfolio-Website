@@ -11,7 +11,7 @@ function initShowcase() {
     if (!app || app.dataset.rendered === "true") return;
     app.dataset.rendered = "true";
 
-    // 1. Data Library
+    // 1. Unified Cinematic Data
     const myVideos = [
         { youtubeId: "RAO0_nqH4wc", title: "MARCO", subtitle: "Cut beyond the story—into the pulse", category: "Featured", type: "mashup", isHero: true },
         { youtubeId: "sJ8Bt_0QaqE", title: "John Wick Mashup", subtitle: "“You don’t hunt him. He hunts you.”", category: "Beyond the Cut", type: "mashup" },
@@ -42,27 +42,27 @@ function initShowcase() {
 
     const heroVid = myVideos.find(v => v.isHero) || myVideos[0];
     
-    // 2. Render Interface (New Static Backdrop)
+    // 2. Render UI (Timeline Image Backdrop)
     let html = `
-        <div class="showcase-hero" id="hero-player-container" style="background: #000; height: 75vh; min-height: 500px;">
+        <div class="showcase-hero" id="hero-player-container" style="background: #000; height: 75vh; min-height: 500px; position: relative; overflow: hidden;">
             <div class="hero-image-wrap" style="position: absolute; top:0; left:0; width:100%; height:100%; z-index: 1;">
-                <img src="cinematic_editor_backdrop_1776855220073.png" style="width:100%; height:100%; object-fit: cover; opacity: 0.6;">
+                <img src="backdrop_timeline.jpg" style="width:100%; height:100%; object-fit: cover; opacity: 0.5; filter: brightness(0.7) contrast(1.1);">
             </div>
             <div class="hero-vignette" style="z-index: 2;"></div>
-            <div class="hero-content" style="z-index: 10;">
-                <span class="hero-badge">Cinematic Showcase</span>
+            <div class="hero-content" style="z-index: 10; position: relative;">
+                <span class="hero-badge">Featured Cinematic Edit</span>
                 <h1 class="hero-title">${heroVid.title}</h1>
                 <p class="hero-subtitle">${heroVid.subtitle}</p>
                 <div class="hero-actions">
                     <button class="hero-play-btn" onclick="window.playSpecificVid('${heroVid.youtubeId}')">
-                        <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
-                        Watch Showreel
+                        <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20" style="margin-right:10px;"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                        Play Fullscreen
                     </button>
                 </div>
             </div>
             <div class="hero-fade-bottom" style="z-index: 3;"></div>
         </div>
-        <div class="showcase-rows-container">
+        <div class="showcase-rows-container" style="background: #000; position: relative; z-index: 5;">
     `;
 
     const categories = ["Love Reels", "Beyond the Cut", "Special Projects", "Viral Reels", "Identity & Intros"];
@@ -71,18 +71,18 @@ function initShowcase() {
         if (vids.length === 0) return;
 
         html += `
-            <div class="showcase-row reveal">
-                <h2 class="row-title">${cat}</h2>
+            <div class="showcase-row reveal" style="padding: 2rem 0;">
+                <h2 class="row-title" style="margin-left: 4%; font-size: 1.8rem; border-left: 4px solid #e50914; padding-left: 15px; margin-bottom: 1rem;">${cat}</h2>
                 <div class="slider-wrapper">
                     <button class="slider-arrow left-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
-                    <div class="row-slider" style="display:flex; overflow-x:auto; scrollbar-width:none;">
-                        <div class="slider-track" style="display:flex; gap:15px; padding: 10px 4%;">
+                    <div class="row-slider" style="display:flex; overflow-x:auto; scrollbar-width:none; padding: 10px 4%;">
+                        <div class="slider-track" style="display:flex; gap:15px;">
                             ${vids.map(v => `
                                 <div class="${v.type === 'reel' ? 'showcase-card vertical' : 'showcase-card horizontal'}" onclick="window.playGalleryItem(this)" style="flex:0 0 auto;">
                                     <div class="project-img custom-player" data-behavior="hover">
                                         <div class="yt-container" data-yt-id="${v.youtubeId}">
                                             <div class="yt-iframe-placeholder">
-                                                <iframe src="https://www.youtube.com/embed/${v.youtubeId}?enablejsapi=1&mute=1&loop=1&playlist=${v.youtubeId}&controls=0&modestbranding=1&rel=0&vq=hd720" style="width:100%; height:115%; top:-7.5%; border:none; position:absolute;"></iframe>
+                                                <iframe src="https://www.youtube.com/embed/${v.youtubeId}?enablejsapi=1&mute=1&loop=1&playlist=${v.youtubeId}&controls=0&modestbranding=1&rel=0&vq=hd720" style="width:100%; height:110%; top:-5%; border:none; position:absolute;"></iframe>
                                             </div>
                                             <div class="yt-cover-image" style="background: url('https://img.youtube.com/vi/${v.youtubeId}/maxresdefault.jpg') center/cover; position:absolute; top:0; left:0; width:100%; height:100%; z-index:2;"></div>
                                             <button class="center-play-btn"><svg viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg></button>
@@ -102,7 +102,7 @@ function initShowcase() {
     html += `</div>`;
     app.innerHTML = html;
 
-    // Listeners
+    // Setup Listeners
     document.querySelectorAll('.slider-wrapper').forEach(wrapper => {
         const slider = wrapper.querySelector('.row-slider');
         wrapper.querySelector('.left-arrow').onclick = (e) => { e.stopPropagation(); slider.scrollBy({ left: -window.innerWidth * 0.7, behavior: 'smooth' }); };
@@ -116,7 +116,7 @@ function initShowcase() {
 
     if (!window.YT) {
         const tag = document.createElement('script'); tag.src = "https://www.youtube.com/iframe_api"; document.body.appendChild(tag);
-    } else { window.onYouTubeIframeAPIReady(); }
+    } else { if(window.onYouTubeIframeAPIReady) window.onYouTubeIframeAPIReady(); }
 }
 
 // VIDEO LOGIC
@@ -147,12 +147,10 @@ window.onYouTubeIframeAPIReady = function() {
 };
 
 window.playSpecificVid = function(ytId) {
-    // Create a temporary player to go fullscreen with the MARCO edit
     const overlay = document.createElement('div');
     overlay.style = "position:fixed; top:0; left:0; width:100%; height:100%; background:#000; z-index:9999; display:flex; align-items:center; justify-content:center;";
     overlay.innerHTML = `<div id="temp-player-fs" style="width:100%; height:100%;"></div><button onclick="this.parentNode.remove()" style="position:absolute; top:20px; right:20px; background:rgba(255,255,255,0.2); border:none; color:white; padding:10px 20px; border-radius:50px; cursor:pointer;">Close</button>`;
     document.body.appendChild(overlay);
-    
     new YT.Player('temp-player-fs', {
         videoId: ytId,
         playerVars: { 'autoplay': 1, 'controls': 1 },
