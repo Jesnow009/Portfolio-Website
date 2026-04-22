@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Blockbuster Trailers / Mashups
         { youtubeId: "RAO0_nqH4wc", title: "MARCO", subtitle: "Where chaos meets precision", category: "Mashup Cuts", type: "mashup" },
-        { youtubeId: "9FDrKlWOojs", title: "Extraction", subtitle: "“One mission. No escape. Only survival.”", category: "Mashup Cuts", type: "mashup" },
+        { youtubeId: "9FDrKlWOojs", title: "Extraction", subtitle: "“One mission. No escape. Only survival.”", category: "Mashup Cuts", type: "mashup", customThumbnail: "https://i.pinimg.com/originals/d5/3b/01/d53b014d86a6b6761bf649a0ed813c2b.png" },
         { youtubeId: "84IrieuQCng", title: "Bullet train", subtitle: "Five killers. One train. No brakes.”", category: "Mashup Cuts", type: "mashup" },
         { youtubeId: "vNWqyKHpF-I", title: "Doctor Strange", subtitle: "Reality is just the beginning", category: "Mashup Cuts", type: "mashup" },
         { youtubeId: "sJ8Bt_0QaqE", title: "John Wick Mashup", subtitle: "“You don’t hunt him. He hunts you.”", category: "Mashup Cuts", type: "mashup" },
@@ -75,6 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     style="width: 100vw; height: 56.25vw; min-height: 100vh; min-width: 177.77vh; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); opacity: 0.4; filter: blur(5px) scale(1.05);"
                     allow="autoplay; fullscreen">
                 </iframe>
+                <div class="yt-cover-image" style="background: url('${heroVideo.customThumbnail || `https://img.youtube.com/vi/${heroVideo.youtubeId}/maxresdefault.jpg`}') center/cover no-repeat; width: 100vw; height: 56.25vw; min-height: 100vh; min-width: 177.77vh; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); opacity: 0.4; transition: opacity 0.8s ease; pointer-events: none;"></div>
             </div>`;
     } else if (heroVideo.cloudinaryId) {
         const clUrl = heroVideo.cloudinaryId.includes('/') 
@@ -136,7 +137,8 @@ document.addEventListener('DOMContentLoaded', () => {
                          <iframe src="https://www.youtube.com/embed/${videoObj.youtubeId}?enablejsapi=1&mute=1&loop=1&playlist=${videoObj.youtubeId}&controls=0&modestbranding=1&rel=0&vq=hd720&hd=1" 
                             style="width:100%; height:100%;" frameborder="0" allow="autoplay; fullscreen"></iframe>
                     </div>
-                    <div class="yt-click-mask" style="position: absolute; top:0; left:0; width:100%; height:100%; z-index: 2; cursor: pointer;"></div>
+                    <div class="yt-cover-image" style="position: absolute; top:0; left:0; width:100%; height:100%; z-index: 2; background: url('${videoObj.customThumbnail || `https://img.youtube.com/vi/${videoObj.youtubeId}/maxresdefault.jpg`}') center/cover no-repeat; transition: opacity 0.6s ease; pointer-events: none;"></div>
+                    <div class="yt-click-mask" style="position: absolute; top:0; left:0; width:100%; height:100%; z-index: 3; cursor: pointer;"></div>
                     <div class="player-controls yt-controls" style="z-index: 5;">
                         <div class="progress-container"><input type="range" class="progress-bar yt-progress" min="0" max="100" value="0" step="0.1"></div>
                         <div class="controls-main">
@@ -349,9 +351,10 @@ window.initHeroPlayer = function() {
                 }
             },
             'onStateChange': (event) => {
-                // Secondary 4K enforcement on playback
                 if (event.data === 1) { 
-                    event.target.setPlaybackQuality('highres');
+                    event.target.setPlaybackQuality('hd720');
+                    const cover = document.querySelector('#hero-player-container .yt-cover-image');
+                    if (cover) cover.style.opacity = '0';
                 }
             }
         }
@@ -596,6 +599,8 @@ function initYTCards() {
                         if (playerContainer) playerContainer.classList.add('playing');
                         if (iconPlay) iconPlay.style.display = 'none';
                         if (iconPause) iconPause.style.display = 'block';
+                        const cover = container.querySelector('.yt-cover-image');
+                        if (cover) cover.style.opacity = '0';
                     } else { // Paused or ended
                         if (card) card.classList.remove('playing');
                         if (playerContainer) playerContainer.classList.remove('playing');
