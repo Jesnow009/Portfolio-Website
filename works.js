@@ -11,7 +11,6 @@ function initShowcase() {
     if (!app || app.dataset.rendered === "true") return;
     app.dataset.rendered = "true";
 
-    // 1. Unified Cinematic Data
     const myVideos = [
         { youtubeId: "RAO0_nqH4wc", title: "MARCO", subtitle: "Cut beyond the story—into the pulse", category: "Featured", type: "mashup", isHero: true },
         { youtubeId: "sJ8Bt_0QaqE", title: "John Wick Mashup", subtitle: "“You don’t hunt him. He hunts you.”", category: "Beyond the Cut", type: "mashup" },
@@ -42,25 +41,19 @@ function initShowcase() {
 
     const heroVid = myVideos.find(v => v.isHero) || myVideos[0];
     
-    // 2. Render UI (Timeline Image Backdrop)
+    // 2. Render Interface (Clean Static Image Backdrop - No YouTube Links)
     let html = `
-        <div class="showcase-hero" id="hero-player-container" style="background: #000; height: 75vh; min-height: 500px; position: relative; overflow: hidden;">
+        <div class="showcase-hero" style="background: #000; height: 75vh; min-height: 500px; position: relative; overflow: hidden; display: flex; align-items: center;">
             <div class="hero-image-wrap" style="position: absolute; top:0; left:0; width:100%; height:100%; z-index: 1;">
-                <img src="backdrop_timeline.jpg.jpg" style="width:100%; height:100%; object-fit: cover; opacity: 0.8; filter: brightness(0.8) contrast(1.1);">
+                <img src="backdrop_timeline.jpg.jpg" style="width:100%; height:100%; object-fit: cover; opacity: 0.8; filter: brightness(0.6) contrast(1.1);">
             </div>
-            <div class="hero-vignette" style="z-index: 2;"></div>
-            <div class="hero-content" style="z-index: 10; position: relative;">
-                <span class="hero-badge">Featured Cinematic Edit</span>
-                <h1 class="hero-title">${heroVid.title}</h1>
-                <p class="hero-subtitle">${heroVid.subtitle}</p>
-                <div class="hero-actions">
-                    <button class="hero-play-btn" onclick="window.playSpecificVid('${heroVid.youtubeId}')">
-                        <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20" style="margin-right:10px;"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
-                        Play Fullscreen
-                    </button>
-                </div>
+            <div class="hero-vignette" style="z-index: 2; position: absolute; top:0; left:0; width:100%; height:100%; background: linear-gradient(to right, rgba(0,0,0,0.8), transparent, rgba(0,0,0,0.8)), linear-gradient(to top, #000, transparent);"></div>
+            <div class="hero-content" style="z-index: 10; position: relative; padding: 0 4%;">
+                <span style="color: #e50914; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; font-size: 0.9rem; border-left: 3px solid #e50914; padding-left: 10px; margin-bottom: 20px; display: inline-block;">Professional Showcase</span>
+                <h1 style="font-size: 5rem; font-weight: 900; line-height: 1; margin: 10px 0 20px 0;">PORTFOLIO</h1>
+                <p style="font-size: 1.2rem; color: #ccc; max-width: 500px; line-height: 1.6;">Advanced Video Editing & Motion Design. Exploring the boundaries of visual storytelling through high-fidelity mashups and viral reel content.</p>
             </div>
-            <div class="hero-fade-bottom" style="z-index: 3;"></div>
+            <div class="hero-fade-bottom" style="z-index: 3; position: absolute; bottom:0; left:0; width:100%; height:150px; background: linear-gradient(to top, #000, transparent);"></div>
         </div>
         <div class="showcase-rows-container" style="background: #000; position: relative; z-index: 5;">
     `;
@@ -102,7 +95,7 @@ function initShowcase() {
     html += `</div>`;
     app.innerHTML = html;
 
-    // Setup Listeners
+    // Listeners
     document.querySelectorAll('.slider-wrapper').forEach(wrapper => {
         const slider = wrapper.querySelector('.row-slider');
         wrapper.querySelector('.left-arrow').onclick = (e) => { e.stopPropagation(); slider.scrollBy({ left: -window.innerWidth * 0.7, behavior: 'smooth' }); };
@@ -143,24 +136,6 @@ window.onYouTubeIframeAPIReady = function() {
         const card = el.closest('.showcase-card');
         card.onmouseenter = () => player.playVideo();
         card.onmouseleave = () => { if (!document.fullscreenElement) player.pauseVideo(); };
-    });
-};
-
-window.playSpecificVid = function(ytId) {
-    const overlay = document.createElement('div');
-    overlay.style = "position:fixed; top:0; left:0; width:100%; height:100%; background:#000; z-index:9999; display:flex; align-items:center; justify-content:center;";
-    overlay.innerHTML = `<div id="temp-player-fs" style="width:100%; height:100%;"></div><button onclick="this.parentNode.remove()" style="position:absolute; top:20px; right:20px; background:rgba(255,255,255,0.2); border:none; color:white; padding:10px 20px; border-radius:50px; cursor:pointer;">Close</button>`;
-    document.body.appendChild(overlay);
-    new YT.Player('temp-player-fs', {
-        videoId: ytId,
-        playerVars: { 'autoplay': 1, 'controls': 1 },
-        events: {
-            'onReady': (e) => {
-                const el = document.getElementById('temp-player-fs');
-                if (el.requestFullscreen) el.requestFullscreen();
-                else if (el.webkitRequestFullscreen) el.webkitRequestFullscreen();
-            }
-        }
     });
 };
 
