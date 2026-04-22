@@ -58,7 +58,7 @@ function initShowcase() {
         <div class="showcase-rows-container" style="background: #000; position: relative; z-index: 5;">
     `;
 
-    const categories = ["Love Reels", "Beyond the Cut", "Special Projects", "Viral Reels", "Identity & Intros"];
+    const categories = ["Beyond the Cut", "Special Projects", "Viral Reels", "Identity & Intros"];
     categories.forEach(cat => {
         const vids = myVideos.filter(v => v.category && v.category.toLowerCase().trim() === cat.toLowerCase().trim() && !v.isHero);
         if (vids.length === 0) return;
