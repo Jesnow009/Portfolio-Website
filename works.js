@@ -1,5 +1,18 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Cinematic Video Data
+    renderShowcase();
+});
+
+// Force render if script loads late
+if (document.readyState === 'complete' || document.readyState === 'interactive') {
+    renderShowcase();
+}
+
+function renderShowcase() {
+    const app = document.getElementById('showcase-app');
+    if (!app || app.dataset.rendered === "true") return;
+    app.dataset.rendered = "true";
+
+    // 1. Unified Cinematic Data
     const myVideos = [
         { youtubeId: "RAO0_nqH4wc", title: "MARCO", subtitle: "Cut beyond the story—into the pulse", category: "Featured", type: "mashup", isHero: true },
         { youtubeId: "sJ8Bt_0QaqE", title: "John Wick Mashup", subtitle: "“You don’t hunt him. He hunts you.”", category: "Beyond the Cut", type: "mashup" },
@@ -28,12 +41,10 @@ document.addEventListener('DOMContentLoaded', () => {
         { youtubeId: "1nM34AdYkIY", title: "dott.fx Thunder", subtitle: "Thunder effect reveal", category: "Identity & Intros", type: "mashup" }
     ];
 
-    const app = document.getElementById('showcase-app');
-    if (!app) return;
-
     const heroVid = myVideos.find(v => v.isHero) || myVideos[0];
     
     // 2. Render UI
+    console.log("Rendering Showcase...");
     let html = `
         <div class="showcase-hero custom-player" id="hero-player-container" onclick="window.playHeroFS()">
             <div class="hero-video-wrap" style="position: absolute; top:0; left:0; width:100%; height:100%; overflow: hidden; pointer-events: none; z-index: -1;">
@@ -68,22 +79,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const categories = ["Love Reels", "Beyond the Cut", "Special Projects", "Viral Reels", "Identity & Intros"];
     categories.forEach(cat => {
-        const vids = myVideos.filter(v => v.category === cat && !v.isHero);
-        if (vids.length === 0) return;
+        const vids = myVideos.filter(v => v.category && v.category.toLowerCase().trim() === cat.toLowerCase().trim() && !v.isHero);
+        if (vids.length === 0) {
+            console.warn(`No videos found for category: ${cat}`);
+            return;
+        }
 
         html += `
-            <div class="showcase-row" style="margin-bottom: 2rem;">
-                <h2 class="row-title" style="margin-left: 4%; font-size: 1.8rem; border-left: 4px solid #e50914; padding-left: 15px; margin-bottom: 1rem;">${cat}</h2>
+            <div class="showcase-row reveal" style="margin-bottom: 3rem; opacity: 1;">
+                <h2 class="row-title" style="margin-left: 4%; font-size: 1.9rem; border-left: 4px solid #e50914; padding-left: 15px; margin-bottom: 1rem;">${cat}</h2>
                 <div class="slider-wrapper" style="position: relative;">
                     <button class="slider-arrow left-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
-                    <div class="row-slider" style="overflow-x: auto; scrollbar-width: none;">
-                        <div class="slider-track" style="display: flex; gap: 15px; padding: 10px 4%;">
+                    <div class="row-slider" style="overflow-x: auto; scrollbar-width: none; display: flex; gap: 20px;">
+                        <div class="slider-track" style="display: flex; gap: 20px; padding: 10px 4%;">
                             ${vids.map(v => `
                                 <div class="${v.type === 'reel' ? 'showcase-card vertical' : 'showcase-card horizontal'}" onclick="window.playGalleryItem(this)" style="flex: 0 0 auto;">
                                     <div class="project-img custom-player" data-behavior="hover">
                                         <div class="yt-container" data-yt-id="${v.youtubeId}">
-                                            <div class="yt-iframe-placeholder" style="position: absolute; top:0; left:0; width:100%; height:115%; top:-7.5%;">
-                                                <iframe src="https://www.youtube.com/embed/${v.youtubeId}?enablejsapi=1&mute=1&loop=1&playlist=${v.youtubeId}&controls=0&modestbranding=1&rel=0&vq=hd720" style="width:100%; height:100%; border:none;"></iframe>
+                                            <div class="yt-iframe-placeholder" style="position: absolute; top:0; left:0; width:100%; height:110%; top:-5%;">
+                                                <iframe src="https://www.youtube.com/embed/${v.youtubeId}?enablejsapi=1&mute=1&loop=1&playlist=${v.youtubeId}&controls=0&modestbranding=1&rel=0&vq=hd720" style="width:100%; height:100%; border:none;" allow="autoplay; fullscreen"></iframe>
                                             </div>
                                             <div class="yt-cover-image" style="background: url('https://img.youtube.com/vi/${v.youtubeId}/maxresdefault.jpg') center/cover; position:absolute; top:0; left:0; width:100%; height:100%; z-index:2;"></div>
                                             
@@ -106,7 +120,6 @@ document.addEventListener('DOMContentLoaded', () => {
                                                     </div>
                                                     <div class="controls-right">
                                                         <div class="inline-quality-selector" style="display:flex; gap:5px;">
-                                                            <button class="quality-option" data-vq="hd1080">1080p</button>
                                                             <button class="quality-option active" data-vq="hd720">720p</button>
                                                         </div>
                                                     </div>
@@ -129,26 +142,36 @@ document.addEventListener('DOMContentLoaded', () => {
     html += `</div>`;
     app.innerHTML = html;
 
-    // 3. Setup Listeners
+    // 3. Post-Render Setup
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
     document.querySelectorAll('.slider-wrapper').forEach(wrapper => {
         const slider = wrapper.querySelector('.row-slider');
         wrapper.querySelector('.left-arrow').onclick = (e) => { e.stopPropagation(); slider.scrollBy({ left: -window.innerWidth * 0.7, behavior: 'smooth' }); };
         wrapper.querySelector('.right-arrow').onclick = (e) => { e.stopPropagation(); slider.scrollBy({ left: window.innerWidth * 0.7, behavior: 'smooth' }); };
     });
 
-    // 4. API Load
     if (!window.YT) {
         const tag = document.createElement('script');
         tag.src = "https://www.youtube.com/iframe_api";
         document.body.appendChild(tag);
-    } else if (typeof window.onYouTubeIframeAPIReady === 'function') {
+    } else {
         window.onYouTubeIframeAPIReady();
     }
-});
+}
 
 // GLOBAL YOUTUBE ENGINE
-window.activePlayers = {};
+window.activePlayers = window.activePlayers || {};
 window.onYouTubeIframeAPIReady = function() {
+    console.log("YouTube API Ready...");
     // Hero
     const heroFrame = document.getElementById('hero-yt-iframe');
     if (heroFrame && !window.ytHeroPlayer) {
@@ -168,7 +191,8 @@ window.onYouTubeIframeAPIReady = function() {
     // Gallery
     document.querySelectorAll('.yt-container').forEach((el, idx) => {
         const iframe = el.querySelector('iframe');
-        const frameId = `yt-gallery-${idx}`;
+        if (!iframe || iframe.id) return; 
+        const frameId = `yt-gallery-${idx}-${Math.random().toString(36).substr(2, 5)}`;
         iframe.id = frameId;
         const player = new YT.Player(frameId, {
             events: {
@@ -215,8 +239,15 @@ function initShowcaseControls(container, player) {
     if (muteBtn) {
         muteBtn.onclick = (e) => {
             e.stopPropagation();
-            if (player.isMuted()) { player.unMute(); container.querySelector('.icon-muted').style.display='none'; container.querySelector('.icon-unmuted').style.display='block'; }
-            else { player.mute(); container.querySelector('.icon-muted').style.display='block'; container.querySelector('.icon-unmuted').style.display='none'; }
+            if (player.isMuted()) { 
+                player.unMute(); 
+                container.querySelector('.icon-muted').style.display='none'; 
+                container.querySelector('.icon-unmuted').style.display='block'; 
+            } else { 
+                player.mute(); 
+                container.querySelector('.icon-muted').style.display='block'; 
+                container.querySelector('.icon-unmuted').style.display='none'; 
+            }
         };
     }
     if (volSlider) {
@@ -234,7 +265,6 @@ function initShowcaseControls(container, player) {
         };
     });
 
-    // Tracking
     setInterval(() => {
         if (player.getPlayerState() === 1) {
             const cur = player.getCurrentTime();
