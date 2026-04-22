@@ -439,4 +439,37 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.hero-name-popup').forEach(heading => {
         wrapLetters(heading, true, 0.4); 
     });
+    // YouTube Card Support (Sync for MARCO etc on Home)
+    window.onYouTubeIframeAPIReady = function() {
+        document.querySelectorAll('.yt-container').forEach(container => {
+            const iframe = container.querySelector('iframe');
+            if (iframe) {
+                const ytId = container.dataset.ytId;
+                const frameId = `yt-home-${Math.random().toString(36).substr(2, 9)}`;
+                iframe.id = frameId;
+                
+                new YT.Player(frameId, {
+                    events: {
+                        'onStateChange': (event) => {
+                            if (event.data === YT.PlayerState.PLAYING) {
+                                const cover = container.querySelector('.yt-cover-image');
+                                if (cover) cover.style.opacity = '0';
+                                
+                                // Enforce quality if possible
+                                try { event.target.setPlaybackQuality('hd720'); } catch(e) {}
+                            }
+                        }
+                    }
+                });
+            }
+        });
+    };
+
+    // Load YT API if not already present
+    if (!window.YT) {
+        const tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        const firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+    }
 });
