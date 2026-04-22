@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // The Video Engine Data
+    // 1. Unified Configuration & Data
     const myVideos = [
         { youtubeId: "RAO0_nqH4wc", title: "MARCO", subtitle: "Cut beyond the story—into the pulse", category: "Featured", type: "mashup", isHero: true },
         { youtubeId: "sJ8Bt_0QaqE", title: "John Wick Mashup", subtitle: "“You don’t hunt him. He hunts you.”", category: "Beyond the Cut", type: "mashup" },
@@ -29,30 +29,29 @@ document.addEventListener('DOMContentLoaded', () => {
     ];
 
     const app = document.getElementById('showcase-app');
-    const heroVideo = myVideos.find(v => v.isHero) || myVideos[0];
-    
-    // 1. Render Hero Section
-    let heroMediaHTML = `
-        <div class="hero-video-wrap" style="position: absolute; top:0; left:0; width:100%; height:100%; overflow: hidden; pointer-events: none; z-index: 0;">
-            <iframe id="hero-yt-iframe"
-                src="https://www.youtube.com/embed/${heroVideo.youtubeId}?enablejsapi=1&autoplay=1&mute=1&loop=1&playlist=${heroVideo.youtubeId}&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&vq=hd1080&hd=1" 
-                frameborder="0" 
-                style="width: 100vw; height: 65vw; min-height: 115vh; min-width: 177.77vh; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); opacity: 1; border: none;" 
-                allow="autoplay; fullscreen">
-            </iframe>
-            <div class="yt-cover-image" style="background: url('https://img.youtube.com/vi/${heroVideo.youtubeId}/maxresdefault.jpg') center/cover no-repeat; width: 100vw; height: 56.25vw; min-height: 100vh; min-width: 177.77vh; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); opacity: 1; transition: opacity 0.8s ease; pointer-events: none;"></div>
-        </div>`;
+    if (!app) return;
 
+    const heroVid = myVideos.find(v => v.isHero) || myVideos[0];
+    
+    // 2. Render Page Content
     let html = `
-        <div class="showcase-hero custom-player" id="hero-player-container" style="cursor: pointer;" onclick="window.playHeroFullscreen()">
-            ${heroMediaHTML}
+        <div class="showcase-hero custom-player" id="hero-player-container" onclick="window.playHeroFS()">
+            <div class="hero-video-wrap" style="position: absolute; top:0; left:0; width:100%; height:100%; overflow: hidden; pointer-events: none; z-index: 0;">
+                <iframe id="hero-yt-iframe"
+                    src="https://www.youtube.com/embed/${heroVid.youtubeId}?enablejsapi=1&autoplay=1&mute=1&loop=1&playlist=${heroVid.youtubeId}&controls=0&modestbranding=1&rel=0&vq=hd1080" 
+                    frameborder="0" 
+                    style="width: 100vw; height: 56.25vw; min-height: 100vh; min-width: 177.77vh; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); opacity: 1; border: none;" 
+                    allow="autoplay; fullscreen">
+                </iframe>
+                <div class="yt-cover-image" style="background: url('https://img.youtube.com/vi/${heroVid.youtubeId}/maxresdefault.jpg') center/cover; position: absolute; top:0; left:0; width:100%; height:100%; z-index:1; pointer-events:none;"></div>
+            </div>
             <div class="hero-vignette"></div>
             <div class="hero-content">
                 <span class="hero-badge">Featured Cinematic Edit</span>
-                <h1 class="hero-title">${heroVideo.title}</h1>
-                <p class="hero-subtitle">${heroVideo.subtitle}</p>
+                <h1 class="hero-title">${heroVid.title}</h1>
+                <p class="hero-subtitle">${heroVid.subtitle}</p>
                 <div class="hero-actions">
-                    <button class="hero-play-btn" onclick="window.playHeroFullscreen()">
+                    <button class="hero-play-btn" onclick="window.playHeroFS()">
                         <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
                         Play Fullscreen
                     </button>
@@ -63,11 +62,10 @@ document.addEventListener('DOMContentLoaded', () => {
         <div class="showcase-rows-container">
     `;
 
-    // 2. Render Cards
-    const categories = ["Love Reels", "Beyond the Cut", "Special Projects", "Viral Reels", "Identity & Intros"];
-    categories.forEach(cat => {
-        const matching = myVideos.filter(v => v.category === cat && !v.isHero);
-        if (matching.length === 0) return;
+    const cats = ["Love Reels", "Beyond the Cut", "Special Projects", "Viral Reels", "Identity & Intros"];
+    cats.forEach(cat => {
+        const vids = myVideos.filter(v => v.category === cat && !v.isHero);
+        if (vids.length === 0) return;
 
         html += `
             <div class="showcase-row reveal">
@@ -75,13 +73,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="slider-wrapper">
                     <button class="slider-arrow left-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
                     <div class="row-slider">
-                        <div class="slider-track" style="display: flex; gap: 15px; padding: 10px 20px;">
-                            ${matching.map(v => `
+                        <div class="slider-track">
+                            ${vids.map(v => `
                                 <div class="${v.type === 'reel' ? 'showcase-card vertical' : 'showcase-card horizontal'}" onclick="window.playGalleryItem(this)">
                                     <div class="project-img custom-player" data-behavior="hover">
                                         <div class="yt-container" data-yt-id="${v.youtubeId}">
-                                            <div class="yt-iframe-placeholder" style="position: absolute; top:0; left:0; width:100%; height:115%; top:-7.5%;">
-                                                <iframe src="https://www.youtube.com/embed/${v.youtubeId}?enablejsapi=1&mute=1&loop=1&playlist=${v.youtubeId}&controls=0&modestbranding=1&rel=0&vq=hd720" style="width:100%; height:100%; border:none;"></iframe>
+                                            <div class="yt-iframe-placeholder">
+                                                <iframe src="https://www.youtube.com/embed/${v.youtubeId}?enablejsapi=1&mute=1&loop=1&playlist=${v.youtubeId}&controls=0&modestbranding=1&rel=0&vq=hd720" style="width:100%; height:115%; top:-7.5%; border:none; position:absolute;"></iframe>
                                             </div>
                                             <div class="yt-cover-image" style="background: url('https://img.youtube.com/vi/${v.youtubeId}/maxresdefault.jpg') center/cover; position:absolute; top:0; left:0; width:100%; height:100%; z-index:2; pointer-events:none;"></div>
                                             <button class="center-play-btn"><svg viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg></button>
@@ -101,27 +99,39 @@ document.addEventListener('DOMContentLoaded', () => {
     html += `</div>`;
     app.innerHTML = html;
 
-    // Slider Listeners
+    // 3. Scroll Reveal Fix
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // 4. Slider Nav
     document.querySelectorAll('.slider-wrapper').forEach(wrapper => {
         const slider = wrapper.querySelector('.row-slider');
         wrapper.querySelector('.left-arrow').onclick = (e) => { e.stopPropagation(); slider.scrollBy({ left: -window.innerWidth * 0.7, behavior: 'smooth' }); };
         wrapper.querySelector('.right-arrow').onclick = (e) => { e.stopPropagation(); slider.scrollBy({ left: window.innerWidth * 0.7, behavior: 'smooth' }); };
     });
 
-    // API Load
+    // 5. Trigger YT API Load
     if (!window.YT) {
         const tag = document.createElement('script');
         tag.src = "https://www.youtube.com/iframe_api";
         document.body.appendChild(tag);
+    } else {
+        window.onYouTubeIframeAPIReady();
     }
 });
 
-// GLOBAL YOUTUBE API READY
+// --- GLOBAL SHOWCASE ENGINE ---
 window.ytPlayers = {};
 window.onYouTubeIframeAPIReady = function() {
-    // Init Hero
-    const heroFrame = document.getElementById('hero-yt-iframe');
-    if (heroFrame) {
+    // Hero Player
+    if (document.getElementById('hero-yt-iframe')) {
         window.ytHeroPlayer = new YT.Player('hero-yt-iframe', {
             events: {
                 'onReady': (e) => { e.target.mute(); e.target.playVideo(); },
@@ -135,12 +145,12 @@ window.onYouTubeIframeAPIReady = function() {
         });
     }
 
-    // Init Gallery
+    // Gallery Players
     document.querySelectorAll('.yt-container').forEach((el, idx) => {
         const iframe = el.querySelector('iframe');
         const frameId = `yt-gallery-${idx}`;
         iframe.id = frameId;
-        window.ytPlayers[frameId] = new YT.Player(frameId, {
+        const player = new YT.Player(frameId, {
             events: {
                 'onStateChange': (e) => {
                     const card = el.closest('.showcase-card');
@@ -154,15 +164,16 @@ window.onYouTubeIframeAPIReady = function() {
                 }
             }
         });
+        window.ytPlayers[frameId] = player;
         el.dataset.frameId = frameId;
         
         const card = el.closest('.showcase-card');
-        card.onmouseenter = () => window.ytPlayers[frameId].playVideo();
-        card.onmouseleave = () => { if (!document.fullscreenElement) window.ytPlayers[frameId].pauseVideo(); };
+        card.onmouseenter = () => player.playVideo();
+        card.onmouseleave = () => { if (!document.fullscreenElement) player.pauseVideo(); };
     });
 };
 
-window.playHeroFullscreen = function() {
+window.playHeroFS = function() {
     if (window.ytHeroPlayer) {
         window.ytHeroPlayer.unMute();
         window.ytHeroPlayer.playVideo();
