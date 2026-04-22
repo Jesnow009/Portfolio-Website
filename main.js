@@ -456,18 +456,21 @@ document.addEventListener('DOMContentLoaded', () => {
                         },
                         'onStateChange': (event) => {
                             const cover = container.querySelector('.yt-cover-image');
+                            const mask = container.querySelector('.yt-click-mask');
                             const iconPlay = container.querySelector('.icon-play');
                             const iconPause = container.querySelector('.icon-pause');
                             const centerBtn = container.closest('.project-img').querySelector('.center-play-btn');
 
                             if (event.data === YT.PlayerState.PLAYING) {
                                 if (cover) cover.style.opacity = '0';
+                                if (mask) mask.style.display = 'none'; // Clear path for controls
                                 if (iconPlay) iconPlay.style.display = 'none';
                                 if (iconPause) iconPause.style.display = 'block';
                                 if (centerBtn) centerBtn.style.opacity = '0';
                                 if (centerBtn) centerBtn.style.pointerEvents = 'none';
                                 startYTProgressLoop(container, event.target);
                             } else {
+                                if (mask) mask.style.display = 'block';
                                 if (iconPlay) iconPlay.style.display = 'block';
                                 if (iconPause) iconPause.style.display = 'none';
                                 if (centerBtn) centerBtn.style.opacity = '1';
@@ -478,8 +481,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
                 window.ytHomePlayers[frameId] = player;
 
-                // Hover Behavior Synergy
-                const hoverTarget = container.closest('.project-card') || container;
+                // Click to Fullscreen / Play Synergy
+                hoverTarget.addEventListener('click', (e) => {
+                    // Don't trigger if clicking on specific controls
+                    if (e.target.closest('.player-controls')) return;
+                    window.playYTHome(container);
+                });
+
                 hoverTarget.addEventListener('mouseenter', () => {
                     player.mute();
                     player.playVideo();
@@ -533,7 +541,6 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
 
-        // Sync Fullscreen exit pause
         const handleFS = () => {
             if (!document.fullscreenElement && !document.webkitIsFullScreen) {
                 player.pauseVideo();
@@ -569,15 +576,23 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     window.playYTHome = function(element) {
-        const container = element.closest('.yt-container');
+        const container = element.classList.contains('yt-container') ? element : element.querySelector('.yt-container') || element.closest('.yt-container');
+        if (!container) return;
         const frameId = container.dataset.frameId;
         const player = window.ytHomePlayers[frameId];
+        
         if (player) {
             player.unMute();
             player.playVideo();
         }
-        const projImg = element.closest('.project-img');
-        if (projImg.requestFullscreen) projImg.requestFullscreen();
+        
+        const projImg = container.closest('.project-img');
+        if (projImg) {
+            if (projImg.requestFullscreen) projImg.requestFullscreen();
+            else if (projImg.webkitRequestFullscreen) projImg.webkitRequestFullscreen();
+            else if (projImg.mozRequestFullScreen) projImg.mozRequestFullScreen();
+            else if (projImg.msRequestFullscreen) projImg.msRequestFullscreen();
+        }
     };
 
     // Load YT API if not already present
