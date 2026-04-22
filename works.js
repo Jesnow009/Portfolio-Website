@@ -46,7 +46,7 @@ function initShowcase() {
     let html = `
         <div class="showcase-hero" id="hero-player-container" style="background: #000; height: 75vh; min-height: 500px; position: relative; overflow: hidden;">
             <div class="hero-image-wrap" style="position: absolute; top:0; left:0; width:100%; height:100%; z-index: 1;">
-                <img src="backdrop_timeline.jpg.jpg" style="width:100%; height:100%; object-fit: cover; opacity: 0.5; filter: brightness(0.7) contrast(1.1);">
+                <img src="backdrop_timeline.jpg.jpg" style="width:100%; height:100%; object-fit: cover; opacity: 0.8; filter: brightness(0.8) contrast(1.1);">
             </div>
             <div class="hero-vignette" style="z-index: 2;"></div>
             <div class="hero-content" style="z-index: 10; position: relative;">
