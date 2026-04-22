@@ -36,7 +36,8 @@ function initShowcase() {
         { youtubeId: "NAxQEAwgjsI", title: "shooting stars", subtitle: "“Written in the Stars”", category: "Identity & Intros", type: "mashup" },
         { youtubeId: "IeMedCR-u-I", title: "shooting stars", subtitle: "“Destined to Shine”", category: "Identity & Intros", type: "mashup" },
         { youtubeId: "n1Ei_vhqdd0", title: "dott.fx Signature", subtitle: "Signature type intro", category: "Identity & Intros", type: "mashup" },
-        { youtubeId: "1nM34AdYkIY", title: "dott.fx Thunder", subtitle: "Thunder effect reveal", category: "Identity & Intros", type: "mashup" }
+        { youtubeId: "1nM34AdYkIY", title: "dott.fx Thunder", subtitle: "Thunder effect reveal", category: "Identity & Intros", type: "mashup" },
+        { youtubeId: "8j_sVKgPXNw", title: "youth", subtitle: "“Capturing the pulse of the next generation.”", category: "Instagram Reels", type: "reel" }
     ];
 
     const heroVid = myVideos.find(v => v.isHero) || myVideos[0];
@@ -58,7 +59,7 @@ function initShowcase() {
         <div class="showcase-rows-container" style="background: #000; position: relative; z-index: 5;">
     `;
 
-    const categories = ["Beyond the Cut", "Special Projects", "Viral Reels", "Identity & Intros"];
+    const categories = ["Beyond the Cut", "Instagram Reels", "Special Projects", "Viral Reels", "Identity & Intros"];
     categories.forEach(cat => {
         const vids = myVideos.filter(v => v.category && v.category.toLowerCase().trim() === cat.toLowerCase().trim() && !v.isHero);
         if (vids.length === 0) return;
