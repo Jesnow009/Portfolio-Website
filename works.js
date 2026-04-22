@@ -73,7 +73,7 @@ function renderShowcaseEngine() {
                                     <div class="project-img custom-player" data-behavior="hover" style="background:#000;">
                                         <div class="yt-container" data-yt-id="${v.youtubeId}">
                                             <div class="yt-iframe-placeholder" style="position: absolute; top:0; left:0; width:100%; height:110%; top:-5%; transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);">
-                                                <iframe src="https://www.youtube.com/embed/${v.youtubeId}?enablejsapi=1&mute=1&loop=1&playlist=${v.youtubeId}&controls=0&modestbranding=1&rel=0&vq=highres" style="width:100%; height:100%; border:none; position:absolute;" allow="autoplay; fullscreen"></iframe>
+                                                <iframe src="https://www.youtube.com/embed/${v.youtubeId}?enablejsapi=1&mute=1&loop=1&playlist=${v.youtubeId}&controls=0&modestbranding=1&rel=0&vq=hd720" style="width:100%; height:100%; border:none; position:absolute;" allow="autoplay; fullscreen"></iframe>
                                             </div>
                                             <div class="yt-cover-image" style="background: url('https://img.youtube.com/vi/${v.youtubeId}/maxresdefault.jpg') center/cover; position:absolute; top:0; left:0; width:100%; height:100%; z-index:2; transition: opacity 0.5s ease;"></div>
                                             
@@ -96,9 +96,9 @@ function renderShowcaseEngine() {
                                                     </div>
                                                     <div class="controls-right" style="display:flex; align-items:center; gap:4px;">
                                                         ${cat === 'Instagram Reels' ? `<button class="rotate-btn" style="background:rgba(255,255,255,0.1); border:none; color:white; font-size:10px; font-weight:700; padding:3px 8px; border-radius:4px; cursor:pointer; text-transform:uppercase;" onclick="window.toggleRotate(this, event)">Rotate</button>` : ''}
-                                                        <button class="quality-btn active" data-vq="highres" style="background:#e50914; border:none; color:white; font-size:10px; font-weight:800; padding:3px 8px; border-radius:4px; cursor:pointer; box-shadow: 0 0 10px rgba(229, 9, 20, 0.5);">2160p</button>
+                                                        <button class="quality-btn" data-vq="highres" style="background:rgba(255,255,255,0.1); border:none; color:white; font-size:10px; font-weight:700; padding:3px 8px; border-radius:4px; cursor:pointer;">2160p</button>
                                                         <button class="quality-btn" data-vq="hd1080" style="background:rgba(255,255,255,0.1); border:none; color:white; font-size:10px; font-weight:700; padding:3px 8px; border-radius:4px; cursor:pointer;">1080p</button>
-                                                        <button class="quality-btn" data-vq="hd720" style="background:rgba(255,255,255,0.1); border:none; color:white; font-size:10px; font-weight:700; padding:3px 8px; border-radius:4px; cursor:pointer;">720p</button>
+                                                        <button class="quality-btn active" data-vq="hd720" style="background:#e50914; border:none; color:white; font-size:10px; font-weight:800; padding:3px 8px; border-radius:4px; cursor:pointer; box-shadow: 0 0 10px rgba(229, 9, 20, 0.5);">720p</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -136,18 +136,18 @@ function renderShowcaseEngine() {
     } else { if(window.onYouTubeIframeAPIReady) window.onYouTubeIframeAPIReady(); }
 }
 
-// 4K MAX ENGINE
+// SMART-DYNAMICS ENGINE
 window.activePlayers = window.activePlayers || {};
 window.onYouTubeIframeAPIReady = function() {
     document.querySelectorAll('.yt-container').forEach((el, idx) => {
         const iframe = el.querySelector('iframe');
         if (!iframe || iframe.id) return;
-        const frameId = `yt-max-${idx}-${Math.random().toString(36).substr(2, 4)}`;
+        const frameId = `yt-dynamic-${idx}-${Math.random().toString(36).substr(2, 4)}`;
         iframe.id = frameId;
         const player = new YT.Player(frameId, {
             events: {
                 'onReady': (e) => { 
-                    e.target.setPlaybackQuality('highres'); // Default to Max
+                    e.target.setPlaybackQuality('hd720'); // Default to 720p for fast loading
                     initProfessionalControls(el, e.target); 
                 },
                 'onStateChange': (e) => {
@@ -156,7 +156,6 @@ window.onYouTubeIframeAPIReady = function() {
                     const centerBtn = el.querySelector('.center-play-btn');
                     const controls = el.querySelector('.player-controls');
                     if (e.data === 1) { 
-                        e.target.setPlaybackQuality('highres'); 
                         card.classList.add('playing');
                         if (cover) cover.style.opacity = '0';
                         if (centerBtn) centerBtn.style.opacity = '0';
@@ -168,7 +167,7 @@ window.onYouTubeIframeAPIReady = function() {
         window.activePlayers[frameId] = player;
         el.dataset.frameId = frameId;
         const card = el.closest('.showcase-card');
-        card.onmouseenter = () => { player.setPlaybackQuality('highres'); player.playVideo(); };
+        card.onmouseenter = () => { player.playVideo(); };
         card.onmouseleave = () => { if (!document.fullscreenElement) player.pauseVideo(); };
     });
 };
@@ -187,6 +186,7 @@ function initProfessionalControls(container, player) {
         btn.onclick = (e) => {
             e.stopPropagation();
             const q = btn.dataset.vq;
+            // ENHANCE TO MAXIMUM Resolution when 1080p or 2160p selected
             player.setPlaybackQuality(q);
             qualityBtns.forEach(b => { 
                 b.classList.remove('active'); 
@@ -195,7 +195,7 @@ function initProfessionalControls(container, player) {
             });
             btn.classList.add('active');
             btn.style.background='#e50914';
-            if (q === 'highres' || q === 'hd1080') btn.style.boxShadow='0 0 10px rgba(229, 9, 20, 0.6)';
+            btn.style.boxShadow='0 0 10px rgba(229, 9, 20, 0.6)';
         };
     });
     setInterval(() => {
@@ -241,7 +241,6 @@ window.playGalleryItem = function(card) {
     const player = window.activePlayers[frameId];
     if (player) {
         player.unMute(); 
-        player.setPlaybackQuality('highres'); 
         player.playVideo();
         const fullTarget = card.querySelector('.project-img');
         if (fullTarget.requestFullscreen) fullTarget.requestFullscreen();
