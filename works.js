@@ -65,12 +65,12 @@ document.addEventListener('DOMContentLoaded', () => {
         heroMediaHTML = `
             <div class="hero-video-wrap" style="position: absolute; top:0; left:0; width:100%; height:100%; overflow: hidden; pointer-events: none; z-index: 0;">
                 <iframe 
-                    src="https://www.youtube.com/embed/${heroVideo.youtubeId}?enablejsapi=1&mute=1&loop=1&playlist=${heroVideo.youtubeId}&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&vq=hd720&hd=1" 
+                    src="https://www.youtube.com/embed/${heroVideo.youtubeId}?enablejsapi=1&autoplay=1&mute=1&loop=1&playlist=${heroVideo.youtubeId}&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&vq=hd1080&hd=1" 
                     frameborder="0" 
-                    style="width: 100vw; height: 65vw; min-height: 115vh; min-width: 177.77vh; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); opacity: 0.4; filter: blur(5px) scale(1.05);"
+                    style="width: 100vw; height: 65vw; min-height: 115vh; min-width: 177.77vh; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); opacity: 1; border: none;" 
                     allow="autoplay; fullscreen">
                 </iframe>
-                <div class="yt-cover-image" style="background: url('${heroVideo.customThumbnail || `https://img.youtube.com/vi/${heroVideo.youtubeId}/maxresdefault.jpg`}') center/cover no-repeat; width: 100vw; height: 56.25vw; min-height: 100vh; min-width: 177.77vh; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); opacity: 0.4; transition: opacity 0.8s ease; pointer-events: none;"></div>
+                <div class="yt-cover-image" style="background: url('${heroVideo.customThumbnail || `https://img.youtube.com/vi/${heroVideo.youtubeId}/maxresdefault.jpg`}') center/cover no-repeat; width: 100vw; height: 56.25vw; min-height: 100vh; min-width: 177.77vh; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); opacity: 1; transition: opacity 0.8s ease; pointer-events: none;"></div>
             </div>`;
     } else if (heroVideo.cloudinaryId) {
         const clUrl = heroVideo.cloudinaryId.includes('/') 
@@ -354,9 +354,6 @@ window.initHeroPlayer = function() {
             }
         }
     });
-
-    // --- Start Card Player Sync ---
-    initYTCards();
 };
 
 function initYTCards() {
@@ -659,6 +656,7 @@ document.addEventListener('webkitfullscreenchange', handleGlobalFullscreenExit);
 window.onYouTubeIframeAPIReady = function() {
     window.ytAPIReady = true;
     if (window.initHeroPlayer) window.initHeroPlayer();
+    initYTCards(); // Run gallery init independently
 };
 
 // Start the API Load

@@ -560,29 +560,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const m = Math.floor(seconds / 60);
         const s = Math.floor(seconds % 60);
         return `${m}:${s < 10 ? '0' : ''}${s}`;
-    }
-
-    window.playYTHome = function(element) {
-        const container = element.classList.contains('yt-container') ? element : element.querySelector('.yt-container') || element.closest('.yt-container');
-        if (!container) return;
-        const frameId = container.dataset.frameId;
-        const player = window.ytHomePlayers[frameId];
-        
-        if (player) {
-            player.unMute();
-            player.playVideo();
-        }
-        
-        const projImg = container.closest('.project-img');
-        if (projImg) {
-            if (projImg.requestFullscreen) projImg.requestFullscreen();
-            else if (projImg.webkitRequestFullscreen) projImg.webkitRequestFullscreen();
-            else if (projImg.mozRequestFullScreen) projImg.mozRequestFullScreen();
-            else if (projImg.msRequestFullscreen) projImg.msRequestFullscreen();
-        }
-    };
-
-    // Load YT API if not already present
+     // Load YT API if not already present
     if (!window.YT) {
         const tag = document.createElement('script');
         tag.src = "https://www.youtube.com/iframe_api";
@@ -590,3 +568,72 @@ document.addEventListener('DOMContentLoaded', () => {
         firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
     }
 });
+
+// GLOBAL YOUTUBE INITIALIZATION
+window.ytHomePlayers = window.ytHomePlayers || {};
+window.onYouTubeIframeAPIReady = function() {
+    window.ytAPIReady = true;
+    document.querySelectorAll('.yt-container').forEach(container => {
+        const iframe = container.querySelector('iframe');
+        if (iframe && !iframe.id) {
+            const frameId = `yt-home-${Math.random().toString(36).substr(2, 9)}`;
+            iframe.id = frameId;
+            container.dataset.frameId = frameId;
+            
+            new YT.Player(frameId, {
+                events: {
+                    'onReady': (event) => {
+                        window.ytHomePlayers[frameId] = event.target;
+                        // Only add controls for interactive gallery cards, not backgrounds
+                        if (!container.classList.contains('bg-loop')) {
+                            if (typeof initYTControls === 'function') initYTControls(container, event.target);
+                        }
+                    },
+                    'onStateChange': (event) => {
+                        const card = container.closest('.showcase-card') || container.closest('.project-card');
+                        const projImg = container.closest('.project-img');
+                        const centerBtn = projImg ? projImg.querySelector('.center-play-btn') : null;
+                        
+                        if (event.data === YT.PlayerState.PLAYING) {
+                            if (card) card.classList.add('playing');
+                            if (centerBtn) {
+                                centerBtn.style.opacity = '0';
+                                centerBtn.style.pointerEvents = 'none';
+                            }
+                            const cover = container.querySelector('.yt-cover-image');
+                            if (cover) cover.style.opacity = '0';
+                        } else {
+                            if (card) card.classList.remove('playing');
+                            if (centerBtn) {
+                                centerBtn.style.opacity = '1';
+                                centerBtn.style.pointerEvents = 'auto';
+                            }
+                        }
+                    }
+                }
+            });
+        }
+    });
+};
+
+window.playYTHome = function(element) {
+    const container = element.classList.contains('yt-container') ? element : element.querySelector('.yt-container') || element.closest('.yt-container');
+    if (!container) return;
+    const frameId = container.dataset.frameId;
+    const player = window.ytHomePlayers[frameId];
+    
+    if (player && typeof player.playVideo === 'function') {
+        player.unMute();
+        player.playVideo();
+    } else {
+        // Fallback: If player not ready, attempt to click the inner iframe if possible (rare)
+    }
+    
+    const projImg = container.closest('.project-img') || container.closest('.custom-player') || container;
+    if (projImg) {
+        try {
+            if (projImg.requestFullscreen) projImg.requestFullscreen();
+            else if (projImg.webkitRequestFullscreen) projImg.webkitRequestFullscreen();
+        } catch (e) { console.warn("FS failed", e); }
+    }
+};
