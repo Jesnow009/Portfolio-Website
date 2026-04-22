@@ -21,8 +21,8 @@ document.addEventListener('DOMContentLoaded', () => {
         { youtubeId: "El7yOj4H7lw", title: "Wheel of the Time", subtitle: "“Fate is not chosen… it is woven.”", category: "Mashup Cuts", type: "mashup" },
         { youtubeId: "e9fVDeoYKqI", title: "Avatar cut", subtitle: "“Not just a planet… a living soul.”", category: "Mashup Cuts", type: "mashup" },
         { youtubeId: "3RkFnMO1AkA", title: "Parava", subtitle: "“Not just birds… they carried our dreams.”", category: "Mashup Cuts", type: "mashup" },
-        { cloudinaryId: "v1775550705/5_1_xbtumo", title: "What is Editing", subtitle: "“Stories aren’t filmed—they’re built in the edit.”", category: "Mashup Cuts", type: "mashup" },
-        { cloudinaryId: "v1775550744/Tamil_Filmmakers_tigdbk", title: "Tamil Filmmakers", subtitle: "“They don’t follow trends—they create movements.”", category: "Mashup Cuts", type: "mashup" },
+        { youtubeId: "1fhLCzN3W9g", title: "What is Editing", subtitle: "“Stories aren’t filmed—they’re built in the edit.”", category: "Mashup Cuts", type: "mashup" },
+        { youtubeId: "4sEgxSRhnGg", title: "Tamil Filmmakers", subtitle: "“They don’t follow trends—they create movements.”", category: "Mashup Cuts", type: "mashup" },
 
         // Viral Reels (Vertical)
         { cloudinaryId: "v1775554997/reel1_ofapqz", title: "Monologue", subtitle: "The pulse of dialogue: mastering the beat of performance and emotion.", category: "Viral Reels", type: "reel" },
