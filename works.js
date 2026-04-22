@@ -96,7 +96,7 @@ function renderShowcaseEngine() {
                                                     </div>
 
                                                     <!-- Dynamic Info Message -->
-                                                    <div class="quality-info-msg" style="font-size: 8.5px; color: #888; opacity: 1; transition: opacity 1.5s ease; flex-grow: 1; text-align: center; font-style: italic; letter-spacing: 0.5px;">
+                                                    <div class="quality-info-msg" style="font-size: 8.5px; color: #e50914; opacity: 1; transition: opacity 1.5s ease; flex-grow: 1; text-align: center; font-style: italic; letter-spacing: 0.5px; font-weight: 700;">
                                                         “Video quality will automatically adjust to maximum within a few seconds based on your connection.”
                                                     </div>
 
