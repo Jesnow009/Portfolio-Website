@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
         heroMediaHTML = `
             <div class="hero-video-wrap" style="position: absolute; top:0; left:0; width:100%; height:100%; overflow: hidden; pointer-events: none; z-index: 0;">
                 <iframe 
-                    src="https://www.youtube.com/embed/${heroVideo.youtubeId}?enablejsapi=1&mute=1&loop=1&playlist=${heroVideo.youtubeId}&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&vq=hd2160&hd=1" 
+                    src="https://www.youtube.com/embed/${heroVideo.youtubeId}?enablejsapi=1&mute=1&loop=1&playlist=${heroVideo.youtubeId}&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&vq=highres&hd=1" 
                     frameborder="0" 
                     style="width: 100vw; height: 56.25vw; min-height: 100vh; min-width: 177.77vh; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); opacity: 0.4; filter: blur(5px) scale(1.05);"
                     allow="autoplay; fullscreen">
@@ -133,7 +133,7 @@ document.addEventListener('DOMContentLoaded', () => {
             mediaHTML = `
                 <div class="video-element-wrapper yt-container" style="width: 100%; height: 100%; overflow: hidden; position: relative;" data-yt-id="${videoObj.youtubeId}">
                     <div class="yt-iframe-placeholder" style="position: absolute; top:0; left:0; width:100%; height:100%; pointer-events: none; z-index: 1;">
-                         <iframe src="https://www.youtube.com/embed/${videoObj.youtubeId}?enablejsapi=1&mute=1&loop=1&playlist=${videoObj.youtubeId}&controls=0&modestbranding=1&rel=0&vq=hd2160&hd=1" 
+                         <iframe src="https://www.youtube.com/embed/${videoObj.youtubeId}?enablejsapi=1&mute=1&loop=1&playlist=${videoObj.youtubeId}&controls=0&modestbranding=1&rel=0&vq=highres&hd=1" 
                             style="width:100%; height:100%;" frameborder="0" allow="autoplay; fullscreen"></iframe>
                     </div>
                     <div class="yt-click-mask" style="position: absolute; top:0; left:0; width:100%; height:100%; z-index: 2; cursor: pointer;"></div>
@@ -155,23 +155,6 @@ document.addEventListener('DOMContentLoaded', () => {
                                 <div class="time-display"><span class="current-time">0:00</span> / <span class="duration">0:00</span></div>
                             </div>
                             <div class="controls-right">
-                                <div class="yt-settings-container" style="position: relative; display: flex; align-items: center; margin-right: 15px;">
-                                    <button class="control-btn yt-settings-btn" aria-label="Settings">
-                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
-                                    </button>
-                                    <div class="yt-quality-menu" style="display: none; position: absolute; bottom: 50px; right: 0; background: rgba(20,20,20,0.95); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 10px 0; min-width: 150px; z-index: 1000; box-shadow: 0 10px 30px rgba(0,0,0,0.8);">
-                                        <div style="padding: 10px 20px; font-size: 11px; font-weight: 800; color: rgba(255,255,255,0.5); border-bottom: 1px solid rgba(255,255,255,0.05); margin-bottom: 5px; display: flex; align-items: center; justify-content: space-between;">
-                                            <span>QUALITY</span>
-                                            <span style="color: #e50914;">AUTO</span>
-                                        </div>
-                                        <button class="quality-option active" data-vq="hd2160">Auto (2160p) <sup style="color: #e50914;">4K</sup></button>
-                                        <button class="quality-option" data-vq="hd1440">1440p <sup style="color: #e50914;">HD</sup></button>
-                                        <button class="quality-option" data-vq="hd1080">1080p <sup style="color: #e50914;">HD</sup></button>
-                                        <button class="quality-option" data-vq="hd720">720p</button>
-                                        <button class="quality-option" data-vq="large">480p</button>
-                                        <button class="quality-option" data-vq="medium">360p</button>
-                                    </div>
-                                </div>
                                 <button class="control-btn fullscreen-btn" aria-label="Fullscreen"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path></svg></button>
                             </div>
                         </div>
@@ -308,7 +291,7 @@ window.initHeroPlayer = function() {
                 
                 player.loadVideoById({
                     videoId: vId,
-                    suggestedQuality: 'hd2160'
+                    suggestedQuality: 'highres'
                 });
                 
                 event.target.mute();
@@ -392,7 +375,7 @@ function initYTCards() {
                     // --- HARD CHUNK LOAD: ORIGINAL QUALITY ---
                     player.loadVideoById({
                         videoId: ytId,
-                        suggestedQuality: 'hd2160'
+                        suggestedQuality: 'highres'
                     });
                     player.mute();
                     player.playVideo();
