@@ -579,11 +579,25 @@ function initYTCards() {
                             };
                         });
                     }
+                    // Hover Playback Synergy (Same as Home Page)
+                    const hoverTarget = container.closest('.showcase-card') || container;
+                    hoverTarget.addEventListener('mouseenter', () => {
+                        player.mute();
+                        player.playVideo();
+                    });
+                    hoverTarget.addEventListener('mouseleave', () => {
+                        // Only pause if not currently in fullscreen
+                        if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+                            player.pauseVideo();
+                        }
+                    });
+
                 },
                 'onStateChange': (event) => {
                     const card = container.closest('.showcase-card');
                     const playerContainer = container.closest('.custom-player');
                     const playBtn = container.querySelector('.yt-play-btn');
+                    const centerBtn = container.closest('.project-img').querySelector('.center-play-btn');
                     if (!playBtn) return;
                     
                     const iconPlay = playBtn.querySelector('.icon-play');
@@ -594,6 +608,10 @@ function initYTCards() {
                         if (playerContainer) playerContainer.classList.add('playing');
                         if (iconPlay) iconPlay.style.display = 'none';
                         if (iconPause) iconPause.style.display = 'block';
+                        if (centerBtn) {
+                            centerBtn.style.opacity = '0';
+                            centerBtn.style.pointerEvents = 'none';
+                        }
                         const cover = container.querySelector('.yt-cover-image');
                         if (cover) cover.style.opacity = '0';
                     } else { // Paused or ended
@@ -601,12 +619,16 @@ function initYTCards() {
                         if (playerContainer) playerContainer.classList.remove('playing');
                         if (iconPlay) iconPlay.style.display = 'block';
                         if (iconPause) iconPause.style.display = 'none';
+                        if (centerBtn) {
+                            centerBtn.style.opacity = '1';
+                            centerBtn.style.pointerEvents = 'auto';
+                        }
                     }
                 }
             }
         });
 
-        // Store player for global control (like pause on exit)
+        // Store player for global control
         if (!window.activeYTPlayers) window.activeYTPlayers = [];
         window.activeYTPlayers.push(player);
     });

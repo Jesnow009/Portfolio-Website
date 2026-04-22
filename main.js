@@ -72,54 +72,41 @@ window.initCustomVideoPlayers = function() {
         };
 
         const openViewer = async (e) => {
-            // Prevent double-trigger if clicking specific control buttons
             if (e.target.closest('.control-btn')) return;
-            
             e.preventDefault(); e.stopPropagation();
             
-            const isFullscreen = document.fullscreenElement || 
-                               document.webkitFullscreenElement || 
-                               document.mozFullScreenElement || 
-                               document.msFullscreenElement;
+            // Unified trigger for both <video> and YouTube cards
+            if (container.querySelector('.yt-container')) {
+                window.playYTHome(container);
+                return;
+            }
 
-            // If already in fullscreen, clicking toggles playback (Play/Pause)
+            const isFullscreen = document.fullscreenElement || document.webkitFullscreenElement;
             if (isFullscreen) {
                 togglePlay();
                 return;
             }
 
             try {
-                // 1. Enter Fullscreen
                 if (container.requestFullscreen) await container.requestFullscreen();
                 else if (container.webkitRequestFullscreen) await container.webkitRequestFullscreen();
-                else if (container.mozRequestFullScreen) await container.mozRequestFullScreen();
-                else if (container.msRequestFullscreen) await container.msRequestFullscreen();
                 
-                // 2. Immediate Unmute & Play for the professional 'Viewer' experience
-                video.muted = false;
-                if (video.paused) await video.play();
+                if (video) {
+                    video.muted = false;
+                    if (video.paused) await video.play();
+                }
                 manuallyPaused = false;
-            } catch (err) {
-                console.warn("Fullscreen/Play failed:", err);
-            }
+            } catch (err) { console.warn(err); }
         };
 
         // Attach listeners
-        if (container.dataset.behavior === 'hover' || container.classList.contains('showcase-hero')) {
-            // Entire card becomes a one-click portal to the viewer
-            const clickTarget = container.closest('.showcase-card') || container.closest('.project-card') || container;
-            clickTarget.style.cursor = 'pointer';
-            clickTarget.addEventListener('click', openViewer);
-            
-            // To ensure center-play-btn and video clicks within the card also trigger fullscreen,
-            // we do NOT add togglePlay to them directly here. They will bubble up to clickTarget.
-            if (playPauseBtn) playPauseBtn.addEventListener('click', togglePlay);
-        } else {
-            // Standard behavioral listeners for non-hover videos (e.g. Reels)
-            if (centerPlayBtn) centerPlayBtn.addEventListener('click', togglePlay);
-            if (playPauseBtn) playPauseBtn.addEventListener('click', togglePlay);
-            video.addEventListener('click', togglePlay); // Video itself toggles play
-        }
+        const clickTarget = container.closest('.showcase-card') || container.closest('.project-card') || container;
+        clickTarget.style.cursor = 'pointer';
+        clickTarget.addEventListener('click', openViewer);
+        
+        if (playPauseBtn) playPauseBtn.addEventListener('click', togglePlay);
+        if (centerPlayBtn) centerPlayBtn.addEventListener('click', openViewer);
+        if (video) video.addEventListener('click', openViewer);
 
         // Hover to play mechanics - Enhanced for Showcase Cards
         if (container.dataset.behavior === 'hover') {
