@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
           type: "mashup", 
           isHero: true 
         },
-        // Selected Mashup Cuts
+        // Selected Mashup Cuts (Primary Showcase)
         { youtubeId: "RAO0_nqH4wc", title: "MARCO", subtitle: "Where chaos meets precision", category: "Selected Mashup Cuts", type: "mashup" },
         { youtubeId: "9FDrKlWOojs", title: "Extraction", subtitle: "“One mission. No escape. Only survival.”", category: "Selected Mashup Cuts", type: "mashup" },
         { youtubeId: "84IrieuQCng", title: "Bullet train", subtitle: "Five killers. One train. No brakes.”", category: "Selected Mashup Cuts", type: "mashup" },
