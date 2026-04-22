@@ -440,22 +440,21 @@ document.addEventListener('DOMContentLoaded', () => {
         wrapLetters(heading, true, 0.4); 
     });
     // YouTube Card Support (Sync for MARCO etc on Home)
+    window.ytHomePlayers = {};
     window.onYouTubeIframeAPIReady = function() {
         document.querySelectorAll('.yt-container').forEach(container => {
             const iframe = container.querySelector('iframe');
             if (iframe) {
-                const ytId = container.dataset.ytId;
                 const frameId = `yt-home-${Math.random().toString(36).substr(2, 9)}`;
                 iframe.id = frameId;
+                container.dataset.frameId = frameId;
                 
-                new YT.Player(frameId, {
+                window.ytHomePlayers[frameId] = new YT.Player(frameId, {
                     events: {
                         'onStateChange': (event) => {
                             if (event.data === YT.PlayerState.PLAYING) {
                                 const cover = container.querySelector('.yt-cover-image');
                                 if (cover) cover.style.opacity = '0';
-                                
-                                // Enforce quality if possible
                                 try { event.target.setPlaybackQuality('hd720'); } catch(e) {}
                             }
                         }
@@ -463,6 +462,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             }
         });
+    };
+
+    window.playYTHome = function(element) {
+        const container = element.closest('.yt-container');
+        const frameId = container.dataset.frameId;
+        const player = window.ytHomePlayers[frameId];
+        if (player) {
+            player.unMute();
+            player.playVideo();
+        }
+        const projImg = element.closest('.project-img');
+        if (projImg.requestFullscreen) projImg.requestFullscreen();
     };
 
     // Load YT API if not already present
