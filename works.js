@@ -12,13 +12,13 @@ function renderShowcaseEngine() {
     app.dataset.rendered = "true";
 
     const myVideos = [
-        { youtubeId: "RAO0_nqH4wc", title: "MARCO", subtitle: "Cut beyond the story—into the pulse", category: "Selected Mashup Cuts", type: "mashup", isHero: true },
-        { youtubeId: "sJ8Bt_0QaqE", title: "John Wick Mashup", subtitle: "“You don’t hunt him. He hunts you.”", category: "Selected Mashup Cuts", type: "mashup" },
-        { youtubeId: "El7yOj4H7lw", title: "Wheel of the Time", subtitle: "“Fate is not chosen… it is woven.”", category: "Selected Mashup Cuts", type: "mashup" },
-        { youtubeId: "e9fVDeoYKqI", title: "Avatar cut", subtitle: "“Not just a planet… a living soul.”", category: "Selected Mashup Cuts", type: "mashup" },
-        { youtubeId: "3RkFnMO1AkA", title: "Parava", subtitle: "“Not just birds… they carried our dreams.”", category: "Selected Mashup Cuts", type: "mashup" },
-        { youtubeId: "1fhLCzN3W9g", title: "What is Editing", subtitle: "“Stories aren’t filmed—they’re built in the edit.”", category: "Selected Mashup Cuts", type: "mashup" },
-        { youtubeId: "4sEgxSRhnGg", title: "Tamil Filmmakers", subtitle: "“They don’t follow trends—they create movements.”", category: "Selected Mashup Cuts", type: "mashup" },
+        { youtubeId: "RAO0_nqH4wc", title: "MARCO", subtitle: "Cut beyond the story—into the pulse", category: "Special Projects", type: "mashup", isHero: true },
+        { youtubeId: "sJ8Bt_0QaqE", title: "John Wick Mashup", subtitle: "“You don’t hunt him. He hunts you.”", category: "Special Projects", type: "mashup" },
+        { youtubeId: "El7yOj4H7lw", title: "Wheel of the Time", subtitle: "“Fate is not chosen… it is woven.”", category: "Special Projects", type: "mashup" },
+        { youtubeId: "e9fVDeoYKqI", title: "Avatar cut", subtitle: "“Not just a planet… a living soul.”", category: "Special Projects", type: "mashup" },
+        { youtubeId: "3RkFnMO1AkA", title: "Parava", subtitle: "“Not just birds… they carried our dreams.”", category: "Special Projects", type: "mashup" },
+        { youtubeId: "1fhLCzN3W9g", title: "What is Editing", subtitle: "“Stories aren’t filmed—they’re built in the edit.”", category: "Special Projects", type: "mashup" },
+        { youtubeId: "4sEgxSRhnGg", title: "Tamil Filmmakers", subtitle: "“They don’t follow trends—they create movements.”", category: "Special Projects", type: "mashup" },
         { youtubeId: "8j_sVKgPXNw", title: "youth", subtitle: "“Capturing the pulse of the next generation.”", category: "Instagram Reels", type: "reel" },
         { youtubeId: "y0QlnHrg3jE", title: "A day with Sneha Shetty Kohli", subtitle: "Honored to host Sneha Shetty Kohli at our campus.", category: "Beyond the Cut", type: "mashup" },
         { youtubeId: "FmwkYXGVKVU", title: "Sneha Shetty Intro", subtitle: "“From screen to stage—stories that inspire.”", category: "Beyond the Cut", type: "mashup" },
@@ -54,8 +54,9 @@ function renderShowcaseEngine() {
         <div class="showcase-rows-container" style="background: #000; position: relative; z-index: 5;">
     `;
 
-    // UPDATED CATEGORIES ORDER
-    const categories = ["Selected Mashup Cuts", "Beyond the Cut", "Instagram Reels", "Viral Reels", "Identity & Intros"];
+    // UPDATED CATEGORIES ORDER (Beyond the Cut -> Special Projects)
+    const categories = ["Beyond the Cut", "Special Projects", "Instagram Reels", "Viral Reels", "Identity & Intros"];
+
     categories.forEach(cat => {
         const vids = myVideos.filter(v => v.category && v.category.toLowerCase().trim() === cat.toLowerCase().trim() && !v.isHero);
         if (vids.length === 0) return;
