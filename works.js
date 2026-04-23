@@ -204,7 +204,7 @@ function initProfessionalControls(container, player) {
                 if (progressBar) progressBar.value = (cur / dur) * 100;
                 container.querySelector('.current-time').textContent = formatTime(cur);
                 container.querySelector('.duration').textContent = formatTime(dur);
-                if (infoMsg) { if (cur > 10) infoMsg.style.opacity = '0'; else infoMsg.style.opacity = '1'; }
+                if (infoMsg) { if (cur > 20) infoMsg.style.opacity = '0'; else infoMsg.style.opacity = '1'; }
             }
         }
     }, 1000);

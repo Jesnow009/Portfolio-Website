@@ -127,7 +127,7 @@ function initHomeYTControls(container, player) {
                 
                 // 10 Second Auto-Hide Logic
                 if (infoMsg) {
-                    if (cur > 10) infoMsg.style.opacity = '0';
+                    if (cur > 20) infoMsg.style.opacity = '0';
                     else infoMsg.style.opacity = '1';
                 }
             }
