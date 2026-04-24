@@ -75,10 +75,10 @@ function renderShowcaseEngine() {
                                 <div class="${v.type === 'reel' ? 'showcase-card vertical' : 'showcase-card horizontal'}" onclick="window.playGalleryItem(this)" style="flex:0 0 auto;">
                                     <div class="project-img custom-player" data-behavior="hover" style="background:#000;">
                                         <div class="yt-container" data-yt-id="${v.youtubeId}">
-                                            <div class="yt-iframe-placeholder" style="position: absolute; top:0; left:0; width:100%; height:110%; top:-5%; transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);">
-                                                <iframe src="https://www.youtube.com/embed/${v.youtubeId}?enablejsapi=1&mute=1&loop=1&playlist=${v.youtubeId}&controls=0&modestbranding=1&rel=0&origin=${window.location.origin}" style="width:100%; height:100%; border:none; position:absolute;" allow="autoplay; fullscreen"></iframe>
+                                            <div class="yt-iframe-placeholder" style="position: absolute; top:0; left:0; width:100%; height:110%; top:-5%; transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); pointer-events: none;">
+                                                <iframe loading="lazy" src="https://www.youtube.com/embed/${v.youtubeId}?enablejsapi=1&mute=1&loop=1&playlist=${v.youtubeId}&controls=0&modestbranding=1&rel=0&origin=${window.location.origin}" style="width:100%; height:100%; border:none; position:absolute; pointer-events: none;" allow="autoplay; fullscreen"></iframe>
                                             </div>
-                                            <div class="yt-cover-image" style="background: url('https://img.youtube.com/vi/${v.youtubeId}/hqdefault.jpg') center/cover; position:absolute; top:0; left:0; width:100%; height:100%; z-index:2; transition: opacity 0.5s ease;"></div>
+                                            <div class="yt-cover-image" style="background: url('https://img.youtube.com/vi/${v.youtubeId}/hqdefault.jpg') center/cover; position:absolute; top:0; left:0; width:100%; height:100%; z-index:2; transition: opacity 0.5s ease; pointer-events: none;"></div>
                                             
                                             <div class="player-controls yt-controls" style="z-index: 10; opacity: 0; transition: opacity 0.3s ease;">
                                                 <div class="progress-container" style="padding: 0 10px;"><input type="range" class="progress-bar yt-progress" min="0" max="100" value="0" step="0.1" style="width:100%;"></div>
