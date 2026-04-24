@@ -57,8 +57,8 @@ function renderShowcaseEngine() {
         <div class="showcase-rows-container" style="background: #000; position: relative; z-index: 5;">
     `;
 
-    // UPDATED CATEGORIES ORDER (Special Projects -> Beyond the Cut)
-    const categories = ["Special Projects", "Beyond the Cut", "Instagram Reels", "Viral Reels", "Identity & Intros"];
+    // UPDATED CATEGORIES ORDER (Beyond the Cut -> Special Projects)
+    const categories = ["Beyond the Cut", "Special Projects", "Instagram Reels", "Viral Reels", "Identity & Intros"];
 
     categories.forEach(cat => {
         const vids = myVideos.filter(v => v.category && v.category.toLowerCase().trim() === cat.toLowerCase().trim() && !v.isHero);
