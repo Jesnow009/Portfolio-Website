@@ -69,6 +69,12 @@ window.onYouTubeIframeAPIReady = function() {
                     } else if (e.data === YT.PlayerState.PAUSED || e.data === YT.PlayerState.ENDED) {
                         if (card) card.classList.remove('playing');
                         if (centerBtn) centerBtn.style.opacity = '1';
+                        
+                        // Enforce perfect looping for background videos
+                        if (e.data === YT.PlayerState.ENDED && container.classList.contains('bg-loop')) {
+                            player.seekTo(0);
+                            player.playVideo();
+                        }
                     }
                 }
             }
