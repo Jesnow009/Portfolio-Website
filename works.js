@@ -21,6 +21,8 @@ function renderShowcaseEngine() {
         { youtubeId: "1fhLCzN3W9g", title: "What is Editing", subtitle: "“Stories aren’t filmed—they’re built in the edit.”", category: "Special Projects", type: "mashup" },
         { youtubeId: "4sEgxSRhnGg", title: "Tamil Filmmakers", subtitle: "“They don’t follow trends—they create movements.”", category: "Special Projects", type: "mashup" },
         { youtubeId: "8j_sVKgPXNw", title: "youth", subtitle: "“Capturing the pulse of the next generation.”", category: "Instagram Reels", type: "reel" },
+        { youtubeId: "POKPrktYqN8", title: "Palm Springs", subtitle: "“Sun, sand, and cinematic memories.”", category: "Instagram Reels", type: "reel" },
+        { youtubeId: "3daiNdB9o3k", title: "Sore: A Wife from the Future", subtitle: "“A glimpse into what’s yet to come.”", category: "Instagram Reels", type: "reel" },
         { youtubeId: "y0QlnHrg3jE", title: "A day with Sneha Shetty Kohli", subtitle: "Honored to host Sneha Shetty Kohli at our campus.", category: "Beyond the Cut", type: "mashup" },
         { youtubeId: "FmwkYXGVKVU", title: "Sneha Shetty Intro", subtitle: "“From screen to stage—stories that inspire.”", category: "Beyond the Cut", type: "mashup" },
         { youtubeId: "B7kyZeNBV4g", title: "Vijay Raghavendra", subtitle: "“From passion to legacy—his journey continues.”", category: "Beyond the Cut", type: "mashup" },
