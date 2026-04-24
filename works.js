@@ -13,6 +13,7 @@ function renderShowcaseEngine() {
 
     const myVideos = [
         { youtubeId: "RAO0_nqH4wc", title: "MARCO", subtitle: "Cut beyond the story—into the pulse", category: "Special Projects", type: "mashup", isHero: true },
+        { youtubeId: "KKTZth1Sg8E", title: "Monkey Man", subtitle: "“A man with nothing can change everything.”", category: "Special Projects", type: "mashup" },
         { youtubeId: "sJ8Bt_0QaqE", title: "John Wick Mashup", subtitle: "“You don’t hunt him. He hunts you.”", category: "Special Projects", type: "mashup" },
         { youtubeId: "El7yOj4H7lw", title: "Wheel of the Time", subtitle: "“Fate is not chosen… it is woven.”", category: "Special Projects", type: "mashup" },
         { youtubeId: "e9fVDeoYKqI", title: "Avatar cut", subtitle: "“Not just a planet… a living soul.”", category: "Special Projects", type: "mashup" },
