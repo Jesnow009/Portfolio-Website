@@ -260,15 +260,8 @@ window.playGalleryItem = function(card) {
     const frameId = container.dataset.frameId;
     const player = window.activePlayers[frameId];
     if (player) {
-        player.unMute(); player.playVideo();
-        const fullTarget = card.querySelector('.project-img');
-        if (!document.fullscreenElement && !document.webkitFullscreenElement && !fullTarget.classList.contains('mobile-fullscreen')) {
-            try {
-                if (fullTarget.requestFullscreen) fullTarget.requestFullscreen();
-                else if (fullTarget.webkitRequestFullscreen) fullTarget.webkitRequestFullscreen();
-                else fullTarget.classList.add('mobile-fullscreen');
-            } catch (err) { fullTarget.classList.add('mobile-fullscreen'); }
-        }
+        player.unMute();
+        player.playVideo();
     }
 };
 
