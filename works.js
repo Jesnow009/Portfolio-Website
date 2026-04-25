@@ -173,8 +173,11 @@ window.onYouTubeIframeAPIReady = function() {
         window.activePlayers[frameId] = player;
         el.dataset.frameId = frameId;
         const card = el.closest('.showcase-card');
-        card.onmouseenter = () => { player.playVideo(); };
-        card.onmouseleave = () => { if (!document.fullscreenElement) player.pauseVideo(); };
+        const isTouch = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+        if (!isTouch) {
+            card.onmouseenter = () => { player.playVideo(); };
+            card.onmouseleave = () => { if (!document.fullscreenElement && !document.webkitFullscreenElement) player.pauseVideo(); };
+        }
     });
 };
 
@@ -257,9 +260,19 @@ window.toggleFS = function(btn, e) {
 
 window.playGalleryItem = function(card) {
     const container = card.querySelector('.yt-container');
-    const ytid = container.dataset.ytId;
-    if (ytid) {
-        window.openCinematicModal(ytid);
+    const frameId = container.dataset.frameId;
+    const player = window.activePlayers[frameId];
+    if (player) {
+        player.unMute();
+        player.playVideo();
+        const fullTarget = card.querySelector('.project-img');
+        if (!document.fullscreenElement && !document.webkitFullscreenElement && !fullTarget.classList.contains('mobile-fullscreen')) {
+            try {
+                if (fullTarget.requestFullscreen) fullTarget.requestFullscreen();
+                else if (fullTarget.webkitRequestFullscreen) fullTarget.webkitRequestFullscreen();
+                else fullTarget.classList.add('mobile-fullscreen');
+            } catch (err) { fullTarget.classList.add('mobile-fullscreen'); }
+        }
     }
 };
 
