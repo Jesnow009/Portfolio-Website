@@ -171,6 +171,14 @@ window.playYTHome = function(btn) {
     if (player) {
         player.unMute();
         player.playVideo();
+        const fullTarget = container.closest('.project-img');
+        if (!document.fullscreenElement && !document.webkitFullscreenElement && !fullTarget.classList.contains('mobile-fullscreen')) {
+            try {
+                if (fullTarget.requestFullscreen) fullTarget.requestFullscreen();
+                else if (fullTarget.webkitRequestFullscreen) fullTarget.webkitRequestFullscreen();
+                else fullTarget.classList.add('mobile-fullscreen');
+            } catch (err) { fullTarget.classList.add('mobile-fullscreen'); }
+        }
     }
 };
 
