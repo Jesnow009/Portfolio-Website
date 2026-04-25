@@ -600,6 +600,21 @@ img {
     transition: var(--transition);
 }
 
+/* Mobile Pseudo Fullscreen Fallback */
+.mobile-fullscreen {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    z-index: 999999 !important;
+    max-height: none !important;
+    border-radius: 0 !important;
+    background: #000 !important;
+    overflow: hidden !important;
+}
+
+
 .project-card:hover .project-info {
     transform: translateY(0);
     opacity: 1;

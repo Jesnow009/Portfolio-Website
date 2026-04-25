@@ -239,6 +239,22 @@ window.toggleRotate = function(btn, e) {
     }
 };
 
+window.toggleFS = function(btn, e) {
+    if (e) e.stopPropagation();
+    const fullTarget = btn.closest('.project-img');
+    if (!document.fullscreenElement && !document.webkitFullscreenElement && !fullTarget.classList.contains('mobile-fullscreen')) {
+        try {
+            if (fullTarget.requestFullscreen) fullTarget.requestFullscreen();
+            else if (fullTarget.webkitRequestFullscreen) fullTarget.webkitRequestFullscreen();
+            else fullTarget.classList.add('mobile-fullscreen');
+        } catch (err) { fullTarget.classList.add('mobile-fullscreen'); }
+    } else {
+        if (document.exitFullscreen) document.exitFullscreen();
+        else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+        fullTarget.classList.remove('mobile-fullscreen');
+    }
+};
+
 window.playGalleryItem = function(card) {
     const container = card.querySelector('.yt-container');
     const frameId = container.dataset.frameId;
@@ -246,8 +262,13 @@ window.playGalleryItem = function(card) {
     if (player) {
         player.unMute(); player.playVideo();
         const fullTarget = card.querySelector('.project-img');
-        if (fullTarget.requestFullscreen) fullTarget.requestFullscreen();
-        else if (fullTarget.webkitRequestFullscreen) fullTarget.webkitRequestFullscreen();
+        if (!document.fullscreenElement && !document.webkitFullscreenElement && !fullTarget.classList.contains('mobile-fullscreen')) {
+            try {
+                if (fullTarget.requestFullscreen) fullTarget.requestFullscreen();
+                else if (fullTarget.webkitRequestFullscreen) fullTarget.webkitRequestFullscreen();
+                else fullTarget.classList.add('mobile-fullscreen');
+            } catch (err) { fullTarget.classList.add('mobile-fullscreen'); }
+        }
     }
 };
 
